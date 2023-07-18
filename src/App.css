@@ -1,38 +1,436 @@
-.App {
-  text-align: center;
+
+.App{
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 100%;
+    align-items: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1, h2, h3, h4, h5, h6 {
+    color: #777777;
+    text-align: center;
+
 }
 
-.App-link {
-  color: #61dafb;
+p, li {
+    color: #777777;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+p {
+    padding: 0 10px;
 }
+
+.payment_and_delivery .map iframe {
+    max-height: 80vh;
+}
+
+.auth_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 10px;
+}
+
+
+.brandFilter .active {
+    background-color: #fe5117;
+    color: #FFF;
+}
+
+
+.sideBar .container, .sideBar .container .sideMenuSubcategory {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 16px;
+
+}
+.sideBar {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 0;
+}
+
+.sideBar .container {
+    padding-top: 0;
+}
+
+.sideBar .accordion {
+    width: 100%;
+}
+
+.sideBar .accordion-item {
+    border-radius: 0;
+}
+
+.sideBar .sideMenuSubcategories .accordion-collapse {
+    border-bottom: solid 1px #BBB;
+    border-radius: 0;
+}
+
+.sideBar .accordion-button:focus,
+.sideBar .accordion-button:active{
+    box-shadow: none;
+}
+
+.sideBar .accordion-button, .sideBar .category {
+    background-color: #2ea9f7;
+    color: #FFF;
+}
+
+.sideBar .accordion-button a {
+    opacity: 1;
+    color: #FFF;
+    font-family: Days;
+    font-weight: 200;
+}
+
+.sideBar .accordion-button::after {
+    background-image: none;
+    content: "⮝";
+    color: #FFF;
+    font-family: Days;
+    rotate: 180deg;
+}
+
+.sideBar .accordion-button.collapsed::after {
+    background-image: none;
+    content: "⮝";
+    color: #FFF;
+    font-family: Days;
+    rotate: 180deg;
+}
+
+.sideMenuSubcategories .sideMenuSubcategory  {
+    font-family: Exo2;
+}
+
+.sideMenuSubcategories > a > div {
+    transition: all 300ms ease-in-out;
+    color: #777777;
+    background-color: #FFFFFF;
+}
+
+.sideMenuSubcategories .active div {
+    font-weight: 800;
+    color: #fff;
+    background-color: #fe5117;
+}
+
+.sideMenuSubcategories > a > div:hover {
+    background: #2ea9f7;
+    color: #FFF;
+}
+
+.sideBar a {
+    text-decoration: none;
+}
+
+.CategoryCard .container a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.CategoryCard .container a div {
+    font-family: Days;
+    color: #777;
+}
+
+.CategoryCard .container a div:hover {
+    color: #fe5117;
+}
+
+.ProductCard img {
+    height: 200px;
+    max-width: 200px;
+    object-fit: scale-down;
+    margin-top: 10px;
+}
+
+.ProductCard a {
+    text-decoration: none;
+}
+
+.ProductCard, .CategoryCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 33%;
+    padding-bottom: 10px;
+    min-width: 220px;
+}
+
+.ProductCard .desc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ProductCard .desc h4 {
+    text-transform: uppercase;
+}
+
+.ProductCard .price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.ProductCard .oldPrice {
+    text-decoration: line-through;
+    font-size: 0.7em;
+    position: absolute;
+    left: 45px;
+
+}
+.ProductPage .oldPrice {
+    text-decoration: line-through;
+    font-size: 0.7em;
+}
+
+.ProductPage .price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.ProductPage .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.ProductPage .product {
+    max-height: 400px;
+}
+
+.mainContainer {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    max-width: 1200px;
+    flex-grow: 1;
+
+}
+
+.mainContainer > .container {
+    padding: 0 25px 0 25px;
+}
+
+.pagination {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pagination .page-link {
+    border-radius: 0 !important;
+    color: #777777;
+}
+
+.pagination .page-link:hover {
+    color: #FFFFFF;
+    background-color: #2ea9f7;
+}
+
+.pagination .active .page-link{
+    background-color: #fe5117;
+    border-color: #fe5117;
+    color: #FFFFFF;
+}
+
+.ProductCard .newPrice, .ProductPage .newPrice {
+    color: #fe5117;
+}
+
+.ProductCard .children, .ProductPage .children {
+    display: flex;
+    gap: 3px;
+    flex-wrap:wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.ProductCard .children button, .ProductPage .children button {
+    border: #2ea9f7 solid 1px;
+    color: #2ea9f7;
+    padding: 5px 5px;
+}
+
+.ProductCard .children button.active, .ProductCard .children button:hover,
+.ProductPage .children button.active, .ProductPage .children button:hover{
+    background: #2ea9f7;
+    color: #FFF;
+}
+
+.ProductCard .AddToCartButton, .ProductPage .AddToCartButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: all 300ms ease-in-out;
+    font-family: Days;
+    font-weight: 400;
+}
+
+.ProductCard>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.ProductCard>div>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ProductCard .AddToCartButton:hover, .ProductPage .AddToCartButton:hover {
+    scale: 1.25;
+}
+
+.ProductPage {
+    flex-wrap:wrap;
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.ProductPage .product {
+    width: 475px
+}
+
+.ProductPage .price {
+    font-size: 2.5rem;
+}
+
+.CarouselContainer {
+    height: 400px;
+    width: 400px;
+}
+
+
+.ProductPage .noImage {
+    margin: 100px 100px;
+}
+
+.ProductPage .description {
+    width: 100%;
+}
+
+.loginPage input {
+    margin-bottom: 15px;
+}
+
+.loginPage .switch {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.ProductCard .stars img, .product .content .stars img{
+    width: 100px;
+    height: 30px;
+    margin-top: 0;
+}
+.ProductCard .stars {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    flex-wrap: nowrap;
+    height: 35px;
+    width: 100%;
+    position: absolute;
+}
+
+
+.product .content .stars {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    height: 35px;
+    width: 100%;
+}
+
+
+.ProductCard .stars p, .product .content .stars p {
+    margin-bottom: 0;
+    font-size: 1.2em;
+}
+
+.loginPage .card form {padding: 10px 10px;}
+
+@media screen and (min-width: 1200px) {
+    .mainContainer {width: 1200px;}
+}
+
+@media screen and (max-width: 991px) {
+    .sideBar {
+        display: none;
+
+    }
+    .mainContainer {
+        display: flex;
+        width: 100%;
+    }
+
+    .CarouselContainer {width: 100%;}
+
+    .CarouselContainer .carousel-item {
+        display: flex;
+        justify-content: center;
+    }
+
+    .ProductPage .product {
+        width: 100%;
+    }
+}
+
+
+@media screen and (min-width: 991px) and (max-width: 1200px) {
+
+    .sideMenuSubcategory {
+        font-size: 0.85em;
+    }
+    .mainContainer {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 1050px) {
+    .ProductCard, .CategoryCard {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .ProductCard, .CategoryCard {
+        width: 100%;
+    }
+}
+

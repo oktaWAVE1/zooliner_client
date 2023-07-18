@@ -1,25 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import AppRouter from "./components/appRouter";
+import React, {useContext, useEffect, useState} from "react";
+import {BrowserRouter} from "react-router-dom";
+import {observer} from "mobx-react-lite";
+import {Context} from "./index";
+import Loader from "./UI/Loader/Loader";
+import MyNavbar from "./components/navbar/MyNavbar";
+import {check} from "./http/userAPI";
+import Footer from "./components/footer/Footer";
+import SideMenu from "./components/sidemenu/SideMenu";
+
+
+const App = observer(() => {
+    const {user} = useContext(Context)
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+        check().then(data => {
+
+            user.setUser(data);
+            user.setIsAuth(true);
+
+        }).finally(() => {
+            setLoading(false)
+        })
+    },[])
+    if(loading) {
+        return <Loader />
+    }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <BrowserRouter>
+
+              <MyNavbar/>
+              <div className="mainContainer">
+                  <SideMenu/>
+                  <AppRouter/>
+              </div>
+
+              <Footer/>
+          </BrowserRouter>
+
+
   );
-}
+});
 
 export default App;

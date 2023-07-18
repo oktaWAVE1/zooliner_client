@@ -1,0 +1,23 @@
+.button {
+    padding: 6px 20px;
+    background: #FFF;
+    color: #fe5117;
+    border: #fe5117 1px solid;
+    border-radius: 6px;
+    font-weight: 900;
+    transition: all 300ms
+}
+
+.button:hover {
+    background: #fe5117;
+    color: #FFF;
+    border: #fe5117 1px solid;
+    transition: all 300ms;
+}
+
+.button:disabled {
+    background: #FFFFFF;
+    color: #AAAAAA;
+    border: #AAAAAA 1px solid;
+    transition: all 700ms;
+}

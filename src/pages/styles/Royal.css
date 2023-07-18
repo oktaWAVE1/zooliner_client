@@ -1,0 +1,99 @@
+.Royal h2, .Royal h3{
+    color: gray;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    padding: 0px 20px;
+}
+
+.Royal .section{
+    width: 100%;
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.Royal .section.section--red{
+    background-color: #F24141;
+    color: white;
+}
+
+.Royal .container{
+    width: 100%;
+    margin: auto;
+}
+
+@media (max-width: 1176px) {
+    .Royal .container{
+        width: 100%;
+    }
+}
+
+.Royal .header-logo{
+    text-align: center;
+}
+
+.Royal .elements{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.Royal a, .Royal a:active, .Royal a:hover, .Royal a:visited{
+    text-transform: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+.Royal .elements .element{
+    max-width: 200px;
+    margin: 10px;
+    transition: all 0.3s ease;
+}
+
+.Royal .elements a.element:hover, .Royal .elements .element .element__button:hover{
+    transform: scale(0.95);
+}
+
+.Royal .element .element__image img{
+    width: 100%;
+}
+
+.Royal .element .element__text{
+    padding-top: 10px;
+    font-weight: 600;
+    color: #F24141;
+}
+
+.Royal .element .element__button{
+    transition: all 0.3s ease;
+    height: 35px;
+    background-color: gray;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.6em;
+    border: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0.7rem;
+}
+.Royal .element .element__button a{
+    width: 100%;
+}
+
+.element__button.i10, .element__button.i5 {background-color: rgba(182, 128, 15, 0.74);}
+.element__button.i9, .element__button.i3  {background-color:  rgba(122, 122, 122, 0.51);}
+.element__button.i8 {background-color: #98C934;}
+.element__button.i7, .element__button.i2 {background-color: rgba(206, 168, 68, 0.74);}
+.element__button.i6 {background-color: #62BBE1;}
+.element__button.i4 {background-color: rgba(63, 66, 71, 0.64);}
+.element__button.i1 {background-color: rgba(216, 118, 157, 0.5)}
+
+.RoyalCategory button::after {
+    content: "" !important;
+
+}

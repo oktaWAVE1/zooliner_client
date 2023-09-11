@@ -10,6 +10,7 @@ import MyNavbar from "./components/navbar/MyNavbar";
 import {check} from "./http/userAPI";
 import Footer from "./components/footer/Footer";
 import SideMenu from "./components/sidemenu/SideMenu";
+import BasketBlock from "./components/BasketBlock";
 
 
 const App = observer(() => {
@@ -35,6 +36,7 @@ const App = observer(() => {
               <div className="mainContainer">
                   <SideMenu/>
                   <AppRouter/>
+                  <BasketBlock />
               </div>
 
               <Footer/>

@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import {Container, Nav, Navbar} from "react-bootstrap";
+import React, {useContext, useRef} from 'react';
+import {Accordion, Container, Nav, Navbar} from "react-bootstrap";
 import cl from './MyNavbar.module.css'
 import {Link, NavLink} from "react-router-dom";
 import {observer} from "mobx-react-lite";
@@ -9,41 +9,85 @@ import {userLogout} from "../../http/userAPI";
 
 
 const MyNavbar = observer(() => {
-    const {user} = useContext(Context)
+    const {user, catalogue} = useContext(Context)
     const logout = () => {
         user.setUser({})
         user.setIsAuth(false)
         localStorage.removeItem('token')
         userLogout()
+        hideMobileMenu()
+    }
+    const menuRef = useRef(null)
+    const togglerRef = useRef(null)
+    const hideMobileMenu = () => {
+        const mobileMenu = menuRef.current
+        mobileMenu.className = 'navbar-collapse collapse'
+        const toggler = togglerRef.current
+        toggler.className = "navbar-toggler collapsed"
     }
 
     return (
         <div>
             <Navbar className={cl.navbar} collapseOnSelect expand="lg" variant="dark">
-                <Container>
+                <Container className={cl.container}>
                     <Navbar.Brand><Link to='/'>
                             <img alt='logo' src={process.env.REACT_APP_API_URL+'/images/logo_main_mini.webp'} className={cl.navbarlogo}/>
                     </Link></Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav"  ref={togglerRef} />
+                    <Navbar.Collapse id="responsive-navbar-nav" ref={menuRef}>
+                        <Nav className='mobileCatalogue'>
+                            <Accordion>
+                                <Accordion.Item eventKey={'catalogue'}>
+                                    <Accordion.Header className={'mobileMenuCatalogue'}>
+                                        <NavLink onClick={hideMobileMenu} to={`/category/0`}>Каталог</NavLink>
+                                    </Accordion.Header>
+                                    <Accordion.Body>
+                                        {catalogue.catalogue.length>0 &&
+                                            catalogue.catalogue.filter(category => category.categoryId===0).map(category =>
+                                                <Accordion key={category.id}>
+                                                    <Accordion.Item className="category" eventKey={category.id}>
+                                                        <Accordion.Header>
+                                                            <NavLink onClick={hideMobileMenu} to={`/category/${category.id}`}>{category.name}</NavLink>
+                                                        </Accordion.Header><div className="mobileMenuSubcategories">
+                                                        {category.children && category.children.map(subCategory =>
+                                                            <NavLink onClick={hideMobileMenu} key={subCategory.id}  to={`/category/${subCategory.id}`}><Accordion.Body className="mobileMenuSubcategory" key={subCategory.id}>
+                                                                {subCategory.name}
+                                                            </Accordion.Body></NavLink>
+
+
+                                                        )}
+                                                    </div>
+
+
+
+                                                    </Accordion.Item>
+                                                </Accordion>
+                                            )
+                                        }
+                                    </Accordion.Body>
+                                </Accordion.Item>
+                            </Accordion>
+
+
+                        </Nav>
                         <Nav className="me-auto">
-                            <NavLink className={cl.navbarItem} to='/payment_and_delivery'>Оплата и доставка</NavLink>
-                            <NavLink className={cl.navbarItem} to='/bonus'>Бонусная программа</NavLink>
+                            <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/payment_and_delivery'>Оплата и доставка</NavLink>
+                            <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/bonus'>Бонусная программа</NavLink>
+                            <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/basket' alt="Корзина" title="Корзина">Корзина</NavLink>
                         </Nav>
 
-
-                            {user.isAuth && <Nav className='align-items-center'>
+                            {user.isAuth && <Nav>
                                 {user.user.role === 'ADMIN' &&
-                                    <NavLink className={cl.navbarItem} to='/admin'>Админ</NavLink>
+                                    <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/admin'>Админ</NavLink>
                                 }
-                                <NavLink className={cl.navbarItem} to='/user'>Аккаунт</NavLink>
-                                <div onClick={() => logout()} className={cl.logout_btn}>Выйти</div>
+                                <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/user'>Аккаунт</NavLink>
+                                <div onClick={() => logout()} className={[cl.logout_btn, cl.navbarItem].join(" ")}>Выйти</div>
+
                             </Nav>
                             }
                             {!user.isAuth &&
                                 <Nav>
-
-                                    <NavLink className={cl.navbarItem} to='/login'>Авторизация</NavLink>
+                                    <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/login'>Авторизация</NavLink>
 
                                 </Nav>
                             }

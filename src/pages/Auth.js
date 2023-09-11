@@ -6,6 +6,7 @@ import {Link, useLocation} from "react-router-dom";
 import MyButton from "../UI/MyButton/MyButton";
 import {login, registration} from "../http/userAPI";
 import {validate} from "email-validator";
+import {Helmet} from "react-helmet";
 
 
 const Auth = observer(() => {
@@ -132,6 +133,9 @@ const Auth = observer(() => {
 
                 </Form>
             </Card>
+            <Helmet>
+                <title>Страница аутентефикации | Зоолайнер</title>
+            </Helmet>
         </Container>
     );
 });

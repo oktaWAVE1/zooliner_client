@@ -14,7 +14,13 @@ const ChildItems = ({chooseChild, chosenProduct, parentProduct, ...props}) => {
                 }
             </div>
             {chosenProduct?.discountedPrice>0 ? <h4 className="price"><span className="oldPrice">{chosenProduct?.price}</span><span className="newPrice">{chosenProduct?.discountedPrice} ₽</span></h4> : <h4 className="price">{chosenProduct?.price} ₽</h4>}
-
+            {(chosenProduct?.price * process.env.REACT_APP_BONUS_RATE) > 1 &&
+                <div title='бонусных баллов за покупку'
+                    className='bonusPoints'>{chosenProduct?.discountedPrice > 0 ? `${Math.floor(chosenProduct?.discountedPrice*parseFloat(process.env.REACT_APP_BONUS_RATE))}` : `${Math.floor(chosenProduct?.price*parseFloat(process.env.REACT_APP_BONUS_RATE))}`}
+                    <span className="material-symbols-outlined">
+pet_supplies
+</span></div>
+            }
         </div>
     );
 };

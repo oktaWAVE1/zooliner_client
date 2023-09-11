@@ -1,5 +1,6 @@
 import React from 'react';
 import "./styles/Royal.css"
+import {Helmet} from "react-helmet";
 
 const Royal = () => {
     return (
@@ -156,6 +157,9 @@ const Royal = () => {
                     </div>
                 </div>
             </div>
+            <Helmet>
+                <title>Бренд зона Royal Canin | Зоолайнер</title>
+            </Helmet>
         </div>
     );
 };

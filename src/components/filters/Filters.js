@@ -6,15 +6,20 @@ import {Context} from "../../index";
 import {useSearchParams} from "react-router-dom";
 import {productFilter} from "../../utils/productFilter"
 import {atrributeFilterUpdate} from "../../utils/atrributeFilterUpdate";
+import {Accordion, Row} from "react-bootstrap";
 
 const Filters = observer(() => {
     const {products, filters} = useContext(Context)
     const [searchParams, setSearchParams] = useSearchParams()
+    let openFilters = []
 
     useEffect(() => {
             if (searchParams.get('attribute')) {
                 let initialAttributeParams = JSON.parse(searchParams.get('attribute'))
                 filters.setAttributeFilters(initialAttributeParams)
+                if (initialAttributeParams) {
+                    openFilters.push('1')
+                }
             }
             filters.setAttributeCheckedFilters([])
             for (const category in filters.attributeFilters) {
@@ -25,6 +30,9 @@ const Filters = observer(() => {
             if (searchParams.get('brand')) {
                 let initialBrandParams = Array.from(searchParams.get('brand').split('_'), Number)
                 filters.setBrandFilters(initialBrandParams)
+                if (initialBrandParams) {
+                    openFilters.push('2')
+                }
             }
     }, [products.attributes, products.brands]);
 
@@ -38,11 +46,14 @@ const Filters = observer(() => {
                 let {filteredProducts, brands} = productFilter(products.products.products, filters.attributeFilters)
                 products.setFilteredProducts(filteredProducts)
                 products.setCurrentBrands(brands)
+                products.setCurrentAttributes(products.attributes)
+
             }
             else if(filters.brandFilters?.length>0 && Object.keys(filters.attributeFilters).length>0)    {
                 let {filteredProducts, brands} = productFilter(products.products.products, filters.attributeFilters)
                 products.setCurrentBrands(brands)
                 products.setFilteredProducts(filteredProducts.filter(p => filters.brandFilters.includes(p.brandId)))
+                products.setCurrentAttributes(products.attributes)
 
             }
             else if (filters.brandFilters?.length>0 && Object.keys(filters.attributeFilters).length<1) {
@@ -58,15 +69,46 @@ const Filters = observer(() => {
             products.setPage(1)
             products.setTotalCount(products.filteredProducts.length)
         }
+        console.log(products.products)
+        console.log(filters.brandFilters)
 
     }, [products.products.products, filters.brandFilters, filters.attributeFilters]);
+    if (products?.products?.attributes && Object.keys(products?.products?.attributes)?.length<1 && products?.products?.brands?.length<2){
+        return (
+            <div>
+
+            </div>
+        )
+    } else {
 
     return (
-        <div>
-            <BrandFilter />
-            <AttributeFilter />
-        </div>
-    );
+        <Row className="Filters">
+
+                <Accordion alwaysOpen defaultActiveKey={openFilters}>
+                    {products?.products?.attributes && Object.keys(products?.products?.attributes)?.length>1 &&
+                        <Accordion.Item eventKey="1">
+                            <Accordion.Header>Фильтры</Accordion.Header>
+                            <Accordion.Body>
+                                <AttributeFilter />
+                            </Accordion.Body>
+                        </Accordion.Item>
+
+                    }
+                    {products?.products?.brands?.length>1 &&
+                        <Accordion.Item eventKey="2">
+                        <Accordion.Header>Производители</Accordion.Header>
+                        <Accordion.Body>
+                        <BrandFilter />
+                        </Accordion.Body>
+                        </Accordion.Item>
+                    }
+
+                </Accordion>
+
+
+
+        </Row>
+    );}
 });
 
 export default Filters;

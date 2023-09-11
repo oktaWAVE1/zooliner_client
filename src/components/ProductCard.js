@@ -3,8 +3,9 @@ import {Card} from "react-bootstrap";
 import MyButton from "../UI/MyButton/MyButton";
 import ChildItems from "./ChildItems";
 import {Link} from "react-router-dom";
+import {addToBasketDB} from "../http/basketAPI";
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product, addToCart}) => {
     const [currentProduct, setCurrentProduct] = useState({});
     useEffect(() => {
 
@@ -20,6 +21,7 @@ const ProductCard = ({product}) => {
     const chooseChild = (id) => {
         product.children.forEach(child => child.id === id && setCurrentProduct(child))
     }
+
 
     return (
         <Card className="ProductCard">
@@ -37,7 +39,7 @@ const ProductCard = ({product}) => {
                 <div>
 
                    <ChildItems chooseChild={chooseChild} chosenProduct={currentProduct} parentProduct={product} />
-                   <MyButton classes="AddToCartButton" title="Добавить в корзину"><span className="material-symbols-outlined">
+                   <MyButton onClick={() => addToCart(currentProduct.id)} classes="AddToCartButton" title="Добавить в корзину"><span className="material-symbols-outlined">
                     add_shopping_cart
                     </span>{currentProduct.inStock ? "В КОРЗИНУ" : "ПОД ЗАКАЗ"}</MyButton>
                 </div>

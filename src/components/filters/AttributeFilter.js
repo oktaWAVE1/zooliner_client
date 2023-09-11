@@ -1,11 +1,15 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
-import {atrributeFilterUpdate} from "../../utils/atrributeFilterUpdate";
+import {Form} from "react-bootstrap";
 
 const AttributeFilter = observer(() => {
     const {products, filters} = useContext(Context)
-
+    const clearAttributes = (e) => {
+        e.preventDefault()
+        filters.setAttributeFilters({})
+        filters.setAttributeCheckedFilters([])
+    }
     function checkAttribute(attributeId, attributeCategory, lastChangedCategory) {
 
         if (!filters.attributeFilters[attributeCategory]) {
@@ -26,7 +30,6 @@ const AttributeFilter = observer(() => {
             })
             filters.setAttributeFilters(tempAttributes)
         }
-        // products.setCurrentAttributes(atrributeFilterUpdate(products.currentProducts, products.currentAttributes, lastChangedCategory))
         filters.setAttributeCheckedFilters([])
         for (const category in filters.attributeFilters) {
             for (let i = 0; i<filters.attributeFilters[category].length; i++) {
@@ -40,21 +43,27 @@ const AttributeFilter = observer(() => {
 
     return (
         <div className="attributeFilter">
+            <Form>
             {products.currentAttributes &&
                 Object.keys(products.currentAttributes).map((item, i) => (
 
-                    <div key={i}>{item}
-                        {products.currentAttributes[item] &&
-                        products.currentAttributes[item].map(a =>
-                            <div key={a.id}>
-                                <input type="checkbox" key={a.id} checked={filters.attributeCheckedFilters.includes(a.id)} onChange={() => checkAttribute(a.id, a.categoryId, item)} />
-                                <label>{a.name}</label>
-                            </div>
-                        )
-                    }</div>
+                    <div key={i} className='attributeFilterGroup'>
+
+                            <div><h5>{item}: </h5></div>
+
+                            {products.currentAttributes[item] &&
+                            products.currentAttributes[item].map(a =>
+
+                                <Form.Check type="switch" id={a.id} label={a.name} key={`${a.id} | ${filters.attributeFilters?.item?.a?.id}`} checked={filters.attributeCheckedFilters.includes(a.id)} isValid={filters.attributeCheckedFilters.includes(a.id)} onChange={() => checkAttribute(a.id, a.categoryId, item)} />
+
+                            )
+                            }
+                        </div>
                     )
                 )
             }
+            <a className='clearFilter' href='#' onClick={(e) => clearAttributes(e)}>Сбросить все</a>
+            </Form>
         </div>
     );
 });

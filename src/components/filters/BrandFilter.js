@@ -5,6 +5,10 @@ import MyButton from "../../UI/MyButton/MyButton";
 
 const BrandFilter = observer(() => {
     const {products, filters} = useContext(Context)
+    const clearBrands = (e) => {
+        e.preventDefault()
+        filters.setBrandFilters([])
+    }
 
     const check = (b) => {
         if (filters.brandFilters.includes(b.id)){
@@ -21,6 +25,7 @@ const BrandFilter = observer(() => {
                     <MyButton classes={filters.brandFilters.includes((b.id)) ? `active item-${b.id}` : `item-${b.id}`}  onClick={() => check(b)} key={b.id}>{b.name}</MyButton>
                 )
             }
+            <a className='clearFilter' href='#' onClick={(e) => clearBrands(e)}>Сбросить все</a>
         </div>
     );
 });

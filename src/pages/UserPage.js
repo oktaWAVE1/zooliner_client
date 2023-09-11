@@ -41,7 +41,7 @@ const UserPage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (
-        <div>
+        <div className='userPage'>
             <Container className='mt-3 mb-5'>
                 <h1>Изменить данные профиля:</h1>
 

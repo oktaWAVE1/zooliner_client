@@ -8,7 +8,8 @@ import CategoryPage from "./pages/CategoryPage";
 import ProductPage from "./pages/ProductPage";
 import BonusPage from "./pages/BonusPage";
 import Royal from "./pages/Royal";
-import Basket from "./pages/Basket";
+import BasketPage from "./pages/BasketPage";
+import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 
 
 export const publicRoutes = [
@@ -22,7 +23,8 @@ export const publicRoutes = [
     {path: '/product/:id', element: <ProductPage/>},
     {path: '/bonus', element: <BonusPage/>},
     {path: '/royal', element: <Royal/>},
-    {path: '/basket', element: <Basket/>},
+    {path: '/basket', element: <BasketPage/>},
+    {path: 'order_confirmation/:accessLink', element: <OrderConfirmationPage/>},
 
 ]
 
@@ -35,7 +37,9 @@ export const authRoutes = [
     {path: '/product/:id', element: <ProductPage/>},
     {path: '/bonus', element: <BonusPage/>},
     {path: '/royal', element: <Royal/>},
-    {path: '/basket', element: <Basket/>},
+    {path: '/basket', element: <BasketPage/>},
+    {path: 'order_confirmation/:accessLink', element: <OrderConfirmationPage/>},
+
 
 ]
 

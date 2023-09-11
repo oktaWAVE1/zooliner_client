@@ -6,6 +6,7 @@ import UserStore from "./store/UserStore";
 import ProductsStore from "./store/ProductsStore";
 import CatalogueStore from "./store/CatalogueStore";
 import FilterStore from "./store/FilterStore";
+import BasketStore from "./store/BasketStore";
 
 
 export const Context = createContext(null)
@@ -17,6 +18,7 @@ root.render(
       catalogue: new CatalogueStore(),
       products: new ProductsStore(),
       filters: new FilterStore(),
+      basket: new BasketStore(),
   }}
       >
 

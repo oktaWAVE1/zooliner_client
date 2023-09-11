@@ -4,7 +4,7 @@ export default class UserStore {
     constructor() {
         this._isAuth = false
         this._user = {}
-        this._premium = 0
+        this._bonus = 0
         makeAutoObservable(this)
     }
 
@@ -12,8 +12,8 @@ export default class UserStore {
         this._isAuth = bool
     }
 
-    setPremium(premium) {
-        this._premium = premium
+    setBonus(bonus) {
+        this._bonus = bonus
     }
 
     setUser(user) {
@@ -23,8 +23,8 @@ export default class UserStore {
         return this._isAuth
     }
 
-    get premium() {
-        return this._premium
+    get bonus() {
+        return this._bonus
     }
 
     get user() {

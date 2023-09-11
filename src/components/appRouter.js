@@ -24,6 +24,7 @@ const AppRouter = observer(() => {
                     )
                 }
                 <Route path="/*" element=<Navigate to='/' /> />
+
             </Routes>
 
     );

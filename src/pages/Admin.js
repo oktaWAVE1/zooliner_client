@@ -6,6 +6,7 @@ import CreateType from "../components/modals/CreateType";
 import AdminComments from "../components/modals/AdminComments";
 import CreateLesson from "../components/modals/CreateLesson";
 import AdminLessons from "../components/modals/AdminLessons";
+import {Helmet} from "react-helmet";
 
 const Admin = () => {
     const [modals, setModals] = useState({type: false, users: false, comments: false, createLesson: false, adminLesson: false})
@@ -29,6 +30,9 @@ const Admin = () => {
             <AdminComments onHide={() => setModals({...modals, comments: false})} show={modals.comments} setUnread={setUnread}/>
             <CreateLesson onHide={() => setModals({...modals, createLesson: false})} show={modals.createLesson} />
             <AdminLessons onHide={() => setModals({...modals, adminLesson: false})} show={modals.adminLesson} />
+            <Helmet>
+                <title>Админка | Зоолайнер</title>
+            </Helmet>
         </div>
     );
 };

@@ -31,8 +31,12 @@ export const modifyUser = async (email, password, name, telephone, address, id, 
 }
 
 export const getUser = async (id) => {
-    console.log(id)
     const {data} = await $authHost.post('api/user/self', {id})
+    return data
+}
+
+export const fetchBonus = async (id) => {
+    const {data} = await $authHost.post('api/user/bonus', {id})
     return data
 }
 

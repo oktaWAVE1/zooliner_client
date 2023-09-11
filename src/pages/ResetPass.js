@@ -3,6 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Alert, Card, Container, Form} from "react-bootstrap";
 import MyButton from "../UI/MyButton/MyButton";
 import {userResetPass, userResetPassMail} from "../http/userAPI";
+import {Helmet} from "react-helmet";
 
 const ResetPass = () => {
     const [email, setEmail] = useState('')
@@ -87,7 +88,9 @@ const ResetPass = () => {
                 </Card>
 
             </Container>
-
+            <Helmet>
+                <title>Сброс пароля | Зоолайнер</title>
+            </Helmet>
         </div>
     );
 };

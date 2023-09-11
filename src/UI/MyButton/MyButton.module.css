@@ -8,11 +8,14 @@
     transition: all 300ms
 }
 
-.button:hover {
-    background: #fe5117;
-    color: #FFF;
-    border: #fe5117 1px solid;
-    transition: all 300ms;
+
+@media screen and (min-width: 800px){
+    .button:hover {
+        background: #fe5117;
+        color: #FFF;
+        border: #fe5117 1px solid;
+        transition: all 300ms;
+    }
 }
 
 .button:disabled {

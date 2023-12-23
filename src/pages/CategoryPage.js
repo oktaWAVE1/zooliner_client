@@ -1,21 +1,25 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {useParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {fetchCategoryProducts} from "../http/catalogueAPI";
 import {Context} from "../index";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/features/ProductCard";
 import {Container, Row} from "react-bootstrap";
-import CategoryCard from "../components/CategoryCard";
-import Pages from "../components/Pages";
+import CategoryCard from "../components/features/CategoryCard";
+import Pages from "../components/features/Pages";
 import Filters from "../components/filters/Filters";
 import {addToBasketDB, fetchBasket, fetchBasketUnauthorized, updateBasketItemQtyDB} from "../http/basketAPI";
 import {useLocalStorage} from "../hooks/useStorage";
 import useDebounce from "../hooks/useDebounce";
 import Loader from "../UI/Loader/Loader";
 import {Helmet} from "react-helmet";
+import {fetchSearchedPublishedProducts} from "../http/searchAPI";
+
 
 const CategoryPage = observer(() => {
     const {products, filters, user, basket} = useContext(Context)
+    const [searchParams, setSearchParams] = useSearchParams()
+    const query = (searchParams.get('query'))
     const [clicker, setClicker] = useState(0);
     const [loading, setLoading] = useState(true);
     const {id} = useParams()
@@ -44,8 +48,11 @@ const CategoryPage = observer(() => {
 
     useEffect(() => {
 
-        fetchCategoryProducts(id).then(data => {
-                products.setPage(1)
+
+        if (id==='-1'){
+
+            fetchSearchedPublishedProducts(query).then(data => {
+
                 products.setProducts(data)
                 products.setBrands(data.brands)
                 products.setAttributes(data.attributes)
@@ -56,16 +63,36 @@ const CategoryPage = observer(() => {
                 if(products?.products?.products?.length>0){
                     products.setTotalCount(products.products.products.length)
                 }
-        }).finally(setLoading(false))
-    }, [id]);
-    useEffect(() => {
+
+            }).finally(() => setLoading(false))
+
+        }  else {
+
+            fetchCategoryProducts(id).then(data => {
+
+                products.setProducts(data)
+                products.setBrands(data.brands)
+                products.setAttributes(data.attributes)
+                filters.setAttributeFilters({})
+                filters.setBrandFilters([])
+                products.setCurrentAttributes([])
+                products.setCurrentBrands([])
+                if(products?.products?.products?.length>0){
+                    products.setTotalCount(products.products.products.length)
+
+        }
+
+        }).finally(() => setLoading(false))
+    }
+    },
+    [id, query]);
+    useDebounce(() => {
         if(products?.products?.products){
             let from = products.page*products.limit-products.limit
             let to = from+products.limit>products.totalCount ? products.totalCount : from+products.limit
             products.setCurrentProducts(products.filteredProducts.slice(from,to))
-
         }
-    }, [products.page, products.filteredProducts]);
+    }, 100, [products.page, products.filteredProducts]);
 
     if (loading) {
         return <div>
@@ -92,7 +119,7 @@ const CategoryPage = observer(() => {
                 }
             </Row>
             <Helmet>
-                <title>{`${products.products?.category?.description} | Зоолайнер`}</title>
+                <title>{`${products.products?.category?.description} | ЗооЛАЙНЕР`}</title>
             </Helmet>
         </Container>
     );

@@ -34,5 +34,5 @@ html {
 
 @font-face {
   font-family: "Exo2";
-  src: url("./components/styles/fonts/Exo2-Regular.ttf") format("opentype");
+  src: url("../../../wake_comps/client/src/styles/fonts/Exo2-Regular.ttf") format("opentype");
 }

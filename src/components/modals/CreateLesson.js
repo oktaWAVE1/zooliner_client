@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {fetchTypes} from "../../http/typeAPI";
 import {Button, Container, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import MyButton from "../../UI/MyButton/MyButton";
 import {createLesson} from "../../http/lessonsAPI";
@@ -15,9 +14,6 @@ const CreateLesson = ({onHide, show}) => {
     }
 
 
-    useEffect(() => {
-        fetchTypes().then(data => setTypes(data))
-    },[show])
 
     const addLesson = () => {
         try {

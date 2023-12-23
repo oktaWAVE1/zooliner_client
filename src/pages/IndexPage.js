@@ -1,13 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Helmet} from "react-helmet";
-import {Container, Row} from "react-bootstrap";
-import {CarouselProvider, Slide, Slider} from "pure-react-carousel";
+import {Row} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
-import {Context} from "../index";
 import {fetchCurrentPromotions} from "../http/promotionAPI";
 import {Link} from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
-import Zoom from "react-img-zoom";
 
 const IndexPage = observer(() => {
     const [promotion, setPromotion] = useState([]);
@@ -35,7 +32,11 @@ const IndexPage = observer(() => {
         </Row>
 
             <Helmet>
-                <title>Товары для животных в Анапе. Интернет-магазин для ваших любимцев | Зоолайнер</title>
+                <meta property="og:title" content="ЗооЛАЙНЕР" />
+                <meta property="og:image" content="https://zooliner.ru/" />
+                <meta property="og:description" content="Товары для животных в Анапе. Интернет-магазин для ваших любимцев." />
+
+                <title>Товары для животных в Анапе. Интернет-магазин для ваших любимцев | ЗооЛАЙНЕР</title>
             </Helmet>
         </div>
     );

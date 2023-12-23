@@ -1,22 +1,27 @@
-import React, {useContext, useRef} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import {Accordion, Container, Nav, Navbar} from "react-bootstrap";
 import cl from './MyNavbar.module.css'
 import {Link, NavLink} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import {userLogout} from "../../http/userAPI";
+import SearchBar from "../search/SearchBar";
+import {useIsMobile} from "../../hooks/useIsMobile";
 
 
 
 const MyNavbar = observer(() => {
     const {user, catalogue} = useContext(Context)
+    const [expanded, setExpanded] = useState(false);
     const logout = () => {
-        user.setUser({})
-        user.setIsAuth(false)
-        localStorage.removeItem('token')
-        userLogout()
-        hideMobileMenu()
+        userLogout().then(() => {
+            user.setUser({})
+            user.setIsAuth(false)
+            localStorage.removeItem('token')
+            hideMobileMenu()
+        })
     }
+    const isMobile = useIsMobile()
     const menuRef = useRef(null)
     const togglerRef = useRef(null)
     const hideMobileMenu = () => {
@@ -24,21 +29,23 @@ const MyNavbar = observer(() => {
         mobileMenu.className = 'navbar-collapse collapse'
         const toggler = togglerRef.current
         toggler.className = "navbar-toggler collapsed"
+        setExpanded(prev => !prev)
     }
 
     return (
-        <div>
-            <Navbar className={cl.navbar} collapseOnSelect expand="lg" variant="dark">
+        <header>
+            <Navbar className={cl.navbar} expanded={expanded} expand="lg" variant="dark">
                 <Container className={cl.container}>
+                    <SearchBar className="ms-1" />
                     <Navbar.Brand><Link to='/'>
-                            <img alt='logo' src={process.env.REACT_APP_API_URL+'/images/logo_main_mini.webp'} className={cl.navbarlogo}/>
+                        <img alt='logo' src={process.env.REACT_APP_API_URL+'/images/logo_main_mini.webp'} className={cl.navbarlogo}/>
                     </Link></Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav"  ref={togglerRef} />
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav"  ref={togglerRef} onClick={() => setExpanded(expanded ? false : "expanded")} />
                     <Navbar.Collapse id="responsive-navbar-nav" ref={menuRef}>
                         <Nav className='mobileCatalogue'>
                             <Accordion>
                                 <Accordion.Item eventKey={'catalogue'}>
-                                    <Accordion.Header className={'mobileMenuCatalogue'}>
+                                    <Accordion.Header className='mobileMenuCatalogue'>
                                         <NavLink onClick={hideMobileMenu} to={`/category/0`}>Каталог</NavLink>
                                     </Accordion.Header>
                                     <Accordion.Body>
@@ -73,30 +80,69 @@ const MyNavbar = observer(() => {
                         <Nav className="me-auto">
                             <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/payment_and_delivery'>Оплата и доставка</NavLink>
                             <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/bonus'>Бонусная программа</NavLink>
-                            <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/basket' alt="Корзина" title="Корзина">Корзина</NavLink>
+
                         </Nav>
 
-                            {user.isAuth && <Nav>
+                            {user.isAuth && <Nav className="d-flex justify-content-center align-items-start">
+
                                 {user.user.role === 'ADMIN' &&
-                                    <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/admin'>Админ</NavLink>
+                                            <NavLink onClick={hideMobileMenu} className={cl.navbarItem}
+                                                     to='/admin'>
+                                                {isMobile ? "Админка" :
+                                                    <span className="material-symbols-outlined" title="Админка">
+                                                        shield_person
+                                                    </span>
+                                                }
+                                            </NavLink>
+
                                 }
-                                <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/user'>Аккаунт</NavLink>
-                                <div onClick={() => logout()} className={[cl.logout_btn, cl.navbarItem].join(" ")}>Выйти</div>
+                                <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/basket' alt="Корзина" title="Корзина">
+                                    {isMobile ? "Корзина" :
+                                        <span className="material-symbols-outlined" title="Корзина">
+                                            shopping_cart
+                                        </span>
+                                    }
+                                </NavLink>
+                                <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/user'>
+                                    {isMobile ? "Личный кабинет" :
+                                        <span className="material-symbols-outlined" title='Личный кабинет'>
+                                            person
+                                        </span>
+                                    }
+                                </NavLink>
+                                <div onClick={() => logout()} className={[cl.logout_btn, cl.navbarItem].join(" ")}>
+                                    {isMobile ? "Выход":
+
+                                    <span className="material-symbols-outlined" title="Выход">
+                                        logout
+                                    </span>
+                                }
+                                </div>
 
                             </Nav>
                             }
                             {!user.isAuth &&
                                 <Nav>
-                                    <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/login'>Авторизация</NavLink>
+                                    <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/basket' alt="Корзина" title="Корзина">
+                                        <span className="material-symbols-outlined" title="Корзина">
+                                        shopping_cart
+                                    </span>
+                                    </NavLink>
+                                    <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/login'>
+                                        <span className="material-symbols-outlined" title="Выход">
+                                        login
+                                    </span>
+                                    </NavLink>
 
                                 </Nav>
                             }
 
                     </Navbar.Collapse>
+
                 </Container>
             </Navbar>
 
-        </div>
+        </header>
     );
 });
 

@@ -1,12 +1,19 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Route, Routes, Navigate} from "react-router-dom";
 import {adminRoutes, authRoutes, publicRoutes} from "../routes";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
+import Loader from "../UI/Loader/Loader";
 
 
 const AppRouter = observer(() => {
     const {user} = useContext(Context)
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        setTimeout(() => setLoading(false),50)
+    }, []);
+
+    if(loading) return <Loader />
 
     return (
             <Routes>

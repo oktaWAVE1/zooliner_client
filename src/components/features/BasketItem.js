@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import useDebounce from "../hooks/useDebounce";
-import {fetchBasket, updateBasketItemQtyDB} from "../http/basketAPI";
+import useDebounce from "../../hooks/useDebounce";
+import {fetchBasket, updateBasketItemQtyDB} from "../../http/basketAPI";
 import {Link} from "react-router-dom";
 
 const BasketItem = ({item, user, basket, delBasketItem, localBasket, setLocalBasket, ...props}) => {
@@ -38,8 +38,9 @@ const BasketItem = ({item, user, basket, delBasketItem, localBasket, setLocalBas
             <div className="basketItemImg">
                 <img loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${item.product?.parent?.product_images[0]?.img ?? item.product?.product_images[0]?.img ?? "no_image.webp"}`}/>
             </div>
-            <div className='basketItemLink'>
+            <div className='basketItemLink d-flex justify-content-start w-100'>
                 {item?.product?.parent?.title ? <Link to={`/product/${item.product.parent.id}`}>{item.product.parent.title} {item.product.parent.shortDescription} {item.product.title}</Link> :<Link to={`/product/${item.product.id}`}>{item.product.title} {item.product.shortDescription}</Link>}
+
             </div>
             <div className="qtyBar">
                 <button className="QtyBtn DcrBtn" onClick={() => decreaseQty()}>-</button>
@@ -58,6 +59,9 @@ const BasketItem = ({item, user, basket, delBasketItem, localBasket, setLocalBas
                     className="material-symbols-outlined">
 delete
 </span></button>
+                {!item.product.inStock && <span title='Под заказ' className="notInStock pointer material-symbols-outlined">
+                                                package_2
+                                          </span>}
             </div>
         </div>
     );

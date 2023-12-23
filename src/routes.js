@@ -10,6 +10,7 @@ import BonusPage from "./pages/BonusPage";
 import Royal from "./pages/Royal";
 import BasketPage from "./pages/BasketPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
+import SuccessPage from "./pages/SuccessPage";
 
 
 export const publicRoutes = [
@@ -24,7 +25,8 @@ export const publicRoutes = [
     {path: '/bonus', element: <BonusPage/>},
     {path: '/royal', element: <Royal/>},
     {path: '/basket', element: <BasketPage/>},
-    {path: 'order_confirmation/:accessLink', element: <OrderConfirmationPage/>},
+    {path: '/order_confirmation/:accessLink', element: <OrderConfirmationPage/>},
+    {path: '/success', element: <SuccessPage />},
 
 ]
 
@@ -38,7 +40,8 @@ export const authRoutes = [
     {path: '/bonus', element: <BonusPage/>},
     {path: '/royal', element: <Royal/>},
     {path: '/basket', element: <BasketPage/>},
-    {path: 'order_confirmation/:accessLink', element: <OrderConfirmationPage/>},
+    {path: '/order_confirmation/:accessLink', element: <OrderConfirmationPage/>},
+    {path: '/success', element: <SuccessPage />},
 
 
 ]

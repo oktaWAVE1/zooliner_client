@@ -12,6 +12,7 @@ const Filters = observer(() => {
     const {products, filters} = useContext(Context)
     const [searchParams, setSearchParams] = useSearchParams()
     let openFilters = []
+    const query = searchParams.get('query')
 
     useEffect(() => {
             if (searchParams.get('attribute')) {
@@ -37,7 +38,7 @@ const Filters = observer(() => {
     }, [products.attributes, products.brands]);
 
     useEffect(() => {
-        setSearchParams(`brand=${filters.brandFilters.join("_")}&attribute=${JSON.stringify(filters.attributeFilters)}`)
+        setSearchParams(`brand=${filters.brandFilters.join("_")}&attribute=${JSON.stringify(filters.attributeFilters)}&query=${query}`)
     }, [filters.attributeFilters, filters.brandFilters]);
 
     useEffect(() => {
@@ -47,14 +48,12 @@ const Filters = observer(() => {
                 products.setFilteredProducts(filteredProducts)
                 products.setCurrentBrands(brands)
                 products.setCurrentAttributes(products.attributes)
-
             }
             else if(filters.brandFilters?.length>0 && Object.keys(filters.attributeFilters).length>0)    {
                 let {filteredProducts, brands} = productFilter(products.products.products, filters.attributeFilters)
                 products.setCurrentBrands(brands)
                 products.setFilteredProducts(filteredProducts.filter(p => filters.brandFilters.includes(p.brandId)))
                 products.setCurrentAttributes(products.attributes)
-
             }
             else if (filters.brandFilters?.length>0 && Object.keys(filters.attributeFilters).length<1) {
                 products.setCurrentBrands(products.brands)
@@ -69,8 +68,6 @@ const Filters = observer(() => {
             products.setPage(1)
             products.setTotalCount(products.filteredProducts.length)
         }
-        console.log(products.products)
-        console.log(filters.brandFilters)
 
     }, [products.products.products, filters.brandFilters, filters.attributeFilters]);
     if (products?.products?.attributes && Object.keys(products?.products?.attributes)?.length<1 && products?.products?.brands?.length<2){

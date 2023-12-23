@@ -8,10 +8,10 @@ import {
     fetchBasketUnauthorized,
     } from "../http/basketAPI";
 import MyButton from "../UI/MyButton/MyButton";
-import BasketItem from "../components/BasketItem";
+import BasketItem from "../components/features/BasketItem";
 import {Container} from "react-bootstrap";
 import {useLocalStorage} from "../hooks/useStorage";
-import BasketTotal from "../components/BasketTotal";
+import BasketTotal from "../components/features/BasketTotal";
 import {Helmet} from "react-helmet";
 import {Link, useNavigate} from "react-router-dom";
 import {createOrderAuth} from "../http/orderAPI";
@@ -69,21 +69,16 @@ const BasketPage = observer(() => {
                     <div>Количество</div>
                     <div>Цена</div>
                     <div>Сумма</div>
-
                 </div>
-
-
-
                 {basket.basketItems.map(item =>
                     <BasketItem user={user} basket={basket} delBasketItem={delBasketItem} localBasket={localBasket} setLocalBasket={setLocalBasket} key={item.productId+"|"+item.qty} item={item}/>
                 )
                 }
                     <MyButton classes="ClearBasket" onClick={() => clearBasket()}>очистить корзину</MyButton>
                 <BasketTotal createOrder={createOrder} />
-
             </Container>
             <Helmet>
-                <title>Корзина | Зоолайнер</title>
+                <title>Корзина | ЗооЛАЙНЕР</title>
             </Helmet>
         </div>
 
@@ -93,11 +88,18 @@ const BasketPage = observer(() => {
 
     return (
         <div className='basketPage'>
-            <h1>Корзина</h1>
-            <div>Ваша корзина пуста...</div>
-            <Link to={"/"}>Вернуться на главную</Link>
+            <h1>Ваша корзина пуста...</h1>
+            <div className="emptyBasket">
+                <div>
+                    <MyButton  onClick={() => navigate("/")}>ВЕРНУТЬСЯ НА ГЛАВНУЮ</MyButton>
+                </div>
+                <div className="mt-3">
+                    <img  src={`${process.env.REACT_APP_API_URL}/images/emptyBasket.png`} />
+                </div>
+
+            </div>
             <Helmet>
-                <title>Корзина пуста | Зоолайнер</title>
+                <title>Корзина пуста | ЗооЛАЙНЕР</title>
             </Helmet>
                     </div>
     );}

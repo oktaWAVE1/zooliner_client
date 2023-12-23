@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Card} from "react-bootstrap";
-import MyButton from "../UI/MyButton/MyButton";
+import MyButton from "../../UI/MyButton/MyButton";
 import ChildItems from "./ChildItems";
 import {Link} from "react-router-dom";
-import {addToBasketDB} from "../http/basketAPI";
+import {addToBasketDB} from "../../http/basketAPI";
 
 const ProductCard = ({product, addToCart}) => {
     const [currentProduct, setCurrentProduct] = useState({});
@@ -32,16 +32,16 @@ const ProductCard = ({product, addToCart}) => {
             </Link>
             <div><div>
                 <Link to={`/product/${product.id}`}>
-                    <h4>{product.title}</h4>
+                    <h4>{product.title.toUpperCase()}</h4>
                 </Link>
                 <p>{product.shortDescription}</p>
             </div>
                 <div>
 
                    <ChildItems chooseChild={chooseChild} chosenProduct={currentProduct} parentProduct={product} />
-                   <MyButton onClick={() => addToCart(currentProduct.id)} classes="AddToCartButton" title="Добавить в корзину"><span className="material-symbols-outlined">
+                   <MyButton onClick={() => addToCart(currentProduct.id)} classes="AddToCartButton"><span className="material-symbols-outlined">
                     add_shopping_cart
-                    </span>{currentProduct.inStock ? "В КОРЗИНУ" : "ПОД ЗАКАЗ"}</MyButton>
+                    </span>{currentProduct?.inStock ? "В КОРЗИНУ" : "ПОД ЗАКАЗ"}</MyButton>
                 </div>
            </div>
         </Card>

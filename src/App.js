@@ -10,17 +10,19 @@ import MyNavbar from "./components/navbar/MyNavbar";
 import {check} from "./http/userAPI";
 import Footer from "./components/footer/Footer";
 import SideMenu from "./components/sidemenu/SideMenu";
-import BasketBlock from "./components/BasketBlock";
+import BasketBlock from "./components/features/BasketBlock";
 
 
 const App = observer(() => {
     const {user} = useContext(Context)
     const [loading, setLoading] = useState(false)
     useEffect(() => {
+        console.log(user.isAuth)
         check().then(data => {
-
-            user.setUser(data);
-            user.setIsAuth(true);
+            if(typeof data === 'object') {
+                user.setUser(data);
+                user.setIsAuth(true);
+            }
 
         }).finally(() => {
             setLoading(false)
@@ -33,6 +35,7 @@ const App = observer(() => {
           <BrowserRouter>
 
               <MyNavbar/>
+
               <div className="mainContainer">
                   <SideMenu/>
                   <AppRouter/>

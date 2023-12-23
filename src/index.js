@@ -7,6 +7,7 @@ import ProductsStore from "./store/ProductsStore";
 import CatalogueStore from "./store/CatalogueStore";
 import FilterStore from "./store/FilterStore";
 import BasketStore from "./store/BasketStore";
+import LoadingStore from "./store/LoadingStore";
 
 
 export const Context = createContext(null)
@@ -19,6 +20,7 @@ root.render(
       products: new ProductsStore(),
       filters: new FilterStore(),
       basket: new BasketStore(),
+      loading: new LoadingStore(),
   }}
       >
 

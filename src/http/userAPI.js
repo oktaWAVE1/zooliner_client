@@ -7,7 +7,7 @@ export const registration = async(name, telephone, email, password) => {
     return data
 }
 
-export const login = async(telephone, email, password) => {
+export const login = async({telephone, email, password}) => {
     const {data} = await $host.post('api/user/login', {email, telephone, password}, {withCredentials: true})
     localStorage.setItem('token', data.accessToken)
     return jwtDecode(data.accessToken)
@@ -35,8 +35,8 @@ export const getUser = async (id) => {
     return data
 }
 
-export const fetchBonus = async (id) => {
-    const {data} = await $authHost.post('api/user/bonus', {id})
+export const fetchBonus = async () => {
+    const {data} = await $authHost.get('api/bonus')
     return data
 }
 

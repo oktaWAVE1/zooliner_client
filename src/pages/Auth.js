@@ -7,11 +7,15 @@ import MyButton from "../UI/MyButton/MyButton";
 import {login, registration} from "../http/userAPI";
 import {validate} from "email-validator";
 import {Helmet} from "react-helmet";
+import MyPhoneInput from "../UI/MyPhoneInput/MyPhoneInput";
+import Loader from "../UI/Loader/Loader";
 
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
+    const [loading, setLoading] = useState(false)
     const [isDisabled, setIsDisabled] = useState(false)
+    const [telephoneToggle, setTelephoneToggle] = useState(false);
     const [currentUser, setCurrentUser] = useState({
         name: '', email: '', telephone: '', password: '', passwordConfirm: ''
     })
@@ -21,12 +25,13 @@ const Auth = observer(() => {
     const isLogin = location.pathname === "/login"
     const doAuth = async (event) => {
         event.preventDefault();
-        let data
         try {
             if (isLogin){
                     setIsDisabled(false)
-                    data = await login(currentUser.email, currentUser.telephone, currentUser.password)
-                    user.setUser(data)
+                    await login(
+                        {telephone: currentUser.telephone,
+                        email:currentUser.email,
+                        password: currentUser.password}).then(data => user.setUser(data))
                 if(user.user.role) {
                     user.setIsAuth(true)
                 }
@@ -37,6 +42,7 @@ const Auth = observer(() => {
                 } else if (currentUser.password!==currentUser.passwordConfirm){
                     setAlertMessage({message: 'Пароли не совпадают', show: true, variant: 'danger'})
                 } else {
+                    setLoading(true)
                     await registration(currentUser.name, currentUser.telephone, currentUser.email, currentUser.password).then(data => {
                             setAlertMessage({
                                 message: 'На ваш Email отправлено письмо с подтверждением регистрации. Пожалуйста пройдите по ссылке в письме.',
@@ -45,22 +51,23 @@ const Auth = observer(() => {
                             });
                             setIsDisabled(true)
                         }
-                    )
+                    ).finally(() => setLoading(false))
                 }
-
             }
-
 
     } catch (e) {
             setAlertMessage({message: e.response.data.message, show: true, variant: 'danger'})
     }
+    }
+    if (loading){
+        return <Loader />
     }
 
     return (
         <Container className="loginPage">
             <Card>
                 <Form onSubmit={doAuth} className='auth_form'>
-                    <h1>{isLogin ? 'Авторизация' : 'Регистрация'}</h1>
+                    <h1>{isLogin ? 'Войти' : 'Регистрация'}</h1>
                     {alertMessage.show &&
                         <Alert variant={alertMessage.variant} onClose={() => setAlertMessage({show: false})} dismissible>
                             <Alert.Heading>{alertMessage.title}</Alert.Heading>
@@ -69,7 +76,12 @@ const Auth = observer(() => {
                             </p>
                         </Alert>
                     }
+                    {isLogin &&
+                        <div className="d-flex justify-content-center" onChange={() => setIsDisabled(false)}>
+                            <Form.Switch isValid={true} checked={telephoneToggle} onChange={() => setTelephoneToggle(prev => !prev)} label="войти по телефону" />
 
+                        </div>
+                    }
                     {!isLogin &&
                         <Form.Control
 
@@ -78,25 +90,18 @@ const Auth = observer(() => {
                             placeholder='Имя'
                             type='text'
                         />}
-                    {!isLogin &&
-                        <Form.Control
-                        value={currentUser.telephone}
-                        onChange={e => setCurrentUser({...currentUser, telephone: e.target.value})}
-                        placeholder='Телефон в формате +7 XXX XXX XX XX'
-                        maxLength='10'
-                        size='10'
-                        type='tel'
-                        />
+                    {(!isLogin || (isLogin && telephoneToggle)) &&
+                        <MyPhoneInput value={currentUser.telephone} onChange={e => setCurrentUser({...currentUser, telephone: e.target.value})} />
 
                     }
-
-                    <Form.Control
-                        value={currentUser.email}
-                        onChange={e => setCurrentUser(isLogin? {...currentUser, email: e.target.value, telephone: e.target.value} : {...currentUser, email: e.target.value} )}
-
-                        placeholder={isLogin ? 'Email или телефон' : 'Email'}
-                        type='text'
-                    />
+                    { (!telephoneToggle || !isLogin) &&
+                        <Form.Control
+                            value={currentUser.email}
+                            onChange={e => setCurrentUser( {...currentUser, email: e.target.value})}
+                            placeholder={'Email'}
+                            type='text'
+                        />
+                    }
                     <Form.Control
                         value={currentUser.password}
                         onChange={e => setCurrentUser({...currentUser, password: e.target.value})}
@@ -121,9 +126,17 @@ const Auth = observer(() => {
                     </MyButton>
                     <div className="switch">{isLogin ? 'Нет аккаунта?' : 'Уже зарегестрированы?'}
                         {isLogin ?
-                            <Link to='/reg' onClick={() => setCurrentUser({email:'', name: '', telephone: '', password: ''})}> Регистрация.</Link>
+                            <Link to='/reg' onClick={() => {
+                                setCurrentUser({email:'', name: '', telephone: '', password: ''})
+                                setAlertMessage({title: '', message: '', show: false, variant: 'danger'})
+                                setIsDisabled(false)
+                            }}> Регистрация.</Link>
                             :
-                            <Link to='/login' onClick={() => setCurrentUser({email:'', name: '', telephone: '', password: ''})}> Авторизация.</Link>
+                            <Link to='/login' onClick={() => {
+                                setCurrentUser({email:'', name: '', telephone: '', password: ''})
+                                setIsDisabled(false)
+                                setAlertMessage({title: '', message: '', show: false, variant: 'danger'})
+                            }}> Войти.</Link>
                         }
                         {isLogin &&
                             <div>Забыли пароль?<Link to='/reset_pass'> Восстановить.</Link></div>
@@ -134,7 +147,7 @@ const Auth = observer(() => {
                 </Form>
             </Card>
             <Helmet>
-                <title>Страница аутентефикации | Зоолайнер</title>
+                <title>Страница аутентефикации | ЗооЛАЙНЕР</title>
             </Helmet>
         </Container>
     );

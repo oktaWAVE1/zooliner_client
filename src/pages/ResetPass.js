@@ -4,9 +4,11 @@ import {Alert, Card, Container, Form} from "react-bootstrap";
 import MyButton from "../UI/MyButton/MyButton";
 import {userResetPass, userResetPassMail} from "../http/userAPI";
 import {Helmet} from "react-helmet";
+import Loader from "../UI/Loader/Loader";
 
 const ResetPass = () => {
     const [email, setEmail] = useState('')
+    const [loading, setLoading] = useState(false)
     const [isDisabled, setIsDisabled] = useState(false)
     const [alertMessage, setAlertMessage] = useState({title: '', message: '', show: false, variant:''})
     const [pass, setPass] = useState({pass:'', confPass: ''})
@@ -22,18 +24,23 @@ const ResetPass = () => {
     }
 
     const sendMail = async (event) => {
+        setLoading(true)
         event.preventDefault()
         try {
             await userResetPassMail(email).then(data => setAlertMessage({
                 show: true,
                 message: data,
                 variant: 'success'
-            }))
+            })).finally(() => setLoading(false))
             setIsDisabled(true)
         } catch (error) {
             setAlertMessage({message: error.response.data.message, show: true, variant: 'danger'})
         }
     }
+    if (loading){
+        return <Loader />
+    }
+
     return (
         <div>
             <Container className="loginPage">
@@ -89,7 +96,7 @@ const ResetPass = () => {
 
             </Container>
             <Helmet>
-                <title>Сброс пароля | Зоолайнер</title>
+                <title>Сброс пароля | ЗооЛАЙНЕР</title>
             </Helmet>
         </div>
     );

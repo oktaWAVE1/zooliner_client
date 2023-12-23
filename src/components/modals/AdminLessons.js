@@ -4,7 +4,6 @@ import MyButton from "../../UI/MyButton/MyButton";
 import {deleteLesson, fetchAllLessons, updateLesson} from "../../http/lessonsAPI";
 
 
-import {fetchTypes} from "../../http/typeAPI";
 
 const AdminLessons = ({onHide, show} ) => {
     const [lessons, setLessons] = useState([])
@@ -14,7 +13,6 @@ const AdminLessons = ({onHide, show} ) => {
 
 
     useEffect(() => {
-        fetchTypes().then(data => setTypes(data))
         fetchAllLessons().then(data => {
             setLessons(data);
             });

@@ -158,7 +158,7 @@ const Royal = () => {
                 </div>
             </div>
             <Helmet>
-                <title>Бренд зона Royal Canin | Зоолайнер</title>
+                <title>Бренд зона Royal Canin | ЗооЛАЙНЕР</title>
             </Helmet>
         </div>
     );

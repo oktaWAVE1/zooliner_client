@@ -11,6 +11,9 @@ import Royal from "./pages/Royal";
 import BasketPage from "./pages/BasketPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 import SuccessPage from "./pages/SuccessPage";
+import AdminOrders from "./pages/AdminOrders";
+import AdminUsers from "./pages/AdminUsers";
+import AdminProductPage from "./pages/AdminProductPage";
 
 
 export const publicRoutes = [
@@ -48,4 +51,7 @@ export const authRoutes = [
 
 export const adminRoutes = [
     {path: '/admin', element: <Admin/>},
+    {path: '/admin/orders', element: <AdminOrders />},
+    {path: '/admin/users', element: <AdminUsers />},
+    {path: '/admin/products', element: <AdminProductPage />},
 ]

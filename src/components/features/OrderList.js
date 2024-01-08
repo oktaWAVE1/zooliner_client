@@ -20,11 +20,10 @@ const OrderList = observer(() => {
             setAllOrders(res)
             setOrders(res.slice(0,5))
         })
-        setTimeout(() => console.log(orders), 1100)
 
     }, []);
     const loadFive = () => {
-        setOrders(prev => [...prev, ...allOrders.slice(orders.length, allOrders.length-orders.length>4 ? orders.length+5 : allOrders.length-orders.length)])
+        setOrders(prev => [...prev, ...allOrders.slice(orders.length, allOrders.length-orders.length>4 ? orders.length+5 : allOrders.length)])
     }
     const loadAll = () => {
         setOrders(allOrders)

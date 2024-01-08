@@ -27,8 +27,9 @@ const BasketTotal = observer(({createOrder}) => {
     return (
         <div className="BasketTotal">
             <hr/>
-
-            <h4>Ваша скидка: {discount} ₽</h4>
+            {discount> 0 &&
+                <h4>Ваша скидка: {discount} ₽</h4>
+            }
             <h4>Итого: {total} ₽</h4>
             <MyButton onClick={() => createOrder()}>Оформить заказ</MyButton>
         </div>

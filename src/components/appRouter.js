@@ -10,7 +10,7 @@ const AppRouter = observer(() => {
     const {user} = useContext(Context)
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        setTimeout(() => setLoading(false),50)
+        setTimeout(() => setLoading(false),180)
     }, []);
 
     if(loading) return <Loader />

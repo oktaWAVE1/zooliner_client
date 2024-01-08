@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Accordion, Button, Card, Container, Form, Modal, Row} from "react-bootstrap";
+import {Accordion, Container, Form, Modal} from "react-bootstrap";
 import useDebounce from "../../hooks/useDebounce";
 import MyButton from "../../UI/MyButton/MyButton";
-import {createBrand, deleteBrand, fetchAllBrands, modifyBrand} from "../../http/adminAPI";
+import {createBrand, deleteBrand, fetchAllBrands, modifyBrand} from "../../http/admin/brandAdminAPI";
 import {useBrandsSortSearch} from "../../hooks/useBrandsSortSearch";
-import ModalPagination from "../features/ModalPagination";
+import ModalPagination from "../features/Admin/ModalPagination";
+import {useIsMobile} from "../../hooks/useIsMobile";
 
 const AdminBrandModal = ({onHide, show}) => {
     const limit = 10
@@ -40,6 +41,7 @@ const AdminBrandModal = ({onHide, show}) => {
     const deleteCurrent = (id) => {
         deleteBrand(id).then(() => fetchAllBrands().then(data => setBrands(data)))
     }
+    const isMobile = useIsMobile()
 
     return (
         <Modal
@@ -49,6 +51,7 @@ const AdminBrandModal = ({onHide, show}) => {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
+            fullscreen={isMobile}
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter ">

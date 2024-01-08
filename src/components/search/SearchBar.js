@@ -1,4 +1,4 @@
-import React, {memo, useState} from 'react';
+import React, {useState} from 'react';
 import useDebounce from "../../hooks/useDebounce";
 import {SearchResultList} from "./SearchResultList";
 import fuseSearch from "../../utils/fuseSearch";

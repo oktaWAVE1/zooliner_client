@@ -35,6 +35,13 @@
 
 }
 
+.adminLimit {
+    width: 40px;
+    border-radius: 5px;
+    text-align: center;
+    border: #AAAAAA 1px solid;
+}
+
 .accordion .accordion-button {
     background-color: var(--main-theme-color);
     color: white;
@@ -43,6 +50,49 @@
 .customerOrdersAccordion .accordion-button, .customerOrdersAccordion .accordion-button:after {
     background-color: var(--main-theme-color);
     color: white;
+}
+
+.adminProductModal .info {
+    max-width: 650px;
+}
+
+.adminProductModal .images .item {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: contain;
+}
+
+.adminProductModal .images>div {
+    position: relative;
+}
+
+.adminProductModal .images .del_btn, .adminProductModal .images .master_btn {
+    color: var(--main-theme-active-color);
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+}
+
+
+.adminProductModal .images .master_btn {
+    right: 30px;
+}
+
+.adminProductIndex {
+    max-width: 30px;
+    width: 30px;
+    padding: 4px;
+    text-align: center;
+    font-size: 0.8rem;
+    margin-right: 6px;
+}
+
+.adminOrders .orderItem {
+    display: grid;
+    grid-template-columns: 2fr 4fr 4fr 1fr 1fr 2fr 3fr;
+    border-bottom: #CCC solid 1px;
+    align-items: center;
 }
 
 .customerOrdersAccordion .orderItem {
@@ -70,8 +120,18 @@
 .pointer {
     cursor: pointer;
 }
+@media (max-width: 800px) {
+    .adminOrders .orderItem{
+        grid-template-columns: 1fr 1fr 1fr;
+        text-align: center;
+        gap: 5px;
+    }
+
+
+}
 
 @media (max-width: 550px){
+
     .customerOrdersAccordion .orderItem {
         grid-template-columns: 10fr 14fr 3fr 3fr;
     }
@@ -103,8 +163,15 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+textarea{
+    border-radius: 5px;
+    border: 1px solid #DDD;
+    outline:0px none transparent;
+}
+
 input:focus, input:active, textarea:focus, textarea:active {
-    box-shadow: 0 0 3px 2px var(--main-theme-color)!important;
+    box-shadow: 0 0 3px 2px var(--main-theme-color) !important;
+
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -136,7 +203,7 @@ a {
     display: none;
 }
 
-@media screen and (max-width: 991px){
+@media (max-width: 991px){
     .mainContainer {
         margin-top: 80px;
     }
@@ -220,7 +287,8 @@ a {
     gap: 8px;
 }
 
-.userPage, .basketPage, .adminPage {
+
+.userPage, .basketPage, .adminPage, .adminOrders, .adminUsersPage {
     width: 100%;
     padding: 0 10px;
 }
@@ -245,8 +313,19 @@ a {
 }
 
 
+.order-default, .orderOption{
+    color: #777;
+}
+.order-canceled{
+    color: darkred;
+}
+.order-done{
+    color: forestgreen;
+}
 
-@media screen and (max-width: 900px) {
+
+
+@media (max-width: 900px) {
     .brandFilter button {
         font-size: 0.7em;
         padding: 4px 8px;
@@ -350,6 +429,11 @@ a {
     padding: 6px 12px;
 }
 
+.adminUsersList .line {
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr 6fr;
+}
+
 
 .orderConfirmation .orderItemsBlock .total {
     display: grid;
@@ -434,7 +518,20 @@ a {
     grid-template-columns: 3fr 1fr 1fr;
 }
 
-.addBrandAccordion .accordion-button.collapsed {
+.userBonusAccordion .accordion-button {
+    padding: 10px 20px;
+}
+
+.productAdminAttributesAccordion .accordion-button {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.addCategoryAccordion .accordion-button.collapsed,
+.addBrandAccordion .accordion-button.collapsed,
+.userBonusAccordion .accordion-button.collapsed,
+.productAdminAttributesAccordion .accordion-button.collapsed
+{
     background-color: #DDD;
 }
 
@@ -442,7 +539,24 @@ a {
     margin-bottom: 5px;
 }
 
-@media screen and (max-width: 960px) {
+.adminCategoryImg {
+    max-width: 200px;
+    border-radius: 5px;
+}
+
+
+.paginationDelimiter a{
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    cursor: default;
+}
+.paginationDelimiter:hover, .paginationDelimiter a:hover {
+    background-color: transparent !important;
+    color: var(--main-theme-text-color) !important;
+}
+
+@media (max-width: 960px) {
     .orderConfirmation {
         width: 100%;
         padding: 6px 6px;
@@ -492,7 +606,7 @@ a {
     display: none;
 }
 
-@media screen and (max-width: 991px){
+@media (max-width: 991px){
     .mobileCatalogue {
         display: block;
     }
@@ -624,7 +738,7 @@ a {
     margin-bottom: 4px;
 }
 
-@media screen and (max-width: 1050px){
+@media (max-width: 1050px){
     .ProductCard{
         margin-bottom: 0;
     }
@@ -1014,7 +1128,16 @@ a {
     width: 100%;
 }
 
-@media screen and (max-width: 850px){
+
+@media (max-width: 850px){
+    .adminUsersList .line {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .adminUsersList .line div:nth-child(4){
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+
     .ProductPage {
         display: grid;
         grid-template-areas:
@@ -1024,6 +1147,15 @@ a {
     }
     .ProductPage > div {
         width: 96vw;
+    }
+}
+@media (max-width: 650px){
+    .adminUsersList .line {
+        grid-template-columns: 1fr 1fr;
+    }
+    .adminUsersList .line div:nth-child(3), .adminUsersList .line div:nth-child(4){
+        grid-column-start: 1;
+        grid-column-end: 3;
     }
 }
 
@@ -1123,11 +1255,13 @@ a {
     z-index: 99;
 }
 
+.basketItem .basketItemImg:hover {
+    z-index: 98;
+}
 
-.basketItem .basketItemImg img:hover {
+.basketItem .basketItemImg img:hover{
     scale: 5;
     background-color: #FFFFFF;
-
 }
 
 @media (max-width: 450px){
@@ -1136,9 +1270,9 @@ a {
     }
 }
 
-@media screen and (max-width: 800px){
+@media (max-width: 800px){
     .basketItem .basketItemImg img:hover {
-        margin-left: 20px;
+        margin-left: 50px;
         position: absolute;
     }
 }
@@ -1339,17 +1473,23 @@ a {
 
 
 
-@media screen and (max-width: 600px) {
+@media (max-width: 600px) {
     .BasketContainer, .basketItem {
-        font-size: 0.9em;
+        font-size: 0.7em;
+
+    }
+
+    .basketItem div, .BasketContainer div:nth-child(2) {
+        justify-self: start;
+
     }
 }
 
-@media screen and (min-width: 1200px) {
+@media (min-width: 1200px) {
     .mainContainer {width: 1200px;}
 }
 
-@media screen and (max-width: 991px) {
+@media (max-width: 991px) {
     .sideBar {
         display: none;
 
@@ -1376,7 +1516,7 @@ a {
 
 
 
-@media screen and (min-width: 991px) and (max-width: 1200px) {
+@media (min-width: 991px) and (max-width: 1200px) {
 
 
 
@@ -1388,7 +1528,7 @@ a {
         width: 100%;
     }
 }
-@media screen and (max-width: 1050px) {
+@media (max-width: 1050px) {
     .ProductCard, .CategoryCard {
         width: 49%;
     }
@@ -1407,7 +1547,7 @@ a {
 
 }
 
-@media screen and (max-width: 500px) {
+@media (max-width: 500px) {
     .ProductCard, .CategoryCard {
         width: 100%;
     }

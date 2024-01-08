@@ -17,7 +17,6 @@ const App = observer(() => {
     const {user} = useContext(Context)
     const [loading, setLoading] = useState(false)
     useEffect(() => {
-        console.log(user.isAuth)
         check().then(data => {
             if(typeof data === 'object') {
                 user.setUser(data);
@@ -27,24 +26,25 @@ const App = observer(() => {
         }).finally(() => {
             setLoading(false)
         })
+        // eslint-disable-next-line
     },[])
     if(loading) {
         return <Loader />
     }
   return (
-          <BrowserRouter>
+    <>
+      <BrowserRouter>
+        <MyNavbar/>
 
-              <MyNavbar/>
+          <div className="mainContainer">
+              <SideMenu/>
+              <AppRouter/>
+              <BasketBlock />
+          </div>
 
-              <div className="mainContainer">
-                  <SideMenu/>
-                  <AppRouter/>
-                  <BasketBlock />
-              </div>
-
-              <Footer/>
-          </BrowserRouter>
-
+          <Footer/>
+      </BrowserRouter>
+    </>
 
   );
 });

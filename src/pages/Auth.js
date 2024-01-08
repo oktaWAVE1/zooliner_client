@@ -78,7 +78,7 @@ const Auth = observer(() => {
                     }
                     {isLogin &&
                         <div className="d-flex justify-content-center" onChange={() => setIsDisabled(false)}>
-                            <Form.Switch isValid={true} checked={telephoneToggle} onChange={() => setTelephoneToggle(prev => !prev)} label="войти по телефону" />
+                            <Form.Switch isValid={true} checked={telephoneToggle} onChange={() => setTelephoneToggle(prev => !prev)} label="войти по номеру телефона" />
 
                         </div>
                     }

@@ -1,15 +1,15 @@
 import React from 'react';
 import MyButton from "../../UI/MyButton/MyButton";
 
-const ChildItems = ({chooseChild, chosenProduct, parentProduct, ...props}) => {
+const ChildItems = ({chooseChild, chosenProduct, parentProduct, preview, ...props}) => {
     return (
-        <div className="desc">
+        <div className="desc" >
 
             <div className="children">
                 {parentProduct?.children?.length>0 &&
 
                     parentProduct?.children.filter(c => c.published===true).sort((a, b) => b.price-a.price).map(child =>
-                        <MyButton key={child.id} onClick={() => chooseChild(child.id)} classes={child.id === chosenProduct.id ? "active" : ""}>{child.title}</MyButton>
+                        <MyButton disabled={preview} key={child.id} onClick={() => chooseChild(child.id)} classes={child.id === chosenProduct.id ? "active" : ""}>{child.title}</MyButton>
                     )
                 }
             </div>

@@ -1,9 +1,10 @@
 import React from 'react';
-import {Form, Modal, Row} from "react-bootstrap";
+import {Modal} from "react-bootstrap";
 import MyButton from "../../UI/MyButton/MyButton";
 import OrderModalItem from "../features/OrderModalItem";
 import {duplicateOrder} from "../../http/orderAPI";
 import {useNavigate} from "react-router-dom";
+import {useIsMobile} from "../../hooks/useIsMobile";
 
 const OrderModal = ({onHide, show, order, userId}) => {
     const navigate = useNavigate()
@@ -12,14 +13,16 @@ const OrderModal = ({onHide, show, order, userId}) => {
     const repeatOrder = async() => {
         await duplicateOrder(order.id, userId).then(() => navigate('/basket'))
     }
+    const isMobile = useIsMobile()
     return (
         <Modal
             className='modal'
             show={show}
             onHide={onHide}
-            size="lg"
+            size="xl"
             aria-labelledby="contained-modal-title-vcenter"
             centered
+            fullscreen={isMobile}
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
@@ -31,6 +34,9 @@ const OrderModal = ({onHide, show, order, userId}) => {
                     <div>Статус: {order.status}</div>
                     <div>Дата заказа: {date}</div>
                     <div>Адрес доставки: {order.orderAddress}</div>
+                    {!userId &&
+                    <div>Доставка: {order?.delivery_method?.name}</div>
+                    }
                     <div>Стоимость доставки: {order.deliverySum}</div>
                     {order?.bonusPointsUsed>0 &&
                         <div>Бонусов потрачено: {order.bonusPointsUsed}</div>
@@ -54,7 +60,9 @@ const OrderModal = ({onHide, show, order, userId}) => {
 
             </Modal.Body>
             <Modal.Footer>
-                <MyButton onClick={repeatOrder}>Повторить заказ</MyButton>
+                {userId &&
+                    <MyButton onClick={repeatOrder}>Повторить заказ</MyButton>
+                }
                 <MyButton onClick={onHide}>Закрыть</MyButton>
             </Modal.Footer>
         </Modal>

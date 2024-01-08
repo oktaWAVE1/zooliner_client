@@ -5,6 +5,11 @@ export const createOrderAuth= async(userId) => {
     return data
 }
 
+export const createOrderAnuthorized= async(basket) => {
+    const data = await $host.post('api/order/unauthorized', {basket})
+    return data
+}
+
 export const duplicateOrder= async(orderId, userId) => {
     const {data} = await $authHost.post(`api/basket/copy/${orderId}`, {userId})
     return data
@@ -19,6 +24,11 @@ export const fetchCustomerOrders = async(userId) => {
     const {data} = await $authHost.get('api/order/user', { params:{
         data: {userId}
 }})
+    return data
+}
+
+export const fetchAllOrders = async() => {
+    const {data} = await $authHost.get('api/order/all')
     return data
 }
 

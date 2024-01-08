@@ -11,6 +11,7 @@ import {useIsMobile} from "../../hooks/useIsMobile";
 
 
 const MyNavbar = observer(() => {
+    console.log('render')
     const {user, catalogue} = useContext(Context)
     const [expanded, setExpanded] = useState(false);
     const logout = () => {
@@ -78,8 +79,8 @@ const MyNavbar = observer(() => {
 
                         </Nav>
                         <Nav className="me-auto">
-                            <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/payment_and_delivery'>Оплата и доставка</NavLink>
-                            <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/bonus'>Бонусная программа</NavLink>
+                            <Link className={cl.navbarItem} onClick={hideMobileMenu} to='/payment_and_delivery'>Оплата и доставка</Link>
+                            <Link className={cl.navbarItem} onClick={hideMobileMenu} to='/bonus'>Бонусная программа</Link>
 
                         </Nav>
 
@@ -124,14 +125,18 @@ const MyNavbar = observer(() => {
                             {!user.isAuth &&
                                 <Nav>
                                     <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/basket' alt="Корзина" title="Корзина">
+                                        {isMobile ? "Корзина" :
                                         <span className="material-symbols-outlined" title="Корзина">
                                         shopping_cart
                                     </span>
+                                        }
                                     </NavLink>
                                     <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/login'>
-                                        <span className="material-symbols-outlined" title="Выход">
+                                        {isMobile ? "Войти" :
+                                            <span className="material-symbols-outlined" title="Войти">
                                         login
-                                    </span>
+                                        </span>
+                                        }
                                     </NavLink>
 
                                 </Nav>

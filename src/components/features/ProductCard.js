@@ -5,7 +5,7 @@ import ChildItems from "./ChildItems";
 import {Link} from "react-router-dom";
 import {addToBasketDB} from "../../http/basketAPI";
 
-const ProductCard = ({product, addToCart}) => {
+const ProductCard = ({product, addToCart, preview}) => {
     const [currentProduct, setCurrentProduct] = useState({});
     useEffect(() => {
 
@@ -28,7 +28,7 @@ const ProductCard = ({product, addToCart}) => {
             {product.brandId === 1 && <div className="stars" ><img title="рейтинг" src={`${process.env.REACT_APP_API_URL}/images/stars.png`}/><p>5.0</p></div>
             }
             <Link to={`/product/${product.id}`}>
-            <img loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${product.product_images[0]?.img ? product.product_images[0]?.img : "no_image.webp"}`}/>
+            <img loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${product?.product_images[0]?.img ? product.product_images[0]?.img : "no_image.webp"}`}/>
             </Link>
             <div><div>
                 <Link to={`/product/${product.id}`}>
@@ -38,8 +38,8 @@ const ProductCard = ({product, addToCart}) => {
             </div>
                 <div>
 
-                   <ChildItems chooseChild={chooseChild} chosenProduct={currentProduct} parentProduct={product} />
-                   <MyButton onClick={() => addToCart(currentProduct.id)} classes="AddToCartButton"><span className="material-symbols-outlined">
+                   <ChildItems preview={preview} chooseChild={chooseChild} chosenProduct={currentProduct} parentProduct={product} />
+                   <MyButton disabled={preview} onClick={() => addToCart(currentProduct.id)} classes="AddToCartButton"><span className="material-symbols-outlined">
                     add_shopping_cart
                     </span>{currentProduct?.inStock ? "В КОРЗИНУ" : "ПОД ЗАКАЗ"}</MyButton>
                 </div>

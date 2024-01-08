@@ -1,6 +1,4 @@
-import {$authHost, $host} from "./index";
-
-
+import {$authHost} from "../index";
 
 export const fetchAllBrands = async () => {
     const {data} = await $authHost.get('api/brand/all')

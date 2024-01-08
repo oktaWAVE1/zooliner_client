@@ -8,7 +8,7 @@ import {Container, Row} from "react-bootstrap";
 import CategoryCard from "../components/features/CategoryCard";
 import Pages from "../components/features/Pages";
 import Filters from "../components/filters/Filters";
-import {addToBasketDB, fetchBasket, fetchBasketUnauthorized, updateBasketItemQtyDB} from "../http/basketAPI";
+import {addToBasketDB, fetchBasket, fetchBasketUnauthorized} from "../http/basketAPI";
 import {useLocalStorage} from "../hooks/useStorage";
 import useDebounce from "../hooks/useDebounce";
 import Loader from "../UI/Loader/Loader";
@@ -18,7 +18,7 @@ import {fetchSearchedPublishedProducts} from "../http/searchAPI";
 
 const CategoryPage = observer(() => {
     const {products, filters, user, basket} = useContext(Context)
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const query = (searchParams.get('query'))
     const [clicker, setClicker] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -48,7 +48,7 @@ const CategoryPage = observer(() => {
 
     useEffect(() => {
 
-
+        setLoading(true)
         if (id==='-1'){
 
             fetchSearchedPublishedProducts(query).then(data => {

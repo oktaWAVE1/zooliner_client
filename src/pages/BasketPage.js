@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {
@@ -13,8 +13,8 @@ import {Container} from "react-bootstrap";
 import {useLocalStorage} from "../hooks/useStorage";
 import BasketTotal from "../components/features/BasketTotal";
 import {Helmet} from "react-helmet";
-import {Link, useNavigate} from "react-router-dom";
-import {createOrderAuth} from "../http/orderAPI";
+import {useNavigate} from "react-router-dom";
+import {createOrderAnuthorized, createOrderAuth} from "../http/orderAPI";
 
 const BasketPage = observer(() => {
     const [localBasket, setLocalBasket, clearLocalBasket] = useLocalStorage('basket', [])
@@ -30,7 +30,8 @@ const BasketPage = observer(() => {
         } else {
             basket.setBasketItems([])
         }
-    }, [user.isAuth, localBasket]);
+        // eslint-disable-next-line
+    }, [user.isAuth, localBasket, user.user.id]);
 
 
     const clearBasket = () => {
@@ -46,6 +47,11 @@ const BasketPage = observer(() => {
     const createOrder = () => {
         if(user.isAuth){
             createOrderAuth(user.user.id).then(data => {
+                navigate('/order_confirmation/'+data.data)
+            })
+        } else {
+
+            createOrderAnuthorized(localBasket).then(data => {
                 navigate('/order_confirmation/'+data.data)
             })
         }
@@ -94,7 +100,7 @@ const BasketPage = observer(() => {
                     <MyButton  onClick={() => navigate("/")}>ВЕРНУТЬСЯ НА ГЛАВНУЮ</MyButton>
                 </div>
                 <div className="mt-3">
-                    <img  src={`${process.env.REACT_APP_API_URL}/images/emptyBasket.png`} />
+                    <img alt='empty basket' src={`${process.env.REACT_APP_API_URL}/images/emptyBasket.png`} />
                 </div>
 
             </div>

@@ -19,7 +19,7 @@ const OrderItemsBlock = ({order}) => {
 
                             <div className="item" key={i.id}>
                                             <span className="orderItemImg">
-                                                <img loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${i.product?.parent?.product_images[0]?.img ?? i.product?.product_images[0]?.img ?? "no_image.webp"}`}/>
+                                                <img alt="product_img" loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${i.product?.parent?.product_images[0]?.img ?? i.product?.product_images[0]?.img ?? "no_image.webp"}`}/>
                                             </span>
                                 <span>{i.name}</span>
                                 <span>{i.price} ₽</span>

@@ -9,7 +9,10 @@ const ChildItems = ({chooseChild, chosenProduct, parentProduct, preview, ...prop
                 {parentProduct?.children?.length>0 &&
 
                     parentProduct?.children.filter(c => c.published===true).sort((a, b) => b.price-a.price).map(child =>
-                        <MyButton disabled={preview} key={child.id} onClick={() => chooseChild(child.id)} classes={child.id === chosenProduct.id ? "active" : ""}>{child.title}</MyButton>
+                        <MyButton key={child.id} onClick={(e) => {
+                            e.preventDefault()
+                            chooseChild(child.id)
+                        }} classes={child.id === chosenProduct.id ? "active" : ""}>{child.title}</MyButton>
                     )
                 }
             </div>

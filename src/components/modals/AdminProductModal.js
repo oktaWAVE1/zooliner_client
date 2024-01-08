@@ -254,14 +254,21 @@ const AdminProductModal = ({show, onHide, productId}) => {
                         <div className="px-2">Описание товара</div>
                         <textarea rows='4' placeholder={"Введите описание..."} type={'textarea'} className="px-2 py-1 w-100" value={currentProduct?.description || ''} onChange={e => setCurrentProduct({...currentProduct, description: e.target.value})} />
                     </Form.Label>
-                    <Form.Label className="d-flex flex-wrap ">
-                        <div className="px-2">Мета заголовок</div>
-                        <Form.Control type={"text"} placeholder={"Введите мета заголовок..."} className="px-2 py-1 w-100" value={currentProduct?.metaTitle || ''} onChange={e => setCurrentProduct({...currentProduct, metaTitle: e.target.value})} />
-                    </Form.Label>
-                    <Form.Label className="d-flex flex-wrap ">
-                        <div className="px-2">Мета описание</div>
-                        <Form.Control type={"text"} placeholder={"Введите мета описание..."} className="px-2 py-1 w-100" value={currentProduct?.metaDescription || ''} onChange={e => setCurrentProduct({...currentProduct, metaDescription: e.target.value})} />
-                    </Form.Label>
+                    <Accordion className="productAdminMetaAccordion mt-0">
+                        <Accordion.Item  eventKey="1">
+                            <Accordion.Header><div className="text-center w-100">МЕТА</div></Accordion.Header>
+                            <Accordion.Body>
+                                <Form.Label className="d-flex flex-wrap ">
+                                    <div className="px-2">Мета заголовок</div>
+                                    <Form.Control type={"text"} placeholder={"Введите мета заголовок..."} className="px-2 py-1 w-100" value={currentProduct?.metaTitle || ''} onChange={e => setCurrentProduct({...currentProduct, metaTitle: e.target.value})} />
+                                </Form.Label>
+                                <Form.Label className="d-flex flex-wrap ">
+                                    <div className="px-2">Мета описание</div>
+                                    <Form.Control type={"text"} placeholder={"Введите мета описание..."} className="px-2 py-1 w-100" value={currentProduct?.metaDescription || ''} onChange={e => setCurrentProduct({...currentProduct, metaDescription: e.target.value})} />
+                                </Form.Label>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
                 </Form>
                 <div>
                     <MyButton classes="w-100 my-2" onClick={e => handleUpdateChanges(e)}>СОХРАНИТЬ ИЗМЕНЕНИЯ</MyButton>

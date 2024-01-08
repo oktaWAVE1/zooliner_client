@@ -522,11 +522,13 @@ a {
     padding: 10px 20px;
 }
 
-.productAdminAttributesAccordion .accordion-button {
+.productAdminAttributesAccordion .accordion-button,
+.productAdminMetaAccordion .accordion-button{
     padding-top: 4px;
     padding-bottom: 4px;
 }
 
+.productAdminMetaAccordion .accordion-button.collapsed,
 .addCategoryAccordion .accordion-button.collapsed,
 .addBrandAccordion .accordion-button.collapsed,
 .userBonusAccordion .accordion-button.collapsed,

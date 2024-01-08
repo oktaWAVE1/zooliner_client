@@ -3,7 +3,6 @@ import {Card} from "react-bootstrap";
 import MyButton from "../../UI/MyButton/MyButton";
 import ChildItems from "./ChildItems";
 import {Link} from "react-router-dom";
-import {addToBasketDB} from "../../http/basketAPI";
 
 const ProductCard = ({product, addToCart, preview}) => {
     const [currentProduct, setCurrentProduct] = useState({});
@@ -28,7 +27,7 @@ const ProductCard = ({product, addToCart, preview}) => {
             {product.brandId === 1 && <div className="stars" ><img title="рейтинг" src={`${process.env.REACT_APP_API_URL}/images/stars.png`}/><p>5.0</p></div>
             }
             <Link to={`/product/${product.id}`}>
-            <img loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${product?.product_images[0]?.img ? product.product_images[0]?.img : "no_image.webp"}`}/>
+            <img alt="product_img" loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${product?.product_images[0]?.img ? product.product_images[0]?.img : "no_image.webp"}`}/>
             </Link>
             <div><div>
                 <Link to={`/product/${product.id}`}>

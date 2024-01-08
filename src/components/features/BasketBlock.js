@@ -7,7 +7,7 @@ import {useLocalStorage} from "../../hooks/useStorage";
 
 const BasketBlock = observer(() => {
     const {user, basket} = useContext(Context)
-    const [localBasket, setLocalBasket, clearLocalBasket] = useLocalStorage('basket', [])
+    const [localBasket] = useLocalStorage('basket', [])
     useEffect(() => {
         if (user.isAuth) {
             fetchBasket(user.user.id).then(data => basket.setBasketItems(data))

@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../../index";
 import {passwordValidator} from "../../utils/passwordValidator";
 import {getUser, modifyUser} from "../../http/userAPI";
-import {Accordion, Alert, Container, Form} from "react-bootstrap";
+import {Accordion, Alert, Form} from "react-bootstrap";
 import MyButton from "../../UI/MyButton/MyButton";
 
 const UserEditForm = () => {

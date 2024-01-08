@@ -36,7 +36,7 @@ const BasketItem = ({item, user, basket, delBasketItem, localBasket, setLocalBas
     return (
         <div className="basketItem">
             <div className="basketItemImg">
-                <img loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${item.product?.parent?.product_images[0]?.img ?? item.product?.product_images[0]?.img ?? "no_image.webp"}`}/>
+                <img loading="lazy" alt="product_img" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${item.product?.parent?.product_images[0]?.img ?? item.product?.product_images[0]?.img ?? "no_image.webp"}`}/>
             </div>
             <div className='basketItemLink d-flex justify-content-start w-100'>
                 {item?.product?.parent?.title ? <Link to={`/product/${item.product.parent.id}`}>{item.product.parent.title} {item.product.parent.shortDescription} {item.product.title}</Link> :<Link to={`/product/${item.product.id}`}>{item.product.title} {item.product.shortDescription}</Link>}

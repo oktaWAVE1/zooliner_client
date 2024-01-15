@@ -24,7 +24,7 @@ const ProductCard = ({product, addToCart, preview}) => {
 
     return (
         <Card className="ProductCard">
-            {product.brandId === 1 && <div className="stars" ><img title="рейтинг" src={`${process.env.REACT_APP_API_URL}/images/stars.png`}/><p>5.0</p></div>
+            {product.brandId === 1 && <div className="stars" ><img alt="rating" title="рейтинг" src={`${process.env.REACT_APP_API_URL}/images/stars.png`}/><p>5.0</p></div>
             }
             <Link to={`/product/${product.id}`}>
             <img alt="product_img" loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${product?.product_images[0]?.img ? product.product_images[0]?.img : "no_image.webp"}`}/>

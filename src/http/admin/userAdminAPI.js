@@ -9,3 +9,10 @@ export const postBonus = async ({userId, qty, comment}) => {
     const {data} = await $authHost.post('/api/bonus', {userId, qty, comment})
     return data
 }
+
+export const setRole = async ({userId, role}) => {
+    if(window.confirm('Точно желаете изменить роль пользователя?')) {
+        const {data} = await $authHost.patch('api/user/modify', {userId, role})
+        return data
+    }
+}

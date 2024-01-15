@@ -48,7 +48,7 @@ const ResetPass = () => {
 
                 <Card>
                     <h1>Восстановление пароля:</h1>
-                <Form>
+                <Form id="ResetPassForm">
                     {!activationLink &&
                         <div>
                         <Form.Control

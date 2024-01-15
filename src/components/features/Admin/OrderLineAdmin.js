@@ -47,7 +47,7 @@ const OrderLine = ({item, showModal, statuses, handleUpdate}) => {
             ><strong>{item.discountedSalesSum>0 ? item.discountedSalesSum+item.deliverySum-item.bonusPointsUsed : item.salesSum+item.deliverySum-item.bonusPointsUsed} ₽
             </strong>
             </div>
-            <Form>
+            <Form id="OrderLineForm">
                 <Form.Select className={item.status==="Выполнен" ? 'order-done' : item.status==="Отменен" ? 'order-canceled' : 'order-default'} onChange={(e) => handleUpdateStatus(e, item.id, e.target.value)} value={item.status} aria-label="Статус заказа">
                     {statuses.map((s, index) =>
                         <option className="orderOption" key={index} value={s}>{s}</option>

@@ -13,17 +13,17 @@ const DeliveryMethods = ({deliveryMethods, order, setCurrentDeliveryMethod, curr
             <Card>
                 <h3>Выберите способ доставки:</h3>
                 {deliveryMethods.length>0 &&
-                    <Form>
+                    <Form id="DeliveryMethods">
                         {deliveryMethods.sort((a,b) => a.id-b.id).map(d =>
                             <Form.Check type="switch" id={d.id} label={d.name} key={`${d.id}`} isValid={order.discountedSalesSum >= d.minSum} disabled={order.discountedSalesSum < d.minSum} checked={d.id===currentDeliveryMethod.id} onChange={() => switchDelivery(d.id)}
                                         title={order.discountedSalesSum < d.minSum ? `Минимальная сумма заказа для доставки: ${d.minSum} р.` : "Способ доставки"}
                             />
                         )
                         }
-                        <a onClick={() => setMapModal(prev => !prev)} href='#'><div className='mapModal'><span
+                        <span onClick={() => setMapModal(prev => !prev)} className="pointer delivery_zones"><div className='mapModal'><span
                             className="material-symbols-outlined">
                         map
-                        </span><span> зоны доставки</span></div></a>
+                        </span><span>зоны доставки</span></div></span>
                     </Form>
 
                 }

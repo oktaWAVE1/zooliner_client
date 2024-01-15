@@ -1,13 +1,16 @@
 import {Accordion, Form, Modal} from "react-bootstrap";
 import MyButton from "../../UI/MyButton/MyButton";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useIsMobile} from "../../hooks/useIsMobile";
 import {postBonus} from "../../http/admin/userAdminAPI";
+import {observer} from "mobx-react-lite";
+import {Context} from "../../index";
+import UserAdminControl from "../features/UserAdminControl";
 
-const ModalUserBonus = ({show, onHide, logs, user, handleUpdate}) => {
+const ModalUserBonus = observer(({show, onHide, logs, currentUser, handleUpdate}) => {
     const [currentLogs, setCurrentLogs] = useState([]);
-    const [bonus, setBonus] = useState({qty: 0, comment: ''});
-    const [showAccordion, setShowAccordion] = useState('0');
+    const {user} = useContext(Context)
+
     useEffect(() => {
         if (logs){
             setCurrentLogs(logs.slice(0, 10))
@@ -24,17 +27,9 @@ const ModalUserBonus = ({show, onHide, logs, user, handleUpdate}) => {
     const loadAll = () => {
         setCurrentLogs(logs)
     }
+
     const isMobile = useIsMobile()
-    const handleBonusCorrect = async (e) => {
-        e.preventDefault()
-        await postBonus({
-            userId: user.id,
-            qty: bonus.qty,
-            comment: bonus.comment
-        }).then(() => handleUpdate(user.id))
-        setBonus({qty: 0, comment: ''})
-        setShowAccordion('0')
-    }
+
     return (
         <Modal
             className='modal'
@@ -47,8 +42,8 @@ const ModalUserBonus = ({show, onHide, logs, user, handleUpdate}) => {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    {user
-                    ?<h3>Пользователь {user.id}. {user.name}: </h3>
+                    {currentUser
+                    ?<h3>Пользователь {currentUser.id}. {currentUser.name} ({currentUser?.role}): </h3>
                     :<h3>История изменения бонусов: </h3>
                     }
 
@@ -56,32 +51,8 @@ const ModalUserBonus = ({show, onHide, logs, user, handleUpdate}) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {user &&
-                <section>
-                    <h3>Информация:</h3>
-                    <div>{user?.telephone}</div>
-                    <div>{user?.address}</div>
-                    <div>{user?.email}</div>
-                    <h3>Бонусы</h3>
-                    <div>Доступно: {Math.floor(user?.bonus_point?.currentQty  || 0)}</div>
-                    <div>Заморожено: {user?.bonus_point?.frozenPoints || 0}</div>
-                    <Accordion activeKey={showAccordion} className="userBonusAccordion mt-2">
-                        <Accordion.Item onClick={() => setShowAccordion('1')} eventKey="1">
-                            <Accordion.Header><div className="text-center w-100">Начисление\списание бонусов</div></Accordion.Header>
-                            <Accordion.Body>
-                                <Form>
-                                    <Form.Control type="text" placeholder="Комментарий..." value={bonus.comment} onChange={(e) => setBonus({...bonus, comment: e.target.value})} />
-                                    <div className='d-flex mt-1 justify-content-between'>
-                                        <Form.Control className="w-50" aria-label="Количество" type="number" value={bonus.qty} onChange={(e) => setBonus({...bonus, qty: e.target.value})} />
-                                        <MyButton onClick={(e) => handleBonusCorrect(e)}>Отправить</MyButton>
-                                    </div>
-
-                                </Form>
-
-                            </Accordion.Body>
-                        </Accordion.Item>
-                    </Accordion>
-                </section>
+                {currentUser && user.user.role === "ADMIN" &&
+                <UserAdminControl handleUpdate={handleUpdate} currentUser={currentUser} />
                 }
                 {logs?.length>0 &&
                     <section>
@@ -119,6 +90,6 @@ const ModalUserBonus = ({show, onHide, logs, user, handleUpdate}) => {
         </Modal>
     );
 
-};
+});
 
 export default ModalUserBonus;

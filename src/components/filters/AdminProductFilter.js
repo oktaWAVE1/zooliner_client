@@ -27,7 +27,7 @@ const AdminProductFilter = ({setFilters, filters, sort, setSort, setUpdate}) => 
     }
 
     return (
-        <Form className="d-flex justify-content-start align-items-end flex-wrap gx-1" style={{columnGap: "6px"}}>
+        <Form id="ProductFilterForm" className="d-flex justify-content-start align-items-end flex-wrap gx-1" style={{columnGap: "6px"}}>
             <Form.Label className="mb-0">
                 <span className="px-2">Опубликованы</span>
                 <Form.Select onChange={(e) => setFilters({...filters, published: e.target.value})} value={filters.published}>

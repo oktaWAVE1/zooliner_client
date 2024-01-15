@@ -83,7 +83,7 @@ const AdminCategoryItemModal = ({onHide, show, item, setUpdate, categories}) => 
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className={isMobile && 'px-0 mx-0'}>
-                <Form className="d-flex flex-column justify-content-center">
+                <Form id="AdminCategoryItemForm" className="d-flex flex-column justify-content-center">
                     <Form.Control placeholder="Название категории" className="mb-2" type='text' value={category.name} onChange={e => setCategory({...category, name: e.target.value})} />
                     <Form.Label className="d-flex gap-3 align-items-center">
                         <Form.Control placeholder="Id категории" className="w-50" type='text' value={category.id} onChange={e => setCategory({...category, id: e.target.value})} />

@@ -15,20 +15,24 @@ const IndexPage = observer(() => {
 
     return (
         <div>
-        <Row>
+        <Row className="mx-3">
             <div className="index_slider">
                        <Carousel pause={'hover'} touch={true} controls={promotion?.length>1} variant={'dark'}>
                     {promotion?.length>0 &&
                         promotion.map(p =>
                             <Carousel.Item key={p.id}>
-                                <img  src={`${process.env.REACT_APP_API_URL}/images/promotions/${p.img}`} />
+                                {p?.link?.length>0 ?
+                                    <Link to={p.link}><img className="promotion_img" alt="promotion_img" src={`${process.env.REACT_APP_API_URL}/images/promotions/${p.img}`} /></Link> :
+                                    <img className="promotion_img" alt="promotion_img" src={`${process.env.REACT_APP_API_URL}/images/promotions/${p.img}`} />
+                                }
+
                             </Carousel.Item>
                         )
                     }
 
                 </Carousel>
             </div>
-            <div className="index_top_banner"><Link to={'/royal'}><img loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/royal/Cat_Royal.png`} /></Link></div>
+            <div className="index_top_banner"><Link to={'/royal'}><img alt="royal_banner" loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/royal/Cat_Royal.png`} /></Link></div>
         </Row>
 
             <Helmet>

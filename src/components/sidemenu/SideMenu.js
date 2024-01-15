@@ -2,8 +2,8 @@ import React, {useContext, useEffect} from 'react';
 import {fetchCategoryItems} from "../../http/catalogueAPI";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
-import {Accordion, Container, Nav, Navbar} from "react-bootstrap";
-import {Link, NavLink} from "react-router-dom";
+import {Accordion, Container, Navbar} from "react-bootstrap";
+import {NavLink} from "react-router-dom";
 
 const SideMenu = observer(() => {
     const {catalogue} = useContext(Context)

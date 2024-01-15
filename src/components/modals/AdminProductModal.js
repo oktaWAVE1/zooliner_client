@@ -3,25 +3,22 @@ import MyButton from "../../UI/MyButton/MyButton";
 import React, {useEffect, useState} from "react";
 import {useIsMobile} from "../../hooks/useIsMobile";
 import {
-    addProductAttribute,
     addProductCategory,
-    addProductImage, delProductAttribute, delProductCategory,
-    delProductImage, fetchAllAttributeCategories, fetchAllAttributes,
+    addProductImage, delProductCategory,
+    delProductImage,
     fetchCurrentProduct,
     setProductMasterImage, updateProduct
 } from "../../http/admin/productAdminAPI";
 import useDebounce from "../../hooks/useDebounce";
 import ProductCard from "../features/ProductCard";
 import {fetchAllCategories} from "../../http/admin/categoryAdminAPI";
+import AdminProductAttributes from "../features/Admin/AdminProductAttributes";
+import AdminProductModalChildren from "../features/Admin/AdminProductModalChildren";
 
 const AdminProductModal = ({show, onHide, productId}) => {
 
     const [product, setProduct] = useState({});
     const [newCategoryId, setNewCategoryId] = useState(0);
-    const [newAttributeCategoryId, setNewAttributeCategoryId] = useState(0);
-    const [newAttributeId, setNewAttributeId] = useState(0);
-    const [attributeCategories, setAttributeCategories] = useState([]);
-    const [attributes, setAttributes] = useState([]);
     const [currentProduct, setCurrentProduct] = useState({});
     const [update, setUpdate] = useState(0);
     const [categories, setCategories] = useState([]);
@@ -29,8 +26,7 @@ const AdminProductModal = ({show, onHide, productId}) => {
     useEffect(() => {
         fetchAllCategories().then(data => setCategories([...data].filter(c => !c.children.length>0)
             .sort((a,b) => a.categoryId-b.categoryId)))
-        fetchAllAttributeCategories().then(data => setAttributeCategories(data))
-        fetchAllAttributes().then(data => setAttributes(data))
+
     }, []);
 
 
@@ -50,16 +46,7 @@ const AdminProductModal = ({show, onHide, productId}) => {
         await delProductCategory(categoryId, productId).then(() => setUpdate(prev => prev + 1))
     }
 
-    const delAttribute = async (attributeId) => {
-        await delProductAttribute(attributeId, productId).then(() => setUpdate(prev => prev + 1))
-    }
 
-    const addAttribute = async (e) => {
-        e.preventDefault()
-        if(newAttributeId!==0){
-            await addProductAttribute(newAttributeId, productId).then(() => setUpdate(prev => prev + 1))
-        }
-    }
 
     const handleUpdateChanges = async (e) => {
         e.preventDefault()
@@ -128,7 +115,7 @@ const AdminProductModal = ({show, onHide, productId}) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form style={{color: "#777"}}>
+                <Form id="adminProductModalForm" style={{color: "#777"}}>
                     <div className="d-flex flex-wrap justify-content-between">
                         <div className='info'>
                             <div>{product?.title}</div>
@@ -197,53 +184,8 @@ const AdminProductModal = ({show, onHide, productId}) => {
                                 </ul>
 
                             </div>
-                                <Accordion className="productAdminAttributesAccordion mt-0">
-                                    <Accordion.Item  eventKey="1">
-                                        <Accordion.Header><div className="text-center w-100">Аттрибуты</div></Accordion.Header>
-                                        <Accordion.Body>
-                                            <div className='d-flex gap-2 mb-2'>
-                                                <Form.Select onChange={(e) => {
-                                                    setNewAttributeCategoryId(e.target.value)
-                                                    setNewAttributeId(0)
-                                                }} value={newAttributeCategoryId}>
-                                                    <option value={0}>Категория аттрибутов</option>
-                                                    {categories?.length> 0 &&
-                                                        attributeCategories.map(ac =>
-                                                            <option key={ac.id} value={ac.id}>{ac?.name}</option>
-                                                        )
-                                                    }
-                                                </Form.Select>
-                                                <Form.Select disabled={newAttributeCategoryId===0} onChange={(e) => setNewAttributeId(e.target.value)} value={newAttributeId}>
-                                                    <option value={0}>Аттрибут</option>
-                                                    {attributes?.length> 0 &&
-                                                        attributes.filter(a => Number(a?.productAttributeCategoryId)===Number(newAttributeCategoryId)).map(a =>
-                                                            <option key={a.id} value={a.id}>{a.value}</option>
-                                                        )
-                                                    }
-                                                </Form.Select>
-                                                <MyButton disabled={newAttributeId===0} style={{fontSize: '0.7rem', width: "220px"}} classes="p-0" onClick={e => addAttribute(e)}>ДОБАВИТЬ АТТРИБУТ</MyButton>
-                                            </div>
-                                           <ul>
-                                               {product?.productAttribute?.length>0 &&
-                                                    product.productAttribute.sort((a,b)=> a.id-b.id).map(pa =>
-                                                        <li key={pa.id}>
-                                                            <div className="d-flex gap-3 align-items-center">
-                                                                {pa?.product_attribute_category?.name} - {pa?.value}
-                                                                    <span
-                                                                        title="Удалить"
-                                                                        onClick={() => delAttribute(pa.id)}
-                                                                        className="pointer material-symbols-outlined">
-                                                                        delete
-                                                                    </span>
-                                                            </div>
-                                                            </li>
-                                                    )
-                                               }
-                                           </ul>
+                               <AdminProductAttributes product={product} setUpdate={setUpdate } productId={productId} />
 
-                                        </Accordion.Body>
-                                    </Accordion.Item>
-                                </Accordion>
 
                         </div>
                         {(product?.product_images) &&
@@ -270,12 +212,15 @@ const AdminProductModal = ({show, onHide, productId}) => {
                         </Accordion.Item>
                     </Accordion>
                 </Form>
+                {product?.children?.length>0 &&
+                    <AdminProductModalChildren product={product} />
+                }
                 <div>
                     <MyButton classes="w-100 my-2" onClick={e => handleUpdateChanges(e)}>СОХРАНИТЬ ИЗМЕНЕНИЯ</MyButton>
                 </div>
                 <div>
                         <h4>Изображения:</h4>
-                <Form>
+                <Form id='AddImgForm'>
                     <Form.Control title={"Добавить изображение"} accept={"image/*"} type="file" className="mb-2" multiple={true} onChange={(e) => addImg(e)} placeholder="Добавить изображение" />
                 </Form>
 
@@ -283,7 +228,7 @@ const AdminProductModal = ({show, onHide, productId}) => {
                     <div className='images d-flex gap-2 flex-wrap'>
                         {product.product_images.map(pi =>
                             <div key={pi.id}>
-                                <img style={{boxShadow: "1px 1px 4px 4px rgba(0, 0, 0, 0.1)"}} className='item' loading="lazy"
+                                <img alt="product_img" style={{boxShadow: "1px 1px 4px 4px rgba(0, 0, 0, 0.1)"}} className='item' loading="lazy"
                                     src={`${process.env.REACT_APP_API_URL}/images/products/${pi.img}`}/>
                                 <span
                                     title="Сделать основной"

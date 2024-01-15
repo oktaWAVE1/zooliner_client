@@ -46,7 +46,7 @@ const UserEditForm = () => {
                 <Accordion.Header><h3  style={{color: "white", textAlign: "center", width: "100%"}}>Изменить данные профиля</h3></Accordion.Header>
                 <Accordion.Body>
 
-                    <Form>
+                    <Form id='UserEditForm'>
                         <label className="p-1">Имя</label>
                         <Form.Control
                             value={currentUser.name}

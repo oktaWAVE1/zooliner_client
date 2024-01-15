@@ -6,9 +6,10 @@ import AdminBrandModal from "../components/modals/AdminBrandModal";
 import {Helmet} from "react-helmet";
 import {useNavigate} from "react-router-dom";
 import AdminCategoryModal from "../components/modals/AdminCategoryModal";
+import AdminPromotionsModal from "../components/modals/AdminPromotionsModal";
 
 const Admin = () => {
-    const [modals, setModals] = useState({brand: false, category: false, users: false, comments: false, createLesson: false, adminLesson: false})
+    const [modals, setModals] = useState({brand: false, category: false, promo:false, users: false, comments: false, createLesson: false, adminLesson: false})
     const navigate = useNavigate()
     return (
         <div className='adminPage'>
@@ -18,12 +19,14 @@ const Admin = () => {
                 <div className='adminCard row gap-1'>
                     <MyButton onClick={() => setModals({...modals, brand: true})}>Производители</MyButton>
                     <MyButton onClick={() => setModals({...modals, category: true})}>Категории</MyButton>
+                    <MyButton onClick={() => setModals({...modals, promo: true})}>Промо акции</MyButton>
                     <MyButton onClick={() => navigate('/admin/orders')}>Управление заказами</MyButton>
                     <MyButton onClick={() => navigate('/admin/users')}>Управление пользователями</MyButton>
                     <MyButton onClick={() => navigate('/admin/products')}>Управление товарами</MyButton>
 
                 </div>
             </Container>
+            <AdminPromotionsModal show={modals.promo} onHide={() => setModals({...modals, promo: false})} />
             <AdminBrandModal onHide={() => setModals({...modals, brand: false})} show={modals.brand} />
             <AdminCategoryModal onHide={() => setModals({...modals, category: false})} show={modals.category} />
             <Helmet>

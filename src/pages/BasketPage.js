@@ -85,6 +85,10 @@ const BasketPage = observer(() => {
             </Container>
             <Helmet>
                 <title>Корзина | ЗооЛАЙНЕР</title>
+                <meta property="og:title" content="Корзина пуста | ЗооЛАЙНЕР" />
+                <meta property="og:image" content="https://zooliner.ru/" />
+                <meta property="og:description" content="Товары для животных в Анапе с доставкой в день заказа." />
+
             </Helmet>
         </div>
 
@@ -106,6 +110,10 @@ const BasketPage = observer(() => {
             </div>
             <Helmet>
                 <title>Корзина пуста | ЗооЛАЙНЕР</title>
+                <meta property="og:title" content="Корзина пуста | ЗооЛАЙНЕР" />
+                <meta property="og:image" content="https://zooliner.ru/" />
+                <meta property="og:description" content="Товары для животных в Анапе с доставкой в день заказа." />
+
             </Helmet>
                     </div>
     );}

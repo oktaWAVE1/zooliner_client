@@ -1,6 +1,7 @@
 {
   "short_name": "zooliner",
   "name": "ЗооЛАЙНЕР - интернет-магазин для ваших любимцев",
+  "description": "интернет-магазин для животный в Анапе",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,17 +9,12 @@
       "type": "image/x-icon"
     },
     {
-//      "src": "logo_main_192.png",
+      "src": "splash_screens/android-chrome-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-//      "src": "logo_main_256.png",
-      "type": "image/png",
-      "sizes": "256x256"
-    },
-    {
-//      "src": "logo_main_512.png",
+      "src": "splash_screens/android-chrome-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

@@ -11,7 +11,6 @@ import {useIsMobile} from "../../hooks/useIsMobile";
 
 
 const MyNavbar = observer(() => {
-    console.log('render')
     const {user, catalogue} = useContext(Context)
     const [expanded, setExpanded] = useState(false);
     const logout = () => {
@@ -79,8 +78,9 @@ const MyNavbar = observer(() => {
 
                         </Nav>
                         <Nav className="me-auto">
+                            <Link className={cl.navbarItem} onClick={hideMobileMenu} to='/contacts'>Контакты</Link>
                             <Link className={cl.navbarItem} onClick={hideMobileMenu} to='/payment_and_delivery'>Оплата и доставка</Link>
-                            <Link className={cl.navbarItem} onClick={hideMobileMenu} to='/bonus'>Бонусная программа</Link>
+                            <Link className={cl.navbarItem} onClick={hideMobileMenu} to='/bonus'>Бонусы</Link>
 
                         </Nav>
 

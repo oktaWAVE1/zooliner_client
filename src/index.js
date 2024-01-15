@@ -12,6 +12,28 @@ import LoadingStore from "./store/LoadingStore";
 
 export const Context = createContext(null)
 
+
+// ReactDOMClient.hydrateRoot(document.getElementById("root"),
+//
+//     <Context.Provider value={{
+//         user: new UserStore(),
+//         catalogue: new CatalogueStore(),
+//         products: new ProductsStore(),
+//         filters: new FilterStore(),
+//         basket: new BasketStore(),
+//         loading: new LoadingStore(),
+//     }}
+//     >
+//
+//         <div className='App'>
+//             <App />
+//
+//         </div>
+//
+//
+//     </Context.Provider>
+// );
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Context.Provider value={{

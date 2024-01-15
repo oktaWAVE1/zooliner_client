@@ -56,7 +56,6 @@ const AdminBrandModal = ({onHide, show}) => {
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter ">
                     <h1>Список производителей: </h1>
-
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -65,7 +64,7 @@ const AdminBrandModal = ({onHide, show}) => {
                         <Accordion.Item eventKey="0">
                             <Accordion.Header><div style={{color: "white", textAlign: "center", width: "100%"}}>Добавить производителя</div></Accordion.Header>
                             <Accordion.Body>
-                                <Form className="d-flex flex-column justify-content-center">
+                                <Form id='AdminBrandForm' className="d-flex flex-column justify-content-center">
                                     <Form.Control placeholder="Название производителя" className="mb-2" type='text' value={brand.name} onChange={e => setBrand({...brand, name: e.target.value})} />
                                     <Form.Control placeholder="Id производителя" className="mb-2" type='text' value={brand.id} onChange={e => setBrand({...brand, id: e.target.value})} />
                                     <Form.Check type="switch" className="mb-2" isValid={true} label="Опубликовать" checked={brand.published}  onChange={() => setBrand({...brand, published: !brand.published})} />
@@ -76,7 +75,7 @@ const AdminBrandModal = ({onHide, show}) => {
                     </Accordion>
                 </Container>
                 <Container>
-               <Form>
+               <Form id="AdminBrandSearchForm">
                    <div className='mt-3 mb-3'>
                        <Form.Control type='text' placeholder='Поиск производителя'
                             value={query}
@@ -94,7 +93,7 @@ const AdminBrandModal = ({onHide, show}) => {
                             <div className="adminBrandList">
                                 <div>{b.id} {b.name}</div>
                                 <div className="pointer d-flex justify-content-end" title="published">
-                                    <Form>
+                                    <Form id="AdminBrandPublishForm">
                                         <Form.Check type="switch" isValid={true}  checked={b.published}  onChange={() => switchPublish(b.id, b.published)} />
                                     </Form>
                                 </div>

@@ -15,7 +15,7 @@ export const useProductsSortSearch = (products, searchQuery, filters, sort) => {
 
 
         let filteredProducts = [...sortedProducts]
-        if (filters.published.length>0){
+        if (filters?.published?.length>0){
             if (filters.published==='true'){
                 filteredProducts = [...filteredProducts].filter(p => p.published===true)
             } else {
@@ -23,7 +23,7 @@ export const useProductsSortSearch = (products, searchQuery, filters, sort) => {
             }
         }
 
-        if (filters.hidden.length>0){
+        if (filters?.hidden?.length>0){
             if (filters.hidden==='true'){
                 filteredProducts = [...filteredProducts].filter(p => p.hidden===true)
             } else {
@@ -31,7 +31,7 @@ export const useProductsSortSearch = (products, searchQuery, filters, sort) => {
             }
         }
 
-        if (filters.hasImages.length>0){
+        if (filters?.hasImages?.length>0){
             if (filters.hasImages==='true'){
                 filteredProducts = [...filteredProducts].filter(p => p?.product_images?.length>0)
             } else {
@@ -39,7 +39,7 @@ export const useProductsSortSearch = (products, searchQuery, filters, sort) => {
             }
         }
 
-        if (filters.inStock.length>0){
+        if (filters?.inStock?.length>0){
             if (filters.inStock==='true'){
                 filteredProducts = [...filteredProducts].filter(p => p.inStock===true)
             } else {
@@ -47,7 +47,7 @@ export const useProductsSortSearch = (products, searchQuery, filters, sort) => {
             }
         }
 
-        if (filters.special.length>0){
+        if (filters?.special?.length>0){
             if (filters.special==='true'){
                 filteredProducts = [...filteredProducts].filter(p => p.special===true)
             } else {
@@ -55,10 +55,10 @@ export const useProductsSortSearch = (products, searchQuery, filters, sort) => {
             }
         }
 
-        if (filters.brandId!==0){
+        if (filters?.brandId!==0){
             filteredProducts = [...filteredProducts].filter(p => Number(p.brandId)===Number(filters.brandId))
         }
-        if (filters.categoryId!==0){
+        if (filters?.categoryId!==0){
             filteredProducts = [...filteredProducts].filter(p => p.categories.includes(filters.categoryId))
         }
         if(searchQuery){

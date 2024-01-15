@@ -44,7 +44,7 @@ const UserListAdmin = () => {
 
     return (
         <div>
-            <ModalUserBonus handleUpdate={handleUpdate} show={modalVisible} onHide={() => setModalVisible(false)} logs={currentUser?.bonus_point?.bonus_points_logs} user={currentUser} />
+            <ModalUserBonus handleUpdate={handleUpdate} show={modalVisible} onHide={() => setModalVisible(false)} logs={currentUser?.bonus_point?.bonus_points_logs} currentUser={currentUser} />
             <div className="d-flex justify-content-between align-items-end">
                 <label>
                     <input min={5} max={1000} className='adminLimit mb-1' type='number' value={limit} onChange={e => setLimit(e.target.value)} />
@@ -54,7 +54,7 @@ const UserListAdmin = () => {
 
             </div>
             <hr className="mt-2 mb-2 pt-0" />
-            <Form className="mb-3">
+            <Form id="OrderSearchForm" className="mb-3">
                 <Form.Control type={'text'} placeholder="Поиск заказа..." value={query} onChange={(e) => setQuery(e.target.value)} />
             </Form>
             {currentUsers?.length>0 &&

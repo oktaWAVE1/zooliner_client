@@ -7,7 +7,7 @@ const PaymentMethods = ({paymentMethods, currentPaymentMethod, switchPayment}) =
             <Card>
                 <h3>Выберите способ оплаты:</h3>
                 {paymentMethods.length>0 &&
-                    <Form>
+                    <Form id="PaymentMethods">
                         {paymentMethods.sort((a,b) => a.id-b.id).map(p =>
                             <Form.Check type="switch" id={p.id} label={p.name} key={`${p.id}`} isValid={true} checked={p.id===currentPaymentMethod.id} onChange={() => switchPayment(p.id)}  />
                         )

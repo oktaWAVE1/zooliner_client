@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {fetchBonus} from "../../http/userAPI";
-import JsBarcode from "jsbarcode";
+import QRCode from "react-qr-code";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import {useIsMobile} from "../../hooks/useIsMobile";
@@ -18,7 +18,6 @@ const UserBonus = observer(() => {
             setUserBonus(res.currentQty)
             setLogs(res.bonus_points_logs)
         })
-        JsBarcode("#barcode", user.user.id, {format: "code39", width: 3, height: 50, displayValue: false});
 
     }, [user.user.id]);
 
@@ -27,8 +26,8 @@ const UserBonus = observer(() => {
             <div onClick={() => setLogsModal(true)} className="userPageBonus pointer mb-2">
                 <h4>Ваши бонусы: {userBonus}</h4>
             </div>
-            <div style={isMobile ? {visibility: "visible"} : {visibility: "hidden", height: "0"}}>
-                <svg id="barcode"></svg>
+            <div className="d-flex justify-content-center" style={isMobile ? {visibility: "visible", width: "60%"} : {visibility: "hidden", height: "0"}}>
+                <QRCode value={String(user.user.id)} />
             </div>
             <ModalUserBonus onHide={() => setLogsModal(false)} show={logsModal} logs={logs.sort((a, b) => b.id - a.id)} />
 

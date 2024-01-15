@@ -83,7 +83,7 @@ const UserListAdmin = () => {
 
 
             <hr className="mt-2 mb-2 pt-0" />
-            <Form className="mb-3">
+            <Form id="ProductListAdminForm" className="mb-3">
                 <Form.Control type={'text'} placeholder="Поиск товара..." value={query} onChange={(e) => setQuery(e.target.value)} />
             </Form>
             {currentProducts?.length>0 &&

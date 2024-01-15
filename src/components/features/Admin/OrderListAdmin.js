@@ -59,7 +59,7 @@ const OrderListAdmin =() => {
 
             </div>
             <hr className="mt-2 mb-2 pt-0" />
-            <Form className="mb-3">
+            <Form id="ProductSearchForm" className="mb-3">
                 <Form.Control type={'text'} placeholder="Поиск заказа..." value={query} onChange={(e) => setQuery(e.target.value)} />
             </Form>
         {currentOrders?.length>0 &&

@@ -9,11 +9,13 @@ import {validate} from "email-validator";
 import {Helmet} from "react-helmet";
 import MyPhoneInput from "../UI/MyPhoneInput/MyPhoneInput";
 import Loader from "../UI/Loader/Loader";
+import SocialAuth from "../components/features/SocialAuth";
 
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
     const [loading, setLoading] = useState(false)
+    const [personalData, setPersonalData] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false)
     const [telephoneToggle, setTelephoneToggle] = useState(false);
     const [currentUser, setCurrentUser] = useState({
@@ -66,12 +68,12 @@ const Auth = observer(() => {
     return (
         <Container className="loginPage">
             <Card>
-                <Form onSubmit={doAuth} className='auth_form'>
+                <Form id="SubmitLoginForm" onSubmit={doAuth} className='auth_form'>
                     <h1>{isLogin ? 'Войти' : 'Регистрация'}</h1>
                     {alertMessage.show &&
                         <Alert variant={alertMessage.variant} onClose={() => setAlertMessage({show: false})} dismissible>
                             <Alert.Heading>{alertMessage.title}</Alert.Heading>
-                            <p>
+                            <p className={'mb-1'}>
                                 {alertMessage.message}
                             </p>
                         </Alert>
@@ -109,17 +111,24 @@ const Auth = observer(() => {
                         type='password'
                     />
                     {!isLogin &&
-                        <Form.Control
-                            value={currentUser.passwordConfirm}
-                            onChange={e => setCurrentUser({...currentUser, passwordConfirm: e.target.value})}
-                            placeholder='Еще раз пароль'
-                            type='password'
-                            title={currentUser.passwordConfirm!==currentUser.password ? 'Пароли не совпадают' : ''}
-                            className={currentUser.passwordConfirm!==currentUser.password && 'pass_dont_match'}
-                        />
+                        <>
+                            <Form.Control
+                                value={currentUser.passwordConfirm}
+                                onChange={e => setCurrentUser({...currentUser, passwordConfirm: e.target.value})}
+                                placeholder='Еще раз пароль'
+                                type='password'
+                                title={currentUser.passwordConfirm!==currentUser.password ? 'Пароли не совпадают' : ''}
+                                className={currentUser.passwordConfirm!==currentUser.password && 'pass_dont_match'}
+                            />
+                            <Form.Label className="px-3 d-flex gap-3 justify-content-center align-items-start">
+                                <Form.Check checked={personalData} onChange={() => setPersonalData(prev => !prev)} />
+                                <span className="text-center">соглашаюсь с <Link to='/personal_data' target="_blank">полилитикой обработки персональных данных</Link></span>
+                            </Form.Label>
+                        </>
+
                     }
                     <MyButton
-                    disabled={isDisabled}
+                    disabled={isLogin ? isDisabled : (isDisabled || !personalData)}
                     type='submit'
                     >
                         {isLogin? "ВОЙТИ" : "ЗАРЕГИСТРИРОВАТЬСЯ"}
@@ -145,6 +154,7 @@ const Auth = observer(() => {
 
 
                 </Form>
+                <SocialAuth />
             </Card>
             <Helmet>
                 <title>Страница аутентефикации | ЗооЛАЙНЕР</title>

@@ -45,43 +45,30 @@ const CategoryPage = observer(() => {
             }
         }
     }
+    const setData = (data) => {
+        products.setProducts(data)
+        products.setBrands(data.brands)
+        products.setAttributes(data.attributes)
+        filters.setAttributeFilters({})
+        filters.setBrandFilters([])
+        products.setCurrentAttributes([])
+        products.setCurrentBrands([])
+        if(products?.products?.products?.length>0){
+            products.setTotalCount(products.products.products.length)
+        }
+    }
 
     useEffect(() => {
 
         setLoading(true)
         if (id==='-1'){
-
             fetchSearchedPublishedProducts(query).then(data => {
-
-                products.setProducts(data)
-                products.setBrands(data.brands)
-                products.setAttributes(data.attributes)
-                filters.setAttributeFilters({})
-                filters.setBrandFilters([])
-                products.setCurrentAttributes([])
-                products.setCurrentBrands([])
-                if(products?.products?.products?.length>0){
-                    products.setTotalCount(products.products.products.length)
-                }
-
+                setData(data)
             }).finally(() => setLoading(false))
 
         }  else {
-
             fetchCategoryProducts(id).then(data => {
-
-                products.setProducts(data)
-                products.setBrands(data.brands)
-                products.setAttributes(data.attributes)
-                filters.setAttributeFilters({})
-                filters.setBrandFilters([])
-                products.setCurrentAttributes([])
-                products.setCurrentBrands([])
-                if(products?.products?.products?.length>0){
-                    products.setTotalCount(products.products.products.length)
-
-        }
-
+              setData(data)
         }).finally(() => setLoading(false))
     }
     },
@@ -120,6 +107,13 @@ const CategoryPage = observer(() => {
             </Row>
             <Helmet>
                 <title>{`${products.products?.category?.description} | ЗооЛАЙНЕР`}</title>
+                <meta property="og:title" content={`${products.products?.category?.description} | ЗооЛАЙНЕР`} />
+                {products.products?.category?.category_images?.length>0 &&
+                        <meta property="og:image" content={`${process.env.REACT_APP_API_URL}/images/categories/mini/${products.products?.category?.category_images[0].img}`} />
+                }
+                <meta property="og:description" content="Товары для животных с доставкой в день заказа | ЗооЛАЙНЕР" />
+                <meta property="og:url" content={`${process.env.REACT_APP_URL}/category/${id}?query=${query}`} />
+
             </Helmet>
         </Container>
     );

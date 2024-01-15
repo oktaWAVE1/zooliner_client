@@ -6,7 +6,7 @@ const CustomerBlock = ({order, setOrder}) => {
     return (
         <div className="customerBlock">
             <Card>
-                <Form>
+                <Form id='CustomerBlockForm'>
                     <Form.Control onChange={event => setOrder({...order, customerName: event.target.value})} type='input' value={order.customerName} placeholder='Имя' />
                     <MyPhoneInput value={order.customerTel} onChange={event => setOrder({...order, customerTel:  event.target.value})} />
                     <Form.Control onChange={event => setOrder({...order, customerEmail: event.target.value})} type='input' value={order.customerEmail} placeholder='Email' />

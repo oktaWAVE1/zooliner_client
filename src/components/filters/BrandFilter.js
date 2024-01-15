@@ -25,7 +25,7 @@ const BrandFilter = observer(() => {
                     <MyButton classes={filters.brandFilters.includes((b.id)) ? `active item-${b.id}` : `item-${b.id}`}  onClick={() => check(b)} key={b.id}>{b.name}</MyButton>
                 )
             }
-            <a className='clearFilter' href='#' onClick={(e) => clearBrands(e)}>Сбросить все</a>
+            <span className='clearFilter pointer' onClick={(e) => clearBrands(e)}>Сбросить все</span>
         </div>
     );
 });

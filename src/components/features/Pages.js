@@ -9,7 +9,9 @@ const Pages = observer(() => {
     const pages = []
     const clickPage = (p) => {
         products.setPage(p)
-        document.getElementById("Content").scrollIntoView();
+        if (document!==undefined){
+            document.getElementById("Content").scrollIntoView();
+        }
     }
     for (let i=1; i<= pageCount; i++){
         pages.push(i)

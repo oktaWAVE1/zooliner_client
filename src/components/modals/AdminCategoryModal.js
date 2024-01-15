@@ -86,7 +86,7 @@ const AdminCategoryModal = ({onHide, show}) => {
                         <Accordion.Item eventKey="0">
                             <Accordion.Header onClick={() => setShowAccordion(showAccordion==="0" ? "-1" : "0")}><div style={{color: "white", textAlign: "center", width: "100%"}}>Добавить категорию</div></Accordion.Header>
                             <Accordion.Body>
-                                <Form className="d-flex flex-column justify-content-center">
+                                <Form id='AddCategoryForm'  className="d-flex flex-column justify-content-center">
                                     <Form.Control placeholder="Название категории" className="mb-2" type='text' value={category.name} onChange={e => setCategory({...category, name: e.target.value})} />
                                     <Form.Label className="d-flex gap-3 align-items-center">
                                         <Form.Control placeholder="Id категории" className="w-50" type='text' value={category.id} onChange={e => setCategory({...category, id: e.target.value})} />
@@ -115,7 +115,7 @@ const AdminCategoryModal = ({onHide, show}) => {
                     </Accordion>
                 </Container>
                 <Container>
-                    <Form>
+                    <Form id="SearchCategoryForm">
                         <div className='mt-3 mb-3'>
                             <Form.Control type='text' placeholder='Поиск категории'
                                           value={query}
@@ -133,7 +133,7 @@ const AdminCategoryModal = ({onHide, show}) => {
                             <div className="adminCategoriesList pointer" onClick={() => selectItem(c)}>
                                 <div className="pointer d-flex justify-content-between" >
                                     <div><strong>{c.parent && `${c.parent.name} > `}{c.name} ({c.id})</strong></div>
-                                    <Form title="published">
+                                    <Form id='AdminCategoryPublishedForm' title="published">
                                         <Form.Check type="switch" disabled isValid={true}  checked={c.published} label="Опубликовано"/>
                                     </Form>
                                 </div>

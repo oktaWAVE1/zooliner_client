@@ -14,10 +14,13 @@ import SuccessPage from "./pages/SuccessPage";
 import AdminOrders from "./pages/AdminOrders";
 import AdminUsers from "./pages/AdminUsers";
 import AdminProductPage from "./pages/AdminProductPage";
+import Contacts from "./pages/Contacts";
+import PersonalDataProcessing from "./pages/PersonalDataProcessing";
 
 
 export const publicRoutes = [
     {path: '/', element: <IndexPage/>},
+    {path: '/contacts', element: <Contacts/>},
     {path: '/login', element: <Auth/>},
     {path: '/reg', element: <Auth/>},
     {path: '/reset_pass', element: <ResetPass/>},
@@ -30,12 +33,14 @@ export const publicRoutes = [
     {path: '/basket', element: <BasketPage/>},
     {path: '/order_confirmation/:accessLink', element: <OrderConfirmationPage/>},
     {path: '/success', element: <SuccessPage />},
+    {path: '/personal_data', element: <PersonalDataProcessing/>}
 
 ]
 
 export const authRoutes = [
 
     {path: '/', element: <IndexPage/>},
+    {path: '/contacts', element: <Contacts/>},
     {path: '/user', element: <UserPage/>},
     {path: '/payment_and_delivery', element: <PaymentAndDelivery/>},
     {path: '/category/:id', element: <CategoryPage/>},
@@ -45,6 +50,7 @@ export const authRoutes = [
     {path: '/basket', element: <BasketPage/>},
     {path: '/order_confirmation/:accessLink', element: <OrderConfirmationPage/>},
     {path: '/success', element: <SuccessPage />},
+    {path: '/personal_data', element: <PersonalDataProcessing/>}
 
 
 ]

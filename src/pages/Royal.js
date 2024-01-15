@@ -1,6 +1,7 @@
 import React from 'react';
 import "./styles/Royal.css"
 import {Helmet} from "react-helmet";
+import {Link} from "react-router-dom";
 
 const Royal = () => {
     return (
@@ -23,41 +24,41 @@ const Royal = () => {
             <div className="section">
                 <div className="container">
                     <div className="elements">
-                        <a className="element" href="#">
+                        <Link className="element" to='/category/4?brand=1&attribute=%7B"3"%3A%5B63%5D%7D&query=null'>
                             <div className="element__image">
                                 <img src={`${process.env.REACT_APP_API_URL}/images/royal/circle-kitten.png`} alt="" />
                             </div>
                             <div className="element__text">
                                 Корм для котят
                             </div>
-                        </a>
+                        </Link>
 
-                        <a className="element" href="#">
+                        <Link className="element" to='/category/4?brand=1&attribute=%7B"3"%3A%5B62%2C64%5D%7D&query=null'>
                             <div className="element__image">
                                 <img src={`${process.env.REACT_APP_API_URL}/images/royal/circle-cat.png`} alt="" />
                             </div>
                             <div className="element__text">
                                 Корм для кошек
                             </div>
-                        </a>
+                        </Link>
 
-                        <a className="element" href="#">
+                        <Link className="element" to='/category/2?brand=1&attribute=%7B"4"%3A%5B67%5D%7D'>
                             <div className="element__image">
                                 <img src={`${process.env.REACT_APP_API_URL}/images/royal/circle-puppy.png`} alt="" />
                             </div>
                             <div className="element__text">
                                 Корм для щенков
                             </div>
-                        </a>
+                        </Link>
 
-                        <a className="element" href="#">
+                        <Link className="element" to='/category/2?brand=1&attribute=%7B"4"%3A%5B66%2C65%5D%7D'>
                             <div className="element__image">
                                 <img src={`${process.env.REACT_APP_API_URL}/images/royal/circle-dog.png`} alt="" />
                             </div>
                             <div className="element__text">
                                 Корм для собак
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -71,7 +72,7 @@ const Royal = () => {
                                 <img src={`${process.env.REACT_APP_API_URL}/images/royal/cat-kitten.png`} alt="" />
                             </div>
                             <div className="element__button i1">
-                                <a href="#">Корм для котят</a>
+                                <Link to='/category/4?brand=1&attribute=%7B"3"%3A%5B63%5D%7D&query=null'>Корм для котят</Link>
                             </div>
                         </div>
                         <div className="element">
@@ -119,7 +120,7 @@ const Royal = () => {
                                 <img src={`${process.env.REACT_APP_API_URL}/images/royal/dog-puppy.png`} alt="" />
                             </div>
                             <div className="element__button i6">
-                                <a href="#">Корм для щенков</a>
+                                <Link to='/category/2?brand=1&attribute=%7B"4"%3A%5B67%5D%7D'>Корм для щенков</Link>
                             </div>
                         </div>
                         <div className="element">
@@ -159,6 +160,12 @@ const Royal = () => {
             </div>
             <Helmet>
                 <title>Бренд зона Royal Canin | ЗооЛАЙНЕР</title>
+                <meta property="og:title" content={`Бренд зона Royal Canin | ЗооЛАЙНЕР`} />
+
+                <meta property="og:image" content={`${process.env.REACT_APP_API_URL}/images/royal/logo.png`} />
+
+                <meta property="og:description" content="Товары для животных с доставкой в день заказа | ЗооЛАЙНЕР" />
+                <meta property="og:url" content={`${process.env.REACT_APP_URL}/royal}`} />
             </Helmet>
         </div>
     );

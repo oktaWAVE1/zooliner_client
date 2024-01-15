@@ -11,6 +11,9 @@
 # production
 /build
 
+#assets
+/public/splash_screens
+
 # misc
 .DS_Store
 .env.local

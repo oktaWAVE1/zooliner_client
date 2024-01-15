@@ -10,12 +10,13 @@
 
 }
 .footer h6 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #FFFFFF;
 }
 
 .footer p {
     color: #FFFFFF;
+    font-size: 0.9rem;
 }
 
 @media (max-width: 600px){

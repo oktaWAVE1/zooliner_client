@@ -43,7 +43,7 @@ const AttributeFilter = observer(() => {
 
     return (
         <div className="attributeFilter">
-            <Form>
+            <Form id="AttributeFilterForm">
             {products.currentAttributes &&
                 Object.keys(products.currentAttributes).map((item, i) => (
 
@@ -62,7 +62,7 @@ const AttributeFilter = observer(() => {
                     )
                 )
             }
-            <a className='clearFilter' href='#' onClick={(e) => clearAttributes(e)}>Сбросить все</a>
+            <span className='clearFilter pointer' href='#' onClick={(e) => clearAttributes(e)}>Сбросить все</span>
             </Form>
         </div>
     );

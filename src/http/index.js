@@ -26,7 +26,7 @@ $authHost.interceptors.response.use((config) => {
     if(error.response.status === 401 && error.config && !originalRequest._isRetry) {
         originalRequest._isRetry = true
         try {
-            const response = await check()
+            await check()
             return $authHost.request(originalRequest)
         } catch (e) {
             console.log("Не авторизован")

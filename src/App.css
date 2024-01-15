@@ -518,20 +518,24 @@ a {
     grid-template-columns: 3fr 1fr 1fr;
 }
 
-.userBonusAccordion .accordion-button {
+.userBonusAccordion .accordion-button,
+.userRoleAccordion .accordion-button {
     padding: 10px 20px;
 }
 
 .productAdminAttributesAccordion .accordion-button,
+.addPromotionAccordion .accordion-button,
 .productAdminMetaAccordion .accordion-button{
     padding-top: 4px;
     padding-bottom: 4px;
 }
 
+.addPromotionAccordion .accordion-button.collapsed,
 .productAdminMetaAccordion .accordion-button.collapsed,
 .addCategoryAccordion .accordion-button.collapsed,
 .addBrandAccordion .accordion-button.collapsed,
 .userBonusAccordion .accordion-button.collapsed,
+.userRoleAccordion .accordion-button.collapsed,
 .productAdminAttributesAccordion .accordion-button.collapsed
 {
     background-color: #DDD;
@@ -608,10 +612,20 @@ a {
     display: none;
 }
 
+.delivery_zones {
+    color: var(--main-theme-active-color);
+}
+
 @media (max-width: 991px){
     .mobileCatalogue {
         display: block;
     }
+}
+
+.promotion_img {
+    height: 300px;
+    max-height: 300px;
+    object-fit: contain;
 }
 
 
@@ -1005,6 +1019,7 @@ a {
 .mainContainer > .container {
     padding: 0 5px 0 5px;
 }
+
 
 
 

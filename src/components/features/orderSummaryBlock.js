@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {Card, Form, Row} from "react-bootstrap";
 import MyButton from "../../UI/MyButton/MyButton";
 import {placeOrder} from "../../http/orderAPI";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 
@@ -10,6 +10,7 @@ import {observer} from "mobx-react-lite";
 const OrderSummaryBlock = observer(({basket, order, currentDeliveryMethod, currentPaymentMethod}) => {
     const navigate = useNavigate()
     const {user, loading} = useContext(Context)
+    const [personalData, setPersonalData] = useState(true);
     const [bonusPoints, setBonusPoints] = useState('');
     const userBonusPoints = (e) => {
         if(e.target.value<0){
@@ -25,6 +26,10 @@ const OrderSummaryBlock = observer(({basket, order, currentDeliveryMethod, curre
     }
     const placeCurrentOrder = async (e) => {
         e.preventDefault()
+        loading.setLoading(true)
+        basket.setBasketItems([])
+        navigate('/success')
+        loading.setLoading(false)
         await placeOrder({
             orderId: order.id,
             paymentMethodId: currentPaymentMethod.id,
@@ -36,14 +41,14 @@ const OrderSummaryBlock = observer(({basket, order, currentDeliveryMethod, curre
             comment: order.comment,
             customerEmail: order.customerEmail,
             userId: user?.user?.id
-        }).then(() => basket.setBasketItems([])).then(() => navigate('/success')).finally(() => loading.setLoading(false))
-    }
+        })
 
+    }
 
     return (
         <div className="summaryBlock">
             <Card>
-                <Form>
+                <Form id="SummaryBlockForm">
                     {user.isAuth &&
                         <div className="useBonusPoints">
                             <span>Бонусы: </span><Form.Control onChange={e => userBonusPoints(e)} type='number' value={bonusPoints} placeholder={`Использовать Баллы (доступно: ${Math.floor(user.bonus.currentQty)})`} />
@@ -54,12 +59,16 @@ const OrderSummaryBlock = observer(({basket, order, currentDeliveryMethod, curre
                         <span>Стоимость доставки: </span><span>{order.discountedSalesSum>=currentDeliveryMethod.freeSum ? 0 : currentDeliveryMethod.price}</span>
                         <span>Итого: </span><span>{order.discountedSalesSum >= currentDeliveryMethod.freeSum ? order.discountedSalesSum - (parseInt(bonusPoints) || 0) : order.discountedSalesSum+currentDeliveryMethod.price - (parseInt(bonusPoints) || 0)}</span>
                     </div>
+                    <Form.Label className="px-3 d-flex gap-3 justify-content-center align-items-start">
+                        <Form.Check checked={personalData} onChange={() => setPersonalData(prev => !prev)} />
+                        <span className="text-center">соглашаюсь с <Link to='/personal_data' target="_blank">полилитикой обработки персональных данных</Link></span>
+                    </Form.Label>
                 </Form>
-                <Row className="m-1">
+                <Row className="m-1" title={!order.customerTel ? "Необходимо ввести контактный номер телефона" : ""}>
                     <MyButton onClick={e => {
                         loading.setLoading(true)
                         placeCurrentOrder(e)
-                    }} disabled={!order.customerTel}>Отправить заказ</MyButton>
+                    }} disabled={!order.customerTel || !personalData}>Отправить заказ</MyButton>
                 </Row>
             </Card>
         </div>

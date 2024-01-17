@@ -34,6 +34,7 @@ const AdminProductModal = ({show, onHide, productId}) => {
         fetchCurrentProduct(productId).then(data => {
             setCurrentProduct(data)
             setProduct(data)
+            console.log(data)
         })
 
     }, 100, [productId, update])
@@ -211,7 +212,9 @@ const AdminProductModal = ({show, onHide, productId}) => {
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion>
+
                 </Form>
+
                 {product?.children?.length>0 &&
                     <AdminProductModalChildren product={product} />
                 }

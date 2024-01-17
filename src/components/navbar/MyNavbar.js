@@ -11,7 +11,7 @@ import {useIsMobile} from "../../hooks/useIsMobile";
 
 
 const MyNavbar = observer(() => {
-    const {user, catalogue} = useContext(Context)
+    const {user, catalogue, loading} = useContext(Context)
     const [expanded, setExpanded] = useState(false);
     const logout = () => {
         userLogout().then(() => {
@@ -25,6 +25,7 @@ const MyNavbar = observer(() => {
     const menuRef = useRef(null)
     const togglerRef = useRef(null)
     const hideMobileMenu = () => {
+        loading.setLoading(true)
         const mobileMenu = menuRef.current
         mobileMenu.className = 'navbar-collapse collapse'
         const toggler = togglerRef.current

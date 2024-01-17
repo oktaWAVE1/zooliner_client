@@ -24,7 +24,7 @@ const SearchBar = ({...props}) => {
     return (
         <div className="searchBar">
             <div className="d-flex row">
-                <input width="600px" placeholder="Поиск по каталогу..."
+                <input width="600px" className='px-2' placeholder="Поиск по каталогу..."
                        onBlur={() => {setTimeout(() => {
                     setSearchResults([])
                     setQuery('')

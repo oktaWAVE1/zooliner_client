@@ -1,27 +1,27 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, Suspense} from 'react';
 import {observer} from "mobx-react-lite";
 import {useParams, useSearchParams} from "react-router-dom";
 import {fetchCategoryProducts} from "../http/catalogueAPI";
 import {Context} from "../index";
-import ProductCard from "../components/features/ProductCard";
 import {Container, Row} from "react-bootstrap";
-import CategoryCard from "../components/features/CategoryCard";
 import Pages from "../components/features/Pages";
-import Filters from "../components/filters/Filters";
 import {addToBasketDB, fetchBasket, fetchBasketUnauthorized} from "../http/basketAPI";
 import {useLocalStorage} from "../hooks/useStorage";
 import useDebounce from "../hooks/useDebounce";
 import Loader from "../UI/Loader/Loader";
-import {Helmet} from "react-helmet";
 import {fetchSearchedPublishedProducts} from "../http/searchAPI";
+
+const Filters = React.lazy(() => import('../components/filters/Filters'));
+const CategoryCard = React.lazy(() => import('../components/features/CategoryCard'));
+const ProductCard = React.lazy(() => import('../components/features/ProductCard'));
+const Helmet = React.lazy(() => import('react-helmet'));
 
 
 const CategoryPage = observer(() => {
-    const {products, filters, user, basket} = useContext(Context)
+    const {products, filters, user, basket, loading} = useContext(Context)
     const [searchParams] = useSearchParams()
     const query = (searchParams.get('query'))
     const [clicker, setClicker] = useState(0);
-    const [loading, setLoading] = useState(true);
     const {id} = useParams()
     const [localBasket, setLocalBasket] = useLocalStorage('basket', [])
     useDebounce(() => user.isAuth ?
@@ -60,16 +60,16 @@ const CategoryPage = observer(() => {
 
     useEffect(() => {
 
-        setLoading(true)
+        loading.setLoading(true)
         if (id==='-1'){
             fetchSearchedPublishedProducts(query).then(data => {
                 setData(data)
-            }).finally(() => setLoading(false))
+            }).finally(() => loading.setLoading(false))
 
         }  else {
             fetchCategoryProducts(id).then(data => {
               setData(data)
-        }).finally(() => setLoading(false))
+        }).finally(() => loading.setLoading(false))
     }
     },
     [id, query]);
@@ -81,7 +81,7 @@ const CategoryPage = observer(() => {
         }
     }, 100, [products.page, products.filteredProducts]);
 
-    if (loading) {
+    if (loading.loading) {
         return <div>
             <Loader/>
         </div>
@@ -90,31 +90,39 @@ const CategoryPage = observer(() => {
 
     return (
         <Container className="categoryPage">
-            <Filters />
+            <Suspense fallback={<Loader />}>
+                <Filters key={'filters'} />
+            </Suspense>
             <Row id="Content">
                 {products?.products?.subCategories?.length>0 ?
                 products.products.subCategories.map(subCategory =>
-                    <CategoryCard key={subCategory.id} category={subCategory}/>
+                    <Suspense fallback={<Loader />}>
+                        <CategoryCard key={subCategory.id} category={subCategory}/>
+                    </Suspense>
                 ) :
                 products?.currentProducts?.length>0 &&
                     products.currentProducts.filter(product => product.productId===0 || !product.productId).map(product =>
-                        <ProductCard addToCart={addToCart} product={product} key={product.id}/>
+                        <Suspense fallback={<Loader />}>
+                            <ProductCard addToCart={addToCart} product={product} key={product.id}/>
+                        </Suspense>
                     )
                 }
                 {!products?.products?.subCategories?.length > 0 &&
                     <Pages className="pagination"/>
                 }
             </Row>
-            <Helmet>
-                <title>{`${products.products?.category?.description} | ЗооЛАЙНЕР`}</title>
-                <meta property="og:title" content={`${products.products?.category?.description} | ЗооЛАЙНЕР`} />
-                {products.products?.category?.category_images?.length>0 &&
-                        <meta property="og:image" content={`${process.env.REACT_APP_API_URL}/images/categories/mini/${products.products?.category?.category_images[0].img}`} />
-                }
-                <meta property="og:description" content="Товары для животных с доставкой в день заказа | ЗооЛАЙНЕР" />
-                <meta property="og:url" content={`${process.env.REACT_APP_URL}/category/${id}?query=${query}`} />
+            <Suspense fallback={<Loader />}>
+                <Helmet>
+                    <title>{`${products.products?.category?.description} | ЗооЛАЙНЕР`}</title>
+                    <meta property="og:title" content={`${products.products?.category?.description} | ЗооЛАЙНЕР`} />
+                    {products.products?.category?.category_images?.length>0 &&
+                            <meta property="og:image" content={`${process.env.REACT_APP_API_URL}/images/categories/mini/${products.products?.category?.category_images[0].img}`} />
+                    }
+                    <meta property="og:description" content="Товары для животных с доставкой в день заказа | ЗооЛАЙНЕР" />
+                    <meta property="og:url" content={`${process.env.REACT_APP_URL}/category/${id}?query=${query}`} />
 
-            </Helmet>
+                </Helmet>
+            </Suspense>
         </Container>
     );
     }

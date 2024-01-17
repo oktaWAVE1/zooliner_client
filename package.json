@@ -4,6 +4,7 @@
   "private": true,
   "author": "Sergey Kosygin",
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/register": "^7.23.7",
     "@pbe/react-yandex-maps": "^1.2.5",
     "@testing-library/jest-dom": "^5.16.5",
@@ -29,6 +30,7 @@
     "react-qr-code": "^2.0.12",
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
+    "react-ym": "^0.0.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

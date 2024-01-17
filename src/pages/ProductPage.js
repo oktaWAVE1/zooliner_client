@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {Suspense, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {fetchProduct} from "../http/catalogueAPI";
 import {Helmet} from "react-helmet";
-import ProductImageCarousel from "../components/features/productImageCarousel";
 import ProductContent from "../components/features/ProductContent";
+import Loader from "../UI/Loader/Loader";
+const ProductImageCarousel = React.lazy(() => import('../components/features/productImageCarousel'));
 
 const ProductPage = () => {
     const {id} = useParams()
@@ -32,7 +33,9 @@ const ProductPage = () => {
 
 
         <div className="ProductPage">
-            <ProductImageCarousel product={product} />
+            <Suspense fallback={<Loader />}>
+                <ProductImageCarousel product={product} />
+            </Suspense>
             <ProductContent
                 product={product}
                 setCurrentProduct={setCurrentProduct}

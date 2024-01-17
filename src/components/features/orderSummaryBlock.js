@@ -59,9 +59,9 @@ const OrderSummaryBlock = observer(({basket, order, currentDeliveryMethod, curre
                         <span>Стоимость доставки: </span><span>{order.discountedSalesSum>=currentDeliveryMethod.freeSum ? 0 : currentDeliveryMethod.price}</span>
                         <span>Итого: </span><span>{order.discountedSalesSum >= currentDeliveryMethod.freeSum ? order.discountedSalesSum - (parseInt(bonusPoints) || 0) : order.discountedSalesSum+currentDeliveryMethod.price - (parseInt(bonusPoints) || 0)}</span>
                     </div>
-                    <Form.Label className="px-3 d-flex gap-3 justify-content-center align-items-start">
+                    <Form.Label className="px-3 d-flex gap-3 justify-content-center align-items-center">
                         <Form.Check checked={personalData} onChange={() => setPersonalData(prev => !prev)} />
-                        <span className="text-center">соглашаюсь с <Link to='/personal_data' target="_blank">полилитикой обработки персональных данных</Link></span>
+                        <span style={{fontSize: "0.8rem"}} className="text-center">соглашаюсь с <Link to='/personal_data' target="_blank">полилитикой обработки персональных данных</Link></span>
                     </Form.Label>
                 </Form>
                 <Row className="m-1" title={!order.customerTel ? "Необходимо ввести контактный номер телефона" : ""}>

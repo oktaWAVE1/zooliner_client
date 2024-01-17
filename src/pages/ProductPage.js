@@ -11,6 +11,7 @@ const ProductPage = () => {
     const [currentProduct, setCurrentProduct] = useState({});
     const navigate = useNavigate()
 
+
     useEffect(() => {
         fetchProduct(id).then(data => {
                 if(data===null){
@@ -28,8 +29,9 @@ const ProductPage = () => {
 
 
     return (
-        <div className="ProductPage">
 
+
+        <div className="ProductPage">
             <ProductImageCarousel product={product} />
             <ProductContent
                 product={product}
@@ -45,6 +47,7 @@ const ProductPage = () => {
                 <meta property="og:url" content={`${process.env.REACT_APP_URL}/product/${id}`} />
             </Helmet>
         </div>
+
     );
 };
 

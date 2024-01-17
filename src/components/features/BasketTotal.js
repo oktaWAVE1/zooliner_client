@@ -25,7 +25,7 @@ const BasketTotal = observer(({createOrder}) => {
         }
     }, [basket.basketItems]);
     return (
-        <div className="BasketTotal">
+        <div className="BasketTotal mb-3">
             <hr/>
             {discount> 0 &&
                 <h4>Ваша скидка: {discount} ₽</h4>

@@ -122,7 +122,7 @@ const Auth = observer(() => {
                             />
                             <Form.Label className="px-3 d-flex gap-3 justify-content-center align-items-start">
                                 <Form.Check checked={personalData} onChange={() => setPersonalData(prev => !prev)} />
-                                <span className="text-center">соглашаюсь с <Link to='/personal_data' target="_blank">полилитикой обработки персональных данных</Link></span>
+                                <span style={{fontSize: "0.8rem", paddingTop: "2px"}} className="text-center">соглашаюсь с <Link to='/personal_data' target="_blank">полилитикой обработки персональных данных</Link></span>
                             </Form.Label>
                         </>
 

@@ -48,6 +48,7 @@ const ProductPage = () => {
                 }
                 <meta property="og:description" content={`${product?.shortDescription} | ЗооЛАЙНЕР`} />
                 <meta property="og:url" content={`${process.env.REACT_APP_URL}/product/${id}`} />
+                <meta name="description" content={`Купить ${product?.title} ${product?.shortDescription} в интернет-магазине ЗооЛАЙНЕР`} />
             </Helmet>
         </div>
 

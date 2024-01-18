@@ -154,7 +154,7 @@ const Auth = observer(() => {
 
 
                 </Form>
-                <SocialAuth />
+                <SocialAuth isLogin={isLogin} />
             </Card>
             <Helmet>
                 <title>Страница аутентефикации | ЗооЛАЙНЕР</title>

@@ -1,11 +1,13 @@
 import React from 'react';
 import * as VKID from '@vkid/sdk';
+import {env} from "../../config"
 
-const SocialAuth = () => {
+const SocialAuth = ({isLogin}) => {
     VKID.Config.set({
-        app: process.env.VK_APP_ID, // Идентификатор приложения.
-        redirectUrl: process.env.VK_APP_REDIRECT_URL, // Адрес для перехода после авторизации.
+        app: env.VK_APP_ID, // Идентификатор приложения.
+        redirectUrl: env.VK_APP_REDIRECT_URL, // Адрес для перехода после авторизации.
     });
+
     const vkAUTH = () => {
         // Открытие авторизации.
         VKID.Auth.login()
@@ -23,7 +25,11 @@ const SocialAuth = () => {
                         </svg>
                     </div>
                     <div className="VkIdWebSdk__button_text">
-                        Войти через VK ID
+                        {isLogin
+                            ? 'Войти через VK ID'
+                            : 'Регистрация через VK ID'
+                        }
+
                     </div>
                 </div>
             </button>

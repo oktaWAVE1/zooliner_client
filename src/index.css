@@ -36,3 +36,8 @@ html {
   font-family: "Exo2";
   src: url("./components/styles/fonts/Exo2-Regular.ttf") format("opentype");
 }
+
+@font-face {
+  font-family: "Days";
+  src: url("./components/styles/fonts/Days.ttf") format("opentype");
+}

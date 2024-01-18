@@ -91,19 +91,19 @@ const CategoryPage = observer(() => {
     return (
         <Container className="categoryPage">
             <Suspense fallback={<Loader />}>
-                <Filters key={'filters'} />
+                <Filters/>
             </Suspense>
             <Row id="Content">
                 {products?.products?.subCategories?.length>0 ?
                 products.products.subCategories.map(subCategory =>
-                    <Suspense fallback={<Loader />}>
-                        <CategoryCard key={subCategory.id} category={subCategory}/>
+                    <Suspense key={subCategory.id} fallback={<Loader />}>
+                        <CategoryCard category={subCategory}/>
                     </Suspense>
                 ) :
                 products?.currentProducts?.length>0 &&
                     products.currentProducts.filter(product => product.productId===0 || !product.productId).map(product =>
-                        <Suspense fallback={<Loader />}>
-                            <ProductCard addToCart={addToCart} product={product} key={product.id}/>
+                        <Suspense key={product.id} fallback={<Loader />}>
+                            <ProductCard addToCart={addToCart} product={product} />
                         </Suspense>
                     )
                 }

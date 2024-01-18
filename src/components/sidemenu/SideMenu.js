@@ -17,7 +17,7 @@ const SideMenu = observer(() => {
 
             <Container>
 
-                    {catalogue.catalogue.length>0 &&
+                    {catalogue?.catalogue?.length>0 &&
                         catalogue.catalogue.filter(category => category.categoryId===0).map(category =>
                             <Accordion key={category.id}>
                                 <Accordion.Item className="category" eventKey={category.id}>

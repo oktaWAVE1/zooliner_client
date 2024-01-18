@@ -7,9 +7,9 @@ import {Context} from "./index";
 import Loader from "./UI/Loader/Loader";
 import {check} from "./http/userAPI";
 import Footer from "./components/footer/Footer";
-import SideMenu from "./components/sidemenu/SideMenu";
 import BasketBlock from "./components/features/BasketBlock";
 
+const SideMenu = React.lazy(() => import('./components/sidemenu/SideMenu'))
 const AppRouter = React.lazy(() => import('./components/appRouter'))
 const MyNavbar = React.lazy(() => import('./components/navbar/MyNavbar'));
 
@@ -40,7 +40,9 @@ const App = observer(() => {
           </Suspense>
 
           <div className="mainContainer">
-              <SideMenu/>
+              <Suspense fallback={<Loader />}>
+                <SideMenu/>
+              </Suspense>
               <Suspense fallback={<Loader />}>
                 <AppRouter/>
               </Suspense>

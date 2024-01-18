@@ -26,11 +26,13 @@ const MyNavbar = observer(() => {
     const togglerRef = useRef(null)
     const hideMobileMenu = () => {
         loading.setLoading(true)
-        const mobileMenu = menuRef.current
-        mobileMenu.className = 'navbar-collapse collapse'
-        const toggler = togglerRef.current
-        toggler.className = "navbar-toggler collapsed"
-        setExpanded(prev => !prev)
+        if(isMobile){
+            const mobileMenu = menuRef.current
+            mobileMenu.className = 'navbar-collapse collapse'
+            const toggler = togglerRef.current
+            toggler.className = "navbar-toggler collapsed"
+            setExpanded(prev => !prev)
+        }
     }
 
     return (

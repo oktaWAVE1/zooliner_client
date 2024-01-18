@@ -16,6 +16,8 @@ import AdminUsers from "./pages/AdminUsers";
 import AdminProductPage from "./pages/AdminProductPage";
 import Contacts from "./pages/Contacts";
 import PersonalDataProcessing from "./pages/PersonalDataProcessing";
+import Check from "./pages/Check";
+import FailedAuthPage from "./pages/FailedAuthPage";
 
 
 export const publicRoutes = [
@@ -33,7 +35,9 @@ export const publicRoutes = [
     {path: '/basket', element: <BasketPage/>},
     {path: '/order_confirmation/:accessLink', element: <OrderConfirmationPage/>},
     {path: '/success', element: <SuccessPage />},
-    {path: '/personal_data', element: <PersonalDataProcessing/>}
+    {path: '/personal_data', element: <PersonalDataProcessing/>},
+    {path: '/check', element: <Check/>},
+    {path: '/failed_auth', element: <FailedAuthPage/>},
 
 ]
 

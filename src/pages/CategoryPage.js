@@ -113,11 +113,27 @@ const CategoryPage = observer(() => {
             </Row>
             <Suspense fallback={<Loader />}>
                 <Helmet>
-                    <title>{`${products.products?.category?.description} | ЗооЛАЙНЕР`}</title>
+                    {String(id)==="0" ?
+                        <>
+                        <title>{`Каталог товаров для животных | ЗооЛАЙНЕР`}</title>
+                        <meta name="description" content={`Каталог товаров для животных в интернет-магазине ЗооЛАЙНЕР`} />
+                        </>
+                        : String(id)==="-1"
+                            ?<>
+                                <title>{`Поиск товаров для животных | ЗооЛАЙНЕР`}</title>
+                                <meta name="description" content={`Поиск товаров для животных в интернет-магазине ЗооЛАЙНЕР`} />
+                            </>
+                            :<>
+                                <title>{`${products.products?.category?.description} | ЗооЛАЙНЕР`}</title>
+                                <meta name="description" content={`Купить ${products.products?.category?.description}  в интернет-магазине ЗооЛАЙНЕР`} />
+                            </>
+                    }
+
                     <meta property="og:title" content={`${products.products?.category?.description} | ЗооЛАЙНЕР`} />
                     {products.products?.category?.category_images?.length>0 &&
                             <meta property="og:image" content={`${process.env.REACT_APP_API_URL}/images/categories/mini/${products.products?.category?.category_images[0].img}`} />
                     }
+
                     <meta property="og:description" content="Товары для животных с доставкой в день заказа | ЗооЛАЙНЕР" />
                     <meta property="og:url" content={`${process.env.REACT_APP_URL}/category/${id}?query=${query}`} />
 

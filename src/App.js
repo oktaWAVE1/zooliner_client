@@ -1,6 +1,5 @@
 import './App.css';
 
-import AppRouter from "./components/appRouter";
 import React, {useContext, useEffect, useState, Suspense} from "react";
 import {BrowserRouter} from "react-router-dom";
 import {observer} from "mobx-react-lite";
@@ -11,6 +10,7 @@ import Footer from "./components/footer/Footer";
 import SideMenu from "./components/sidemenu/SideMenu";
 import BasketBlock from "./components/features/BasketBlock";
 
+const AppRouter = React.lazy(() => import('./components/appRouter'));
 const MyNavbar = React.lazy(() => import('./components/navbar/MyNavbar'));
 
 
@@ -41,7 +41,9 @@ const App = observer(() => {
 
           <div className="mainContainer">
               <SideMenu/>
-              <AppRouter/>
+              <Suspense fallback={<Loader />}>
+                <AppRouter/>
+              </Suspense>
               <BasketBlock />
           </div>
 

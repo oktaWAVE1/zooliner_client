@@ -113,21 +113,22 @@ const CategoryPage = observer(() => {
             </Row>
             <Suspense fallback={<Loader />}>
                 <Helmet>
-                    {String(id)==="0" ?
-                        <>
+                    {id==="0" ?
                         <title>{`Каталог товаров для животных | ЗооЛАЙНЕР`}</title>
-                        <meta name="description" content={`Каталог товаров для животных в интернет-магазине ЗооЛАЙНЕР`} />
-                        </>
-                        : String(id)==="-1"
-                            ?<>
-                                <title>{`Поиск товаров для животных | ЗооЛАЙНЕР`}</title>
-                                <meta name="description" content={`Поиск товаров для животных в интернет-магазине ЗооЛАЙНЕР`} />
-                            </>
-                            :<>
-                                <title>{`${products.products?.category?.description} | ЗооЛАЙНЕР`}</title>
-                                <meta name="description" content={`Купить ${products.products?.category?.description}  в интернет-магазине ЗооЛАЙНЕР`} />
-                            </>
+                        : id==="-1"
+                            ?<title>{`Поиск товаров для животных | ЗооЛАЙНЕР`}</title>
+                            :<title>{`${products.products?.category?.description} | ЗооЛАЙНЕР`}</title>
                     }
+                    {id === "0" ?
+                        <meta name="description"
+                              content={`Каталог товаров для животных в интернет-магазине ЗооЛАЙНЕР`}/>
+                        : id === "-1" ?
+                            <meta name="description"
+                                  content={`Поиск товаров для животных в интернет-магазине ЗооЛАЙНЕР`}/>
+                            : <meta name="description"
+                                    content={`Купить ${products.products?.category?.description}  в интернет-магазине ЗооЛАЙНЕР`}/>
+                    }
+
 
                     <meta property="og:title" content={`${products.products?.category?.description} | ЗооЛАЙНЕР`} />
                     {products.products?.category?.category_images?.length>0 &&

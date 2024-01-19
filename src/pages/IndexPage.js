@@ -29,7 +29,7 @@ const IndexPage = observer(() => {
                 <meta property="og:title" content="ЗооЛАЙНЕР" />
                 <meta property="og:image" content="https://zooliner.ru/" />
                 <meta property="og:description" content="Товары для животных в Анапе. Интернет-магазин для ваших любимцев." />
-
+                <meta name="description" content={`Интернет-магазин товаров для Ваших любимцев в Анапе. ЗооЛАЙНЕР.`} />
                 <title>Товары для животных в Анапе. Интернет-магазин для ваших любимцев | ЗооЛАЙНЕР</title>
             </Helmet>
         </div>

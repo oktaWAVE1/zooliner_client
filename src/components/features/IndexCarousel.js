@@ -10,7 +10,7 @@ const IndexCarousel = ({promotion}) => {
                     <Carousel.Item key={p.id}>
                         {p?.link?.length>0 ?
                             <Link to={p.link}><img className="promotion_img" alt="promotion_img" src={`${process.env.REACT_APP_API_URL}/images/promotions/${p.img}`} /></Link> :
-                            <img className="promotion_img" alt="promotion_img" src={`${process.env.REACT_APP_API_URL}/images/promotions/${p.img}`} />
+                            <img loading="lazy" className="promotion_img" alt="promotion_img" src={`${process.env.REACT_APP_API_URL}/images/promotions/${p.img}`} />
                         }
 
                     </Carousel.Item>

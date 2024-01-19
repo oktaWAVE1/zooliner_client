@@ -15,7 +15,7 @@ const SideMenu = observer(() => {
     return (
         <Navbar className="sideBar">
 
-            <Container>
+            <Container className="mx-0 px-1">
 
                     {catalogue?.catalogue?.length>0 &&
                         catalogue.catalogue.filter(category => category?.categoryId===0).map(category =>

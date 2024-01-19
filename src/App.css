@@ -901,7 +901,7 @@ a {
     width: 270px;
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
+    margin-left: 5px;
 }
 .searchBar input {
     padding: 5px 5px;
@@ -976,7 +976,15 @@ a {
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
     z-index: 99999;
 }
+@media (min-width: 992px) and (max-width: 1235px){
+    .searchBar {
+        margin-left: 15px;
+    }
+    .mainContainer {
+        padding-left: 7px;
+    }
 
+}
 @media (max-width: 992px){
     .searchBarList{
         transform: translateX(0);
@@ -984,7 +992,7 @@ a {
     .searchBar {
         width: 280px;
         margin: 0 0;
-        padding-left: 30px;
+        padding-left: 24px;
     }
     .searchBar input {
         width: 200px;
@@ -993,6 +1001,18 @@ a {
     }
     .searchBar .search_btn {
         width: 30px;
+    }
+
+    .mainContainer > .container{
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 6px;
+    }
+    #Content {
+        gap: 6px;
+        width: 100%;
     }
 }
 
@@ -1018,7 +1038,7 @@ a {
 
 .mainContainer {
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 23% 77%;
     max-width: 1200px;
     flex-grow: 1;
 
@@ -1033,7 +1053,7 @@ a {
 
 @media (max-width: 768px){
     .mainContainer > .container{
-        padding: 0 6px 0 6px;
+        padding: 0 12px 0 0px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1042,6 +1062,7 @@ a {
         gap: 6px;
         width: 100%;
     }
+
 }
 
 

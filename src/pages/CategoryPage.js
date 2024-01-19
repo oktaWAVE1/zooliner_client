@@ -107,10 +107,12 @@ const CategoryPage = observer(() => {
                         </Suspense>
                     )
                 }
+            </Row>
+            <div className='w-100 d-flex justify-content-center'>
                 {!products?.products?.subCategories?.length > 0 &&
                     <Pages className="pagination"/>
                 }
-            </Row>
+            </div>
             <Suspense fallback={<Loader />}>
                 <Helmet>
                     {id==="0" ?

@@ -210,7 +210,9 @@ a {
     #responsive-navbar-nav{
         background-color: #777777;
         opacity: 0.8;
-        padding: 10px 0px 10px 0px;
+        padding: 0;
+        max-width: 100vw;
+        box-sizing: border-box;
     }
     #responsive-navbar-nav .active {
         background-color: var(--main-theme-active-color);
@@ -272,7 +274,10 @@ a {
     /*justify-content: space-between;*/
     gap: 4px;
     max-width: 100%;
-
+    align-items: center;
+}
+#Content .ProductCard {
+    height: 100%;
 }
 
 .index_slider img, .index_top_banner img {
@@ -992,7 +997,7 @@ a {
     .searchBar {
         width: 280px;
         margin: 0 0;
-        padding-left: 24px;
+        padding-left: 15px;
     }
     .searchBar input {
         width: 200px;
@@ -1012,7 +1017,7 @@ a {
     }
     #Content {
         gap: 6px;
-        width: 100%;
+
     }
 }
 
@@ -1020,7 +1025,7 @@ a {
     .searchBar {
         width: 170px;
         margin: 0 0;
-        padding-left: 20px;
+        padding-left: 15px;
     }
     .searchBar input {
         width: 115px;
@@ -1041,6 +1046,7 @@ a {
     grid-template-columns: 23% 77%;
     max-width: 1200px;
     flex-grow: 1;
+    gap: 20px;
 
 }
 
@@ -1049,19 +1055,37 @@ a {
 }
 
 
+@media (max-width: 1240px){
+    .mainContainer > .container{
+        padding: 0 35px 0 0;
+    }
+}
 
+
+@media (min-width: 768px) and (max-width: 992px){
+    .mainContainer > .container{
+        width: 100%;
+        max-width: 100vw;
+        padding: 0 25px 0 10px;
+    }
+}
 
 @media (max-width: 768px){
     .mainContainer > .container{
-        padding: 0 12px 0 0px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin: 0 0;
+        width: 100%;
+        max-width: 100%;
+        padding: 0 10px 0 10px;
+        box-sizing: border-box;
     }
     #Content {
         gap: 6px;
-        width: 100%;
+        max-width: 100%;
     }
+
 
 }
 
@@ -1071,6 +1095,7 @@ a {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    width: 100%;
 
 }
 
@@ -1548,11 +1573,13 @@ a {
     }
     .mainContainer {
         display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 100vw;
+        gap: 0;
+        max-width: 100vw;
     }
-    #Content, .Filters.row {
-        padding: 0px 8px;
-    }
+
 
     .CarouselContainer {width: 100%;}
 
@@ -1604,15 +1631,7 @@ a {
     }
 }
 
-@media (min-width: 576px) {
-    .container, .container-md, .container-sm {
-        max-width: 96% !important;
-    }
-    .categoryPage.container{
-        max-width: 95%;
-    }
 
-}
 
 /*VK ID*/
 .VkIdWebSdk__button_reset {

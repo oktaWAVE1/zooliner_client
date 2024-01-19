@@ -8,6 +8,7 @@ import {
 } from "../../http/admin/categoryAdminAPI";
 import {useIsMobile} from "../../hooks/useIsMobile";
 import useDebounce from "../../hooks/useDebounce";
+import Delete from "../../UI/svgs/delete";
 
 
 const AdminCategoryItemModal = ({onHide, show, item, setUpdate, categories}) => {
@@ -111,8 +112,8 @@ const AdminCategoryItemModal = ({onHide, show, item, setUpdate, categories}) => 
                             <div><span
                                 title="Удалить"
                                 onClick={() => delImg()}
-                                className="pointer d-flex justify-content-end material-symbols-outlined">
-                                    delete
+                                className="pointer d-flex justify-content-end">
+                                    <Delete />
                                 </span></div>
                         </div>
                     }

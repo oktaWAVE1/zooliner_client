@@ -6,6 +6,7 @@ import {createBrand, deleteBrand, fetchAllBrands, modifyBrand} from "../../http/
 import {useBrandsSortSearch} from "../../hooks/useBrandsSortSearch";
 import ModalPagination from "../features/Admin/ModalPagination";
 import {useIsMobile} from "../../hooks/useIsMobile";
+import Delete from "../../UI/svgs/delete";
 
 const AdminBrandModal = ({onHide, show}) => {
     const limit = 10
@@ -100,8 +101,8 @@ const AdminBrandModal = ({onHide, show}) => {
                                 <div><span
                                     title="Удалить"
                                     onClick={() => deleteCurrent(b.id)}
-                                    className="pointer d-flex justify-content-end material-symbols-outlined">
-                                    delete
+                                    className="pointer d-flex justify-content-end">
+                                    <Delete fill={'#777'} />
                                 </span></div>
 
                             </div>

@@ -7,6 +7,7 @@ import useDebounce from "../../hooks/useDebounce";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {useLocalStorage} from "../../hooks/useStorage";
+import AddShoppingCart from "../../UI/svgs/addShoppingCart";
 
 const ProductContent = observer(({product, setCurrentProduct, currentProduct}) => {
 
@@ -59,9 +60,7 @@ const ProductContent = observer(({product, setCurrentProduct, currentProduct}) =
                     <button className='IncrBtn QtyBtn' onClick={() => increaseQty()}>+</button>
                 </div>
                 <ChildItems chosenProduct={currentProduct} parentProduct={product} chooseChild={chooseChild} />
-                <MyButton onClick={() => addToCart(currentProduct.id, quantity)} classes="AddToCartButton" title="Добавить в корзину"><span className="material-symbols-outlined">
-                add_shopping_cart
-                </span>{currentProduct?.inStock ? "В КОРЗИНУ" : "ПОД ЗАКАЗ"}</MyButton>
+                <MyButton onClick={() => addToCart(currentProduct.id, quantity)} classes="AddToCartButton" title="Добавить в корзину"><AddShoppingCart />{currentProduct?.inStock ? "В КОРЗИНУ" : "ПОД ЗАКАЗ"}</MyButton>
             </div>
         </div>
 

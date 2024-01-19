@@ -3,6 +3,7 @@ import useDebounce from "../../hooks/useDebounce";
 import {SearchResultList} from "./SearchResultList";
 import fuseSearch from "../../utils/fuseSearch";
 import {useNavigate} from "react-router-dom";
+import Search from "../../UI/svgs/search";
 
 const SearchBar = ({...props}) => {
 
@@ -35,8 +36,8 @@ const SearchBar = ({...props}) => {
                            setQuery('')
                        }}}
                        value={query} onChange={e => setQuery(e.target.value)} />
-                <button onClick={() => handleSearch()} className="search_btn"><span className="material-symbols-outlined" title='Поиск'>
-                                            search
+                <button onClick={() => handleSearch()} className="search_btn"><span title='Поиск' style={{marginTop: "-4px"}}>
+                                            <Search />
                                         </span></button>
 
             </div>

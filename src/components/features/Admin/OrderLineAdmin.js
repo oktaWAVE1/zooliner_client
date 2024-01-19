@@ -2,6 +2,10 @@ import React from 'react';
 import {updateStatus} from "../../../http/admin/orderAdminAPI";
 import {Form} from "react-bootstrap";
 import telephoneParser from "../../../utils/telephoneParser";
+import Cash from "../../../UI/svgs/cash";
+import CreditCard from "../../../UI/svgs/creditCard";
+import TakeAway from "../../../UI/svgs/takeAway";
+import Delivery from "../../../UI/svgs/delivery";
 
 const OrderLine = ({item, showModal, statuses, handleUpdate}) => {
     let date = new Date(item.createdAt)
@@ -26,19 +30,11 @@ const OrderLine = ({item, showModal, statuses, handleUpdate}) => {
                     {item?.customerTel}
                 </a>}
             </div>
-            <div>{item.paymentMethodId===1 ? <span className="material-symbols-outlined pointer" title='Наличными'>
-                                            payments
-                                        </span> :
-                <span className="material-symbols-outlined pointer" title='Безналичный рассчет'>
-                                            credit_card
-                        </span>}
+            <div className="pointer" title={item.paymentMethodId===1 ? "Наличными" : "Безналичный рассчет"}>{item.paymentMethodId===1 ? <Cash /> :
+                <CreditCard />}
             </div>
-            <div>{item.deliveryMethodId===1 ? <span className="material-symbols-outlined pointer" title='Самовывоз'>
-                                            storefront
-                                        </span> :
-                <span  className="material-symbols-outlined pointer" title='Доставка'>
-                                            local_shipping
-                        </span>}
+            <div className="pointer" title={item.deliveryMethodId===1 ? 'Самовывоз' : 'Доставка'}>{item.deliveryMethodId===1 ? <TakeAway /> :
+                <Delivery />}
 
             </div>
 

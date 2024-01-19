@@ -1,26 +1,29 @@
 import React from 'react';
+import Cash from "../../UI/svgs/cash";
+import CreditCard from "../../UI/svgs/creditCard";
+import TakeAway from "../../UI/svgs/takeAway";
+import Delivery from "../../UI/svgs/delivery";
 
 const OrderLine = ({item, showModal}) => {
     let date = new Date(item.createdAt)
     date = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
 
     return (
-        <div className="orderItem">
+        <div className="orderItem py-1">
             <div>{date}</div>
             <div className="pointer link" onClick={() => showModal(item)}>{item.orderNumber}</div>
-            <div>{item.paymentMethodId===1 ? <span className="material-symbols-outlined pointer" title='Наличными'>
-                                            payments
-                                        </span> :
-                <span className="material-symbols-outlined pointer" title='Безналичный рассчет'>
-                                            credit_card
-                        </span>}
+            <div title={item.paymentMethodId===1
+                ? "Наличными"
+                : 'Безналичный рассчет'}>
+                    {item.paymentMethodId===1
+                        ? <span className="pointer"> <Cash /> </span>
+                        : <span className="pointer"> <CreditCard /> </span>
+                    }
             </div>
-            <div>{item.deliveryMethodId===1 ? <span className="material-symbols-outlined pointer" title='Самовывоз'>
-                                            storefront
-                                        </span> :
-                <span  className="material-symbols-outlined pointer" title='Доставка'>
-                                            local_shipping
-                        </span>}
+            <div title={item.deliveryMethodId===1 ? "Самовывоз" : "Доаставка"}>
+                {item.deliveryMethodId===1
+                    ? <span className="pointer"> <TakeAway /> </span>
+                    : <span  className="pointer"> <Delivery /> </span>}
 
             </div>
 

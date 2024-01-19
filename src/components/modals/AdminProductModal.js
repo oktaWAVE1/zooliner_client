@@ -14,6 +14,8 @@ import ProductCard from "../features/ProductCard";
 import {fetchAllCategories} from "../../http/admin/categoryAdminAPI";
 import AdminProductAttributes from "../features/Admin/AdminProductAttributes";
 import AdminProductModalChildren from "../features/Admin/AdminProductModalChildren";
+import Delete from "../../UI/svgs/delete";
+import Master from "../../UI/svgs/master";
 
 const AdminProductModal = ({show, onHide, productId}) => {
 
@@ -172,14 +174,16 @@ const AdminProductModal = ({show, onHide, productId}) => {
                                 <ul className="mb-2">
                                     {product?.category?.length>0 &&
                                         product.category.map(c =>
-                                            <li key={c.id}><div className="d-flex gap-3 align-items-center">{c?.parent?.name ? `${c.parent.name} > ${c.name}` : c.name}
-                                                <span
-                                                title="Удалить"
-                                                onClick={() => delCategory(c.id)}
-                                                className="pointer material-symbols-outlined">
-                                                delete
-                                            </span>
-                                            </div></li>
+                                            <li key={c.id}>
+                                                <div className="d-flex gap-3 align-items-center">{c?.parent?.name ? `${c.parent.name} > ${c.name}` : c.name}
+                                                    <span
+                                                    title="Удалить"
+                                                    onClick={() => delCategory(c.id)}
+                                                    className="pointer">
+                                                        <Delete height={'20'} fill={'#777'} />
+                                                    </span>
+                                                </div>
+                                            </li>
                                         )
                                     }
                                 </ul>
@@ -236,14 +240,14 @@ const AdminProductModal = ({show, onHide, productId}) => {
                                 <span
                                     title="Сделать основной"
                                     onClick={() => setMasterImg(pi.id)}
-                                    className="pointer master_btn material-symbols-outlined">
-                                verified
+                                    className="pointer master_btn">
+                                    <Master />
                                 </span>
                                 <span
                                     title="Удалить"
                                     onClick={() => delImg(pi.id)}
-                                    className="pointer del_btn material-symbols-outlined">
-                                    delete
+                                    className="pointer del_btn">
+                                   <Delete />
                                 </span>
 
                             </div>

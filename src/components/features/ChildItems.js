@@ -1,5 +1,6 @@
 import React from 'react';
 import MyButton from "../../UI/MyButton/MyButton";
+import PetBonus from "../../UI/svgs/petBonus";
 
 const ChildItems = ({chooseChild, chosenProduct, parentProduct, preview, ...props}) => {
     return (
@@ -22,9 +23,10 @@ const ChildItems = ({chooseChild, chosenProduct, parentProduct, preview, ...prop
                     className='bonusPoints d-flex align-items-center'>
                     <span>{chosenProduct?.discountedPrice > 0 ? `${Math.floor(chosenProduct?.discountedPrice*parseFloat(process.env.REACT_APP_BONUS_RATE))}` : `${Math.floor(chosenProduct?.price*parseFloat(process.env.REACT_APP_BONUS_RATE))}`}
                     </span>
-                    <span className="pt-1 material-symbols-outlined">
-pet_supplies
-</span></div>
+                    <span>
+                        <PetBonus />
+                    </span>
+                </div>
             }
         </div>
     );

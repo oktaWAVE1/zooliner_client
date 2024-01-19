@@ -3,6 +3,7 @@ import {Card} from "react-bootstrap";
 import MyButton from "../../UI/MyButton/MyButton";
 import ChildItems from "./ChildItems";
 import {Link} from "react-router-dom";
+import AddShoppingCart from "../../UI/svgs/addShoppingCart";
 
 const ProductCard = ({product, addToCart, preview}) => {
     const [currentProduct, setCurrentProduct] = useState({});
@@ -38,9 +39,10 @@ const ProductCard = ({product, addToCart, preview}) => {
                 <div>
 
                    <ChildItems preview={preview} chooseChild={chooseChild} chosenProduct={currentProduct} parentProduct={product} />
-                   <MyButton disabled={preview} onClick={() => addToCart(currentProduct.id)} classes="AddToCartButton"><span className="material-symbols-outlined">
-                    add_shopping_cart
-                    </span>{currentProduct?.inStock ? "В КОРЗИНУ" : "ПОД ЗАКАЗ"}</MyButton>
+                   <MyButton disabled={preview} onClick={() => addToCart(currentProduct.id)} classes="AddToCartButton">
+                       <span>
+                        <AddShoppingCart />
+                        </span>{currentProduct?.inStock ? "В КОРЗИНУ" : "ПОД ЗАКАЗ"}</MyButton>
                 </div>
            </div>
         </Card>

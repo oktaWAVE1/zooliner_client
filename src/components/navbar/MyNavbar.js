@@ -7,6 +7,11 @@ import {Context} from "../../index";
 import {userLogout} from "../../http/userAPI";
 import SearchBar from "../search/SearchBar";
 import {useIsMobile} from "../../hooks/useIsMobile";
+import Login from "../../UI/svgs/login";
+import ShoppingCart from "../../UI/svgs/shoppingCart";
+import Logout from "../../UI/svgs/logout";
+import Person from "../../UI/svgs/person";
+import Admin from "../../UI/svgs/admin";
 
 
 
@@ -91,35 +96,29 @@ const MyNavbar = observer(() => {
 
                                 {user.user.role === 'ADMIN' &&
                                             <NavLink onClick={hideMobileMenu} className={cl.navbarItem}
-                                                     to='/admin'>
+                                                     to='/admin' title="Админка">
                                                 {isMobile ? "Админка" :
-                                                    <span className="material-symbols-outlined" title="Админка">
-                                                        shield_person
-                                                    </span>
+                                                    <Admin />
                                                 }
                                             </NavLink>
 
                                 }
                                 <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/basket' alt="Корзина" title="Корзина">
                                     {isMobile ? "Корзина" :
-                                        <span className="material-symbols-outlined" title="Корзина">
-                                            shopping_cart
-                                        </span>
+                                        <ShoppingCart />
                                     }
                                 </NavLink>
-                                <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/user'>
+                                <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/user' title='Личный кабинет'>
                                     {isMobile ? "Личный кабинет" :
-                                        <span className="material-symbols-outlined" title='Личный кабинет'>
-                                            person
-                                        </span>
+                                        <Person />
                                     }
                                 </NavLink>
                                 <div onClick={() => logout()} className={[cl.logout_btn, cl.navbarItem].join(" ")}>
                                     {isMobile ? "Выход":
+                                    <div title='Выход'>
+                                        <Logout />
+                                    </div>
 
-                                    <span className="material-symbols-outlined" title="Выход">
-                                        logout
-                                    </span>
                                 }
                                 </div>
 
@@ -129,16 +128,13 @@ const MyNavbar = observer(() => {
                                 <Nav>
                                     <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/basket' alt="Корзина" title="Корзина">
                                         {isMobile ? "Корзина" :
-                                        <span className="material-symbols-outlined" title="Корзина">
-                                        shopping_cart
-                                    </span>
+
+                                            <ShoppingCart />
                                         }
                                     </NavLink>
-                                    <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/login'>
+                                    <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/login' alt="Войти" title="Войти">
                                         {isMobile ? "Войти" :
-                                            <span className="material-symbols-outlined" title="Войти">
-                                        login
-                                        </span>
+                                            <Login style={{color: "#FFF"}} />
                                         }
                                     </NavLink>
 

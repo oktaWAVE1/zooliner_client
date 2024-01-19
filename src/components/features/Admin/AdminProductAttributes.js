@@ -6,6 +6,7 @@ import {
     delProductAttribute,
     fetchAllAttributeCategories, fetchAllAttributes
 } from "../../../http/admin/productAdminAPI";
+import Delete from "../../../UI/svgs/delete";
 
 const AdminProductAttributes = ({setUpdate, product, productId}) => {
     const [newAttributeCategoryId, setNewAttributeCategoryId] = useState(0);
@@ -64,9 +65,10 @@ const AdminProductAttributes = ({setUpdate, product, productId}) => {
                                         <span
                                             title="Удалить"
                                             onClick={() => delAttribute(pa.id)}
-                                            className="pointer material-symbols-outlined">
-                                                                        delete
-                                                                    </span>
+                                            className="pointer">
+                                                <Delete fill={"#777"} height={'24'} />
+
+                                            </span>
                                     </div>
                                 </li>
                             )

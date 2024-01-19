@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import useDebounce from "../../hooks/useDebounce";
 import {fetchBasket, updateBasketItemQtyDB} from "../../http/basketAPI";
 import {Link} from "react-router-dom";
+import Delete from "../../UI/svgs/delete";
+import Package from "../../UI/svgs/package";
 
 const BasketItem = ({item, user, basket, delBasketItem, localBasket, setLocalBasket, ...props}) => {
 
@@ -55,12 +57,13 @@ const BasketItem = ({item, user, basket, delBasketItem, localBasket, setLocalBas
                 {item.product.discountedPrice>0 ? <span><div className="oldPrice">{item.product.price*quantity}</div><div className="newPrice">{item.product.discountedPrice*quantity}</div></span>: <span className="Price">{item.product.price*quantity}</span>}
             </div>
             <div>
-                <button className="DelItemBtn" onClick={() => delBasketItem(item.product.id)} title="Удалить из корзины"><span
-                    className="material-symbols-outlined">
-delete
-</span></button>
-                {!item.product.inStock && <span title='Под заказ' className="notInStock pointer material-symbols-outlined">
-                                                package_2
+                <button className="DelItemBtn" onClick={() => delBasketItem(item.product.id)} title="Удалить из корзины">
+                    <span>
+                        <Delete height={"20"} fill={"#777"} />
+                    </span>
+                </button>
+                {!item.product.inStock && <span title='Под заказ' className="notInStock pointer">
+                                                <Package />
                                           </span>}
             </div>
         </div>

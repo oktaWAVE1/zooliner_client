@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Card, Form} from "react-bootstrap";
 import MapModal from "../modals/MapModal";
+import Map from "../../UI/svgs/map"
 
 const DeliveryMethods = ({deliveryMethods, order, setCurrentDeliveryMethod, currentDeliveryMethod}) => {
 
@@ -20,10 +21,7 @@ const DeliveryMethods = ({deliveryMethods, order, setCurrentDeliveryMethod, curr
                             />
                         )
                         }
-                        <span onClick={() => setMapModal(prev => !prev)} className="pointer delivery_zones"><div className='mapModal'><span
-                            className="material-symbols-outlined">
-                        map
-                        </span><span>зоны доставки</span></div></span>
+                        <span onClick={() => setMapModal(prev => !prev)} className="pointer delivery_zones"><div className='mapModal'><Map /><span>зоны доставки</span></div></span>
                     </Form>
 
                 }

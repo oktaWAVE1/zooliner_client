@@ -4,6 +4,7 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import {fetchBasket, fetchBasketUnauthorized} from "../../http/basketAPI";
 import {useLocalStorage} from "../../hooks/useStorage";
+import ShoppingCart from "../../UI/svgs/shoppingCart";
 
 const BasketBlock = observer(() => {
     const {user, basket} = useContext(Context)
@@ -22,9 +23,10 @@ const BasketBlock = observer(() => {
         <div className='basketBlock' id="BasketBlock" title='Корзина'>
             <NavLink to='/basket' alt="Корзина" title="Корзина">
                 <div className='shoppingCart'>
-                    <div><span className="material-symbols-outlined">
-                                    shopping_cart
-                                    </span>{basket.basketItems.length>0 ? <span className="basketItems">{basket.basketItems.length}</span> : ""}</div>
+                    <div>
+                        <span>
+                            <ShoppingCart />
+                        </span>{basket.basketItems.length>0 ? <span className="basketItems">{basket.basketItems.length}</span> : ""}</div>
 
 
                 </div>

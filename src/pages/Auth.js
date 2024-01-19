@@ -7,9 +7,9 @@ import MyButton from "../UI/MyButton/MyButton";
 import {login, registration} from "../http/userAPI";
 import {validate} from "email-validator";
 import {Helmet} from "react-helmet";
-import MyPhoneInput from "../UI/MyPhoneInput/MyPhoneInput";
 import Loader from "../UI/Loader/Loader";
 
+const MyPhoneInput = React.lazy(() => import('../UI/MyPhoneInput/MyPhoneInput'));
 const SocialAuth = React.lazy(() => import('../components/features/SocialAuth'));
 
 const Auth = observer(() => {
@@ -93,7 +93,9 @@ const Auth = observer(() => {
                             type='text'
                         />}
                     {(!isLogin || (isLogin && telephoneToggle)) &&
-                        <MyPhoneInput value={currentUser.telephone} onChange={e => setCurrentUser({...currentUser, telephone: e.target.value})} />
+                        <Suspense fallback={<Loader />}>
+                            <MyPhoneInput value={currentUser.telephone} onChange={e => setCurrentUser({...currentUser, telephone: e.target.value})} />
+                        </Suspense>
 
                     }
                     { (!telephoneToggle || !isLogin) &&

@@ -19,7 +19,7 @@ const BasketBlock = observer(() => {
         }
     }, [user.isAuth, localBasket]);
     return (
-        <div className='basketBlock' title='Корзина'>
+        <div className='basketBlock' id="BasketBlock" title='Корзина'>
             <NavLink to='/basket' alt="Корзина" title="Корзина">
                 <div className='shoppingCart'>
                     <div><span className="material-symbols-outlined">

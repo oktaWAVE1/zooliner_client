@@ -4,13 +4,13 @@ import {useParams, useSearchParams} from "react-router-dom";
 import {fetchCategoryProducts} from "../http/catalogueAPI";
 import {Context} from "../index";
 import {Container, Row} from "react-bootstrap";
-import Pages from "../components/features/Pages";
 import {addToBasketDB, fetchBasket, fetchBasketUnauthorized} from "../http/basketAPI";
 import {useLocalStorage} from "../hooks/useStorage";
 import useDebounce from "../hooks/useDebounce";
 import Loader from "../UI/Loader/Loader";
 import {fetchSearchedPublishedProducts} from "../http/searchAPI";
 
+const Pages = React.lazy(() => import('../components/features/Pages'));
 const Filters = React.lazy(() => import('../components/filters/Filters'));
 const CategoryCard = React.lazy(() => import('../components/features/CategoryCard'));
 const ProductCard = React.lazy(() => import('../components/features/ProductCard'));
@@ -110,10 +110,12 @@ const CategoryPage = observer(() => {
             </Row>
             <div className='w-100 d-flex justify-content-center'>
                 {!products?.products?.subCategories?.length > 0 &&
-                    <Pages className="pagination"/>
+                    <Suspense>
+                        <Pages className="pagination"/>
+                    </Suspense>
                 }
             </div>
-            <Suspense fallback={<Loader />}>
+            <Suspense>
                 <Helmet>
                     {id==="0" ?
                         <title>{`Каталог товаров для животных | ЗооЛАЙНЕР`}</title>

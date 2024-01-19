@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, Suspense} from 'react';
 import {Container} from "react-bootstrap";
 import MyButton from "../UI/MyButton/MyButton";
-import AdminBrandModal from "../components/modals/AdminBrandModal";
-
 import {Helmet} from "react-helmet";
 import {useNavigate} from "react-router-dom";
-import AdminCategoryModal from "../components/modals/AdminCategoryModal";
-import AdminPromotionsModal from "../components/modals/AdminPromotionsModal";
+import Loader from "../UI/Loader/Loader";
+
+const AdminBrandModal = React.lazy(() => import('../components/modals/AdminBrandModal'));
+const AdminCategoryModal = React.lazy(() => import('../components/modals/AdminCategoryModal'));
+const AdminPromotionsModal = React.lazy(() => import('../components/modals/AdminPromotionsModal'));
 
 const Admin = () => {
     const [modals, setModals] = useState({brand: false, category: false, promo:false, users: false, comments: false, createLesson: false, adminLesson: false})
@@ -26,9 +27,11 @@ const Admin = () => {
 
                 </div>
             </Container>
-            <AdminPromotionsModal show={modals.promo} onHide={() => setModals({...modals, promo: false})} />
-            <AdminBrandModal onHide={() => setModals({...modals, brand: false})} show={modals.brand} />
-            <AdminCategoryModal onHide={() => setModals({...modals, category: false})} show={modals.category} />
+            <Suspense fallback={<Loader />}>
+                <AdminPromotionsModal show={modals.promo} onHide={() => setModals({...modals, promo: false})} />
+                <AdminBrandModal onHide={() => setModals({...modals, brand: false})} show={modals.brand} />
+                <AdminCategoryModal onHide={() => setModals({...modals, category: false})} show={modals.category} />
+            </Suspense>
             <Helmet>
                 <title>Админка | ЗооЛАЙНЕР</title>
             </Helmet>

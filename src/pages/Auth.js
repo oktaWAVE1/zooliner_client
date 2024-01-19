@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, Suspense} from 'react';
 import {Form, Card, Container, Alert} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
@@ -9,8 +9,8 @@ import {validate} from "email-validator";
 import {Helmet} from "react-helmet";
 import MyPhoneInput from "../UI/MyPhoneInput/MyPhoneInput";
 import Loader from "../UI/Loader/Loader";
-import SocialAuth from "../components/features/SocialAuth";
 
+const SocialAuth = React.lazy(() => import('../components/features/SocialAuth'));
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
@@ -154,7 +154,9 @@ const Auth = observer(() => {
 
 
                 </Form>
-                <SocialAuth isLogin={isLogin} />
+                <Suspense fallback={<Loader/>}>
+                    <SocialAuth isLogin={isLogin} />
+                </Suspense>
             </Card>
             <Helmet>
                 <title>Страница аутентефикации | ЗооЛАЙНЕР</title>

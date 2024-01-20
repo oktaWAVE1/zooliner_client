@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState, Suspense} from 'react';
+import React, {useContext, useEffect, useState, Suspense, useLayoutEffect} from 'react';
 import {observer} from "mobx-react-lite";
 import {useParams, useSearchParams} from "react-router-dom";
 import {fetchCategoryProducts} from "../http/catalogueAPI";
@@ -58,9 +58,7 @@ const CategoryPage = observer(() => {
         }
     }
 
-    useEffect(() => {
-
-        loading.setLoading(true)
+    useLayoutEffect(() => {
         if (id==='-1'){
             fetchSearchedPublishedProducts(query).then(data => {
                 setData(data)

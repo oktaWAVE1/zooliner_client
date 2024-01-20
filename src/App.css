@@ -315,6 +315,7 @@ a {
     margin-bottom: 10px;
 }
 
+
 .userPageBonus {
     border-radius: 5px;
     padding: 10px 25px;
@@ -1066,7 +1067,7 @@ a {
 }
 
 .mainContainer > .container {
-    padding: 0 5px 0 5px;
+    padding: 0 0px 0 0px;
 }
 
 
@@ -1572,7 +1573,14 @@ a {
 }
 
 
-
+@keyframes fadeIn {
+    0% {
+        height: 0;
+    }
+    100% {
+        heigth: 100%;
+    }
+}
 
 
 @media (max-width: 600px) {

@@ -11,7 +11,7 @@ import {Accordion, Row} from "react-bootstrap";
 const Filters = observer(() => {
     const {products, filters} = useContext(Context)
     const [searchParams, setSearchParams] = useSearchParams()
-    let openFilters = []
+    let openFilters = [1]
     const query = searchParams.get('query')
 
     useEffect(() => {

@@ -100,7 +100,6 @@
     }
     .logoButtons {
         margin-right: -10px;
-        border: solid 1px red;
     }
 }
 @media (min-width: 992px){

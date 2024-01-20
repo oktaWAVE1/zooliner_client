@@ -33,7 +33,7 @@
     left: 0;
     width: 100vw;
     z-index: 999;
-    padding: 0 5px;
+    padding: 0 0;
     box-shadow: 2px 2px 8px rgba(0,0,0, 0.5);
 }
 
@@ -87,19 +87,25 @@
     margin-top: 6px;
 }
 
-@media (min-width: 1200px){
+@media (min-width: 1240px){
     .navbarlogo{
         margin-left: 100px;
         margin-right: 60px;
         max-height: 60px;
     }
     .container {
-        padding-left: 26px;
+        padding-left: 43px;
+        padding-right: 0;
+        max-width: 1240px !important;
+    }
+    .logoButtons {
+        margin-right: -10px;
+        border: solid 1px red;
     }
 }
 @media (min-width: 992px){
     .navbar {
-        padding-right: 32px;
+        padding-right: 22px;
     }
 }
 
@@ -110,7 +116,8 @@
         max-height: 54px;
     }
     .container {
-        padding-left: 5px;
+        padding-left: 8px;
+        padding-right: 0;
     }
 }
 

@@ -1,7 +1,7 @@
 import React, {useContext, useRef, useState} from 'react';
 import {Accordion, Container, Nav, Navbar} from "react-bootstrap";
 import cl from './MyNavbar.module.css'
-import {Link, NavLink} from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import {userLogout} from "../../http/userAPI";
@@ -17,6 +17,7 @@ import Admin from "../../UI/svgs/admin";
 
 const MyNavbar = observer(() => {
     const {user, catalogue, loading} = useContext(Context)
+    const navigate = useNavigate()
     const [expanded, setExpanded] = useState(false);
     const logout = () => {
         userLogout().then(() => {
@@ -24,6 +25,7 @@ const MyNavbar = observer(() => {
             user.setIsAuth(false)
             localStorage.removeItem('token')
             hideMobileMenu()
+            navigate('/')
         })
     }
     const isMobile = useIsMobile()
@@ -92,7 +94,7 @@ const MyNavbar = observer(() => {
 
                         </Nav>
 
-                            {user.isAuth && <Nav className="d-flex justify-content-center align-items-start">
+                            {user.isAuth && <Nav className="d-flex justify-content-center align-items-start logoButtons">
 
                                 {user.user.role === 'ADMIN' &&
                                             <NavLink onClick={hideMobileMenu} className={cl.navbarItem}
@@ -125,7 +127,7 @@ const MyNavbar = observer(() => {
                             </Nav>
                             }
                             {!user.isAuth &&
-                                <Nav>
+                                <Nav className={cl.logoButtons}>
                                     <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/basket' alt="Корзина" title="Корзина">
                                         {isMobile ? "Корзина" :
 

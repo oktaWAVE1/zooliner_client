@@ -24,7 +24,6 @@ const AdminCategoryItemModal = ({onHide, show, item, setUpdate, categories}) => 
 
     useDebounce(() => {
         fetchCurrentCategory(category.id).then(data => {
-            console.log(data)
             setCategory(data)
         })
     }, 100, [refetch])

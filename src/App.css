@@ -537,6 +537,7 @@ a {
     padding: 10px 20px;
 }
 
+.addAttributeCategoryAccordion .accordion-button,
 .productAdminAttributesAccordion .accordion-button,
 .addPromotionAccordion .accordion-button,
 .productAdminMetaAccordion .accordion-button{
@@ -544,6 +545,7 @@ a {
     padding-bottom: 4px;
 }
 
+.addAttributeCategoryAccordion .accordion-button.collapsed,
 .addPromotionAccordion .accordion-button.collapsed,
 .productAdminMetaAccordion .accordion-button.collapsed,
 .addCategoryAccordion .accordion-button.collapsed,
@@ -553,6 +555,11 @@ a {
 .productAdminAttributesAccordion .accordion-button.collapsed
 {
     background-color: #DDD;
+}
+
+
+.attributeItem:hover {
+    font-weight: 800;
 }
 
 .customerBlock input {
@@ -908,6 +915,8 @@ a {
     flex-direction: column;
     margin-left: 5px;
 }
+
+
 .searchBar input {
     padding: 5px 5px;
     width: 220px;
@@ -916,6 +925,12 @@ a {
     box-shadow: none;
     outline: none;
     border-radius: 5px 0 0 5px;
+}
+@media (min-width: 1240px){
+
+    .searchBar input {
+        width: 230px;
+    }
 }
 
 .searchBar .search_btn {

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState, Suspense, useLayoutEffect} from 'react';
+import React, {useContext, useState, Suspense, useLayoutEffect} from 'react';
 import {observer} from "mobx-react-lite";
 import {useParams, useSearchParams} from "react-router-dom";
 import {fetchCategoryProducts} from "../http/catalogueAPI";
@@ -98,8 +98,10 @@ const CategoryPage = observer(() => {
             <Suspense fallback={<Loader />}>
                 <Filters/>
             </Suspense>
+            <h2 className="mb-2 text-uppercase">{products.products?.category?.description.replace('.', '')}</h2>
             <Row id="Content">
                 {products?.products?.subCategories?.length>0 ?
+
                 products.products.subCategories.map(subCategory =>
                     <Suspense key={subCategory.id} fallback={<Loader />}>
                         <CategoryCard category={subCategory}/>

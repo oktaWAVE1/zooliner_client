@@ -16,3 +16,10 @@ export const setRole = async ({userId, role}) => {
         return data
     }
 }
+
+export const setEmailActivation = async ({userId, isActivated}) => {
+    if(window.confirm('Точно желаете изменить активацию email?')) {
+        const {data} = await $authHost.patch('api/user/activate_email', {userId, isActivated})
+        return data
+    }
+}

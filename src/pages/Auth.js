@@ -4,7 +4,7 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {Link, useLocation} from "react-router-dom";
 import MyButton from "../UI/MyButton/MyButton";
-import {login, registration} from "../http/userAPI";
+import {login, registration, userResendActivationLink} from "../http/userAPI";
 import {validate} from "email-validator";
 import {Helmet} from "react-helmet";
 import Loader from "../UI/Loader/Loader";
@@ -18,6 +18,7 @@ const Auth = observer(() => {
     const [personalData, setPersonalData] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false)
     const [telephoneToggle, setTelephoneToggle] = useState(false);
+    const [resendLink, setResendLink] = useState(false);
     const [currentUser, setCurrentUser] = useState({
         name: '', email: '', telephone: '', password: '', passwordConfirm: ''
     })
@@ -25,6 +26,13 @@ const Auth = observer(() => {
 
     const location = useLocation()
     const isLogin = location.pathname === "/login"
+    const resendActivationLink = async() =>{
+        setLoading(true)
+        await userResendActivationLink(currentUser.email).then(data => {
+            setResendLink(false)
+            setAlertMessage({message: data, show: true, variant: 'success'})
+        }).finally(() => setLoading(false))
+    }
     const doAuth = async (event) => {
         event.preventDefault();
         try {
@@ -58,7 +66,17 @@ const Auth = observer(() => {
             }
 
     } catch (e) {
-            setAlertMessage({message: e.response.data.message, show: true, variant: 'danger'})
+            console.log(e.response.status)
+            if(e.response.status===423){
+                setResendLink(true)
+                setAlertMessage(
+                    {
+                        message:e.response.data.message,
+                        show: true,
+                        variant: 'danger'})
+            } else {
+                setAlertMessage({message: e.response.data.message, show: true, variant: 'danger'})
+            }
     }
     }
     if (loading){
@@ -76,6 +94,7 @@ const Auth = observer(() => {
                             <p className={'mb-1'}>
                                 {alertMessage.message}
                             </p>
+                            {resendLink && <p className="pointer mb-0 pb-0" style={{color: "blueviolet"}} onClick={() => resendActivationLink()}>Запросить новую ссылку активации</p>}
                         </Alert>
                     }
                     {isLogin &&

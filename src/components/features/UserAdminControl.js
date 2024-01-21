@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {Accordion, Form} from "react-bootstrap";
 import MyButton from "../../UI/MyButton/MyButton";
-import {postBonus, setRole} from "../../http/admin/userAdminAPI";
+import {postBonus, setEmailActivation, setRole} from "../../http/admin/userAdminAPI";
 
 const UserAdminControl = ({currentUser, handleUpdate}) => {
     const [bonus, setBonus] = useState({qty: 0, comment: ''});
-    const [showAccordion, setShowAccordion] = useState({bonus: '0', role: '0'});
+    const [showAccordion, setShowAccordion] = useState({bonus: '0', role: '0', activated: '0'});
     const handleBonusCorrect = async (e) => {
         e.preventDefault()
         await postBonus({
@@ -18,8 +18,12 @@ const UserAdminControl = ({currentUser, handleUpdate}) => {
     }
     const handleRoleUpdate = async(e) =>{
         e.preventDefault()
-        console.log(e.target.value)
         await setRole({userId: currentUser.id, role: e.target.value}).then(() => handleUpdate(currentUser.id))
+    }
+
+    const handleEmailActivatedUpdate = async(e) =>{
+        e.preventDefault()
+        await setEmailActivation({userId: currentUser.id, isActivated: !currentUser.isActivated}).then(() => handleUpdate(currentUser.id))
     }
 
     return (
@@ -61,6 +65,17 @@ const UserAdminControl = ({currentUser, handleUpdate}) => {
                                 </Form.Select>
                             </Form.Label>
 
+                        </Form>
+
+                    </Accordion.Body>
+                </Accordion.Item>
+            </Accordion>
+            <Accordion activeKey={showAccordion.activationLink} className="userRoleAccordion mt-2">
+                <Accordion.Item eventKey="1">
+                    <Accordion.Header onClick={() => setShowAccordion(showAccordion.activated==='1' ? {...showAccordion, activated: '0'} : {...showAccordion, activated: '1'})}><div className="text-center w-100">Активировать почту</div></Accordion.Header>
+                    <Accordion.Body>
+                        <Form id="UserEmailActivationForm">
+                            <Form.Switch label="Активация почты" checked={currentUser.isActivated} onChange={e => handleEmailActivatedUpdate(e)} />
                         </Form>
 
                     </Accordion.Body>

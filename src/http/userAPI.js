@@ -54,3 +54,8 @@ export const userResetPass = async(activationLink, password) => {
     const {data} = await $host.post('api/user/reset/apply', {activationLink, password}, {withCredentials: true})
     return data
 }
+
+export const userResendActivationLink = async (email) => {
+    const {data} = await $host.post('api/user/activate', {email})
+    return data
+}

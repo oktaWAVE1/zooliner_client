@@ -48,7 +48,16 @@ const ResetPass = () => {
 
                 <Card>
                     <h1>Восстановление пароля:</h1>
+
                 <Form id="ResetPassForm">
+                    {alertMessage.show &&
+                        <Alert className='mt-0' variant={alertMessage.variant} onClose={() => setAlertMessage({show: false})} dismissible>
+                            <Alert.Heading>{alertMessage.title}</Alert.Heading>
+                            <p className="mb-0 px-0">
+                                {alertMessage.message}
+                            </p>
+                        </Alert>
+                    }
                     {!activationLink &&
                         <div>
                         <Form.Control
@@ -84,14 +93,7 @@ const ResetPass = () => {
                         </div>
                     }
                 </Form>
-                    {alertMessage.show &&
-                        <Alert className='mt-2' variant={alertMessage.variant} onClose={() => setAlertMessage({show: false})} dismissible>
-                            <Alert.Heading>{alertMessage.title}</Alert.Heading>
-                            <p>
-                                {alertMessage.message}
-                            </p>
-                        </Alert>
-                    }
+
                 </Card>
 
             </Container>

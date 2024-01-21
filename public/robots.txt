@@ -1,3 +1,10 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /login
+Disallow: /reg
+Disallow: /basket
+Disallow: /category/-1
+Disallow: /server
+sitemap: https://demo.zooliner.ru/server/sitemap.xml
+
+
+

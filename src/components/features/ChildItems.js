@@ -4,7 +4,7 @@ import PetBonus from "../../UI/svgs/petBonus";
 
 const ChildItems = ({chooseChild, chosenProduct, parentProduct, preview, ...props}) => {
     return (
-        <div className="desc" >
+        <div className="desc mb-2" >
 
             <div className="children">
                 {parentProduct?.children?.length>0 &&

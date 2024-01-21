@@ -59,7 +59,11 @@ export const useProductsSortSearch = (products, searchQuery, filters, sort) => {
             filteredProducts = [...filteredProducts].filter(p => Number(p.brandId)===Number(filters.brandId))
         }
         if (filters?.categoryId!==0){
-            filteredProducts = [...filteredProducts].filter(p => p.categories.includes(filters.categoryId))
+            if(filters?.categoryId===-1){
+                filteredProducts = [...filteredProducts].filter(p => p.categories.length===0)
+            } else {
+                filteredProducts = [...filteredProducts].filter(p => p.categories.includes(filters.categoryId))
+            }
         }
         if(searchQuery){
             return (filteredProducts.filter(p => (p?.title && p.title.toLowerCase().includes(searchQuery.toLowerCase()))

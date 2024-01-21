@@ -1185,8 +1185,15 @@ a {
 }
 
 .ProductCard .AddToCartButton svg, .ProductPage .AddToCartButton svg{
+    fill: var(--main-theme-active-color);
+    transition: all 200ms linear;
+}
+
+.ProductCard .AddToCartButton:hover svg, .ProductPage .AddToCartButton:hover svg{
     fill: #FFF;
 }
+
+
 
 .ProductCard>div{
     display: flex;
@@ -1719,4 +1726,23 @@ a {
     flex: 1;
     justify-content: center;
     color: #ffffff;
+}
+
+#BasketBlock.shake {
+    animation: shakeCart .5s ease-in-out forwards;
+}
+
+@keyframes shakeCart {
+    25% {
+        transform:translateX(6px)
+    }
+    50% {
+        transform:translateX(-4px);
+    }
+    75% {
+        transform:translateX(2px);
+    }
+    100% {
+        transform:translateX(0);
+    }
 }

@@ -65,6 +65,7 @@ const AdminProductFilter = ({setFilters, filters, sort, setSort, setUpdate}) => 
                 <span className="px-2">Категория</span>
                 <Form.Select onChange={(e) => setFilters({...filters, categoryId: Number(e.target.value)})} value={filters.categoryId}>
                     <option value={0}>Все</option>
+                    <option value={-1}>Нет категорий</option>
                     {categories?.length> 0 &&
                         categories.map(c =>
                             <option key={c.id} value={c.id}>{c?.parent?.name && `${c.parent.name} > `}{c.name}</option>

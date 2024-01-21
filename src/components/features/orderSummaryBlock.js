@@ -30,6 +30,7 @@ const OrderSummaryBlock = observer(({basket, order, currentDeliveryMethod, curre
         basket.setBasketItems([])
         navigate('/success')
         loading.setLoading(false)
+        window.ym(40042180,'reachGoal','placeOrder')
         await placeOrder({
             orderId: order.id,
             paymentMethodId: currentPaymentMethod.id,

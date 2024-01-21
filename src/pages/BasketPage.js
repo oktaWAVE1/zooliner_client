@@ -15,6 +15,7 @@ import BasketTotal from "../components/features/BasketTotal";
 import {Helmet} from "react-helmet";
 import {useNavigate} from "react-router-dom";
 import {createOrderAnuthorized, createOrderAuth} from "../http/orderAPI";
+import {ym} from "react-ym";
 
 const BasketPage = observer(() => {
     const [localBasket, setLocalBasket, clearLocalBasket] = useLocalStorage('basket', [])
@@ -22,8 +23,12 @@ const BasketPage = observer(() => {
 
     const {user, basket} = useContext(Context)
     useEffect(() => {
+        console.log(user.isAuth)
         if (user.isAuth) {
-            fetchBasket(user.user.id).then(data => basket.setBasketItems(data))
+            fetchBasket(user.user.id).then(data => {
+                console.log(data)
+                basket.setBasketItems(data)
+            })
         } else if (localBasket?.length>0) {
             fetchBasketUnauthorized(JSON.stringify(localBasket)).then(data => basket.setBasketItems(data)
             )
@@ -45,6 +50,7 @@ const BasketPage = observer(() => {
     }
 
     const createOrder = () => {
+        window.ym(40042180,'reachGoal','makeOrder')
         if(user.isAuth){
             createOrderAuth(user.user.id).then(data => {
                 navigate('/order_confirmation/'+data.data)

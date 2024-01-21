@@ -44,6 +44,13 @@ const CategoryPage = observer(() => {
                 return
             }
         }
+        if(document){
+            const cart = document.getElementById("BasketBlock")
+            cart.classList.add('shake')
+            setTimeout(()=> {
+                cart.classList.remove('shake')
+            },400)
+        }
     }
     const setData = (data) => {
         products.setProducts(data)

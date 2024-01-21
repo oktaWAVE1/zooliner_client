@@ -45,6 +45,13 @@ const ProductContent = observer(({product, setCurrentProduct, currentProduct}) =
                 setLocalBasket([...localBasket, {qty: qty, productId: productId}])
             }
         }
+        if(document){
+            const cart = document.getElementById("BasketBlock")
+            cart.classList.add('shake')
+            setTimeout(()=> {
+                cart.classList.remove('shake')
+            },400)
+        }
     }
     return (
         <>

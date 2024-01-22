@@ -16,6 +16,8 @@ const UserAdminControl = ({currentUser, handleUpdate}) => {
         setBonus({qty: 0, comment: ''})
         setShowAccordion({...showAccordion, bonus: '0'})
     }
+    const lastVisitDate = new Date(currentUser?.lastVisitDate)
+    const lastVisitDateString = lastVisitDate.toLocaleDateString()
     const handleRoleUpdate = async(e) =>{
         e.preventDefault()
         await setRole({userId: currentUser.id, role: e.target.value}).then(() => handleUpdate(currentUser.id))
@@ -29,6 +31,7 @@ const UserAdminControl = ({currentUser, handleUpdate}) => {
     return (
         <section>
             <h3>Информация:</h3>
+            <div>Последний визит: {lastVisitDateString}</div>
             <div>{currentUser?.telephone}</div>
             <div>{currentUser?.address}</div>
             <div>{currentUser?.email}</div>

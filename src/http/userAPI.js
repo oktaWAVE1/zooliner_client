@@ -26,7 +26,7 @@ export const fetchUsers = async (limit=5, offset=0) => {
 
 
 export const modifyUser = async (email, password, name, telephone, address, id, newPassword) => {
-    const {data} = await $authHost.put('api/user/modify', {email, password, name, telephone, address, id, newPassword})
+    const data = await $authHost.put('api/user/modify', {email, password, name, telephone, address, id, newPassword})
     return data
 }
 

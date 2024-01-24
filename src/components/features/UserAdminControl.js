@@ -31,7 +31,7 @@ const UserAdminControl = ({currentUser, handleUpdate}) => {
     return (
         <section>
             <h3>Информация:</h3>
-            <div>Последний визит: {lastVisitDateString}</div>
+            <div>Последний визит: fi{lastVisitDateString}</div>
             <div>{currentUser?.telephone}</div>
             <div>{currentUser?.address}</div>
             <div>{currentUser?.email}</div>

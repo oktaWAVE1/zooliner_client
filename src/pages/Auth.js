@@ -41,7 +41,10 @@ const Auth = observer(() => {
                     await login(
                         {telephone: currentUser.telephone,
                         email:currentUser.email,
-                        password: currentUser.password}).then(data => user.setUser(data))
+                        password: currentUser.password}).then(data =>
+                    {
+                        user.setUser(data)
+                    })
                 if(user.user.role) {
                     user.setIsAuth(true)
                 }
@@ -66,7 +69,6 @@ const Auth = observer(() => {
             }
 
     } catch (e) {
-            console.log(e.response.status)
             if(e.response.status===423){
                 setResendLink(true)
                 setAlertMessage(

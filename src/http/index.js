@@ -31,6 +31,8 @@ $authHost.interceptors.response.use((config) => {
         } catch (e) {
             console.log("Не авторизован")
         }
+    } else {
+        return error.response
     }
 })
 

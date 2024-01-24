@@ -22,7 +22,20 @@ const UserEditForm = () => {
                     currentUser.address,
                     currentUser.id,
                     pass.newPassword
-                ).then(res => setAlertMessage({message: 'Изменения успешно сохранены!', show: true, variant: 'success'})).finally(setPass({
+                )
+                    .then((res) => {
+                        console.log(res)
+                        if(res?.status===200){
+                            setAlertMessage({message: res?.data, show: true, variant: 'success'})
+                        } else {
+                            setAlertMessage({message: res?.data?.message, show: true, variant: 'danger'})
+                        }
+                })
+                    .catch(err => {
+                    console.log(err)
+                    setAlertMessage({message: err, show: true, variant: 'danger'})
+                })
+                    .finally(setPass({
                     password: '',
                     newPassword: '',
                     confirmNewPassword: ''
@@ -33,11 +46,15 @@ const UserEditForm = () => {
             }
 
         } catch (e) {
-            setAlertMessage({message: e.response.data.message, show: true, variant: 'danger'})
+            console.log(e)
+            setAlertMessage({message: e?.response?.data?.message, show: true, variant: 'danger'})
         }
     }
     useEffect(() => {
-        getUser(user.user.id).then(data => setCurrentUser(data))
+        getUser(user.user.id).then(data => {
+            setCurrentUser(data)
+            console.log(data)
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (
@@ -88,18 +105,22 @@ const UserEditForm = () => {
                                 </Accordion.Body>
                             </Accordion.Item>
                         </Accordion>
-                        <label className="p-1" >Введите старый пароль для потверждения изменений!</label>
-                        <Form.Control
-                            type='password'
-                            placeholder='Обязательно'
-                            value={pass.password}
-                            onChange={(e) => setPass({...pass, password: e.target.value})}
-                        />
+                        {!currentUser?.vkId &&
+                            <div>
+                                <label className="p-1" >Введите старый пароль для потверждения изменений!</label>
+                                <Form.Control
+                                    type='password'
+                                    placeholder='Обязательно'
+                                    value={pass.password}
+                                    onChange={(e) => setPass({...pass, password: e.target.value})}
+                                />
+                            </div>
+                        }
 
                         {alertMessage.show &&
                             <Alert className='mt-2 mb-2' variant={alertMessage.variant} onClose={() => setAlertMessage({show: false})} dismissible>
                                 <Alert.Heading>{alertMessage.title}</Alert.Heading>
-                                <p>
+                                <p className={"mb-1"}>
                                     {alertMessage.message}
                                 </p>
                             </Alert>
@@ -107,7 +128,7 @@ const UserEditForm = () => {
                         <div className='mt-2'>
                             <MyButton style={{width: "100%"}}
                                       title={!pass.password ? "Введите пароль" : pass.newPassword!==pass.confirmNewPassword ? "Пароли не совпадают" : ''}
-                                      disabled={!pass.password || pass.newPassword!==pass.confirmNewPassword}
+                                      disabled={!(currentUser.vkId || pass.password) || pass.newPassword!==pass.confirmNewPassword}
                                       onClick={(e) => updateUser(e)}
                             >Сохранить изменения</MyButton>
                         </div>

@@ -338,7 +338,19 @@ a {
     color: forestgreen;
 }
 
+.attributeList button {
+    background: white;
+    border: solid 1px var(--main-theme-active-color);
+    border-radius: 5px;
+    padding: 0 20px;
+    color: var(--main-theme-active-color);
+    transition: all linear 200ms;
+}
 
+.attributeList button:hover {
+    background: var(--main-theme-active-color);
+    color: white;
+}
 
 @media (max-width: 900px) {
     .brandFilter button {
@@ -780,6 +792,9 @@ a {
     .ProductCard{
         margin-bottom: 0;
     }
+}
+#adminProductModalForm .ProductCard {
+    max-width: 300px;
 }
 
 .ProductCard img {

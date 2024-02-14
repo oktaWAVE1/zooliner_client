@@ -5,7 +5,7 @@ import ChildItems from "./ChildItems";
 import {Link} from "react-router-dom";
 import AddShoppingCart from "../../UI/svgs/addShoppingCart";
 
-const ProductCard = ({product, addToCart, preview}) => {
+const   ProductCard = ({product, addToCart, preview}) => {
     const [currentProduct, setCurrentProduct] = useState({});
     useEffect(() => {
 

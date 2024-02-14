@@ -13,7 +13,7 @@ const ChildItems = ({chooseChild, chosenProduct, parentProduct, preview, ...prop
                         <MyButton key={child.id} onClick={(e) => {
                             e.preventDefault()
                             chooseChild(child.id)
-                        }} classes={child.id === chosenProduct.id ? "active" : ""}>{child.title}</MyButton>
+                        }} classes={child?.id === chosenProduct?.id ? "active" : ""}>{child.title}</MyButton>
                     )
                 }
             </div>

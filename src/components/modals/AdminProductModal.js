@@ -36,7 +36,6 @@ const AdminProductModal = ({show, onHide, productId}) => {
         fetchCurrentProduct(productId).then(data => {
             setCurrentProduct(data)
             setProduct(data)
-            console.log(data)
         })
 
     }, 100, [productId, update])

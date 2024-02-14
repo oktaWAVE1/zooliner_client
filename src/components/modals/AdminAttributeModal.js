@@ -117,7 +117,7 @@ const AdminAttributeModal = ({onHide, show}) => {
                                                 <Accordion.Header><div style={{color: "white", textAlign: "center", width: "100%"}}>Добавить атрибут</div></Accordion.Header>
                                                 <Accordion.Body>
                                                     <Form id='AdminBrandForm' className="d-flex flex-column justify-content-center">
-                                                        <Form.Control placeholder="Название аттрибута" className="mb-2" type='text' value={attribute} onChange={e => setAttribute( e.target.value)} />
+                                                        <Form.Control placeholder="Название атрибута" className="mb-2" type='text' value={attribute} onChange={e => setAttribute( e.target.value)} />
                                                         <MyButton disabled={attribute.length<1} onClick={e => addAttribute(e, c.id)}>ДОБАВИТЬ</MyButton>
                                                     </Form>
                                                 </Accordion.Body>

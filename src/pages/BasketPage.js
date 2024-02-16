@@ -39,10 +39,12 @@ const BasketPage = observer(() => {
     }, [user.isAuth, localBasket, user.user.id]);
 
 
-    const clearBasket = () => {
+    const clearBasket = async () => {
         if(user.isAuth){
-            clearBasketDB(user.user.id)
-            fetchBasket(user.user.id).then(data => basket.setBasketItems(data))
+            await clearBasketDB(user.user.id).then(async () =>
+            await fetchBasket(user.user.id).then(data => basket.setBasketItems(data))
+            )
+
         } else {
             clearLocalBasket()
             basket.setBasketItems([])

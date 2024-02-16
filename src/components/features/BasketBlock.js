@@ -26,7 +26,8 @@ const BasketBlock = observer(() => {
                     <div>
                         <span>
                             <ShoppingCart />
-                        </span>{basket.basketItems.length>0 ? <span className="basketItems">{basket.basketItems.length}</span> : ""}</div>
+                        </span>{basket.basketItems.length>0 ? <span className="basketItems">{basket.basketItems.length}</span> : ""}
+                    </div>
 
 
                 </div>

@@ -54,7 +54,7 @@ const ModalUserBonus = observer(({show, onHide, logs, currentUser, handleUpdate}
                 {currentUser && user.user.role === "ADMIN" &&
                 <UserAdminControl handleUpdate={handleUpdate} currentUser={currentUser} />
                 }
-                {logs?.length>0 &&
+                {logs?.length>0 ?
                     <section>
                         <table className="table">
                             <thead className="text-center">
@@ -74,7 +74,8 @@ const ModalUserBonus = observer(({show, onHide, logs, currentUser, handleUpdate}
                                  )}
                             </tbody>
                         </table>
-                    </section>
+                    </section> :
+                    <h3 className='w-100 text-center'>История начисления бонусов пока пустая...</h3>
 
                 }
                 {logs?.length!==currentLogs.length &&

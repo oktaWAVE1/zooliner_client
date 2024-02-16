@@ -1380,6 +1380,20 @@ a {
     gap: 5px;
 }
 
+.navigationBasketCounter {
+    position: absolute;
+    left:15px;
+    top: 15px;
+    border-radius: 4px;
+    background-color: var(--main-theme-active-color);
+    width: 15px;
+    height: 15px;
+    font-size: 0.7rem;
+    text-align: center;
+    vertical-align: center;
+    font-family: Exo2;
+}
+
 .BasketContainer {
     font-weight: 800;
 }

@@ -16,7 +16,7 @@ import Admin from "../../UI/svgs/admin";
 
 
 const MyNavbar = observer(() => {
-    const {user, catalogue, loading} = useContext(Context)
+    const {user, catalogue, loading, basket} = useContext(Context)
     const navigate = useNavigate()
     const [expanded, setExpanded] = useState(false);
     const logout = () => {
@@ -100,19 +100,27 @@ const MyNavbar = observer(() => {
                                             <NavLink onClick={hideMobileMenu} className={cl.navbarItem}
                                                      to='/admin' title="Админка">
                                                 {isMobile ? "Админка" :
-                                                    <Admin />
+                                                    <div>
+                                                        <Admin />
+                                                    </div>
                                                 }
                                             </NavLink>
 
                                 }
                                 <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/basket' alt="Корзина" title="Корзина">
                                     {isMobile ? "Корзина" :
-                                        <ShoppingCart />
+                                        <div className="position-relative">
+                                            <ShoppingCart />
+                                            <span className={basket.basketItems?.length > 0 && 'navigationBasketCounter'}>
+                                                {basket.basketItems?.length > 0 && basket.basketItems?.length}</span>
+                                        </div>
                                     }
                                 </NavLink>
                                 <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/user' title='Личный кабинет'>
                                     {isMobile ? "Личный кабинет" :
-                                        <Person />
+                                        <div>
+                                            <Person />
+                                        </div>
                                     }
                                 </NavLink>
                                 <div onClick={() => logout()} className={[cl.logout_btn, cl.navbarItem].join(" ")}>
@@ -130,13 +138,18 @@ const MyNavbar = observer(() => {
                                 <Nav className={cl.logoButtons}>
                                     <NavLink className={cl.navbarItem} onClick={hideMobileMenu} to='/basket' alt="Корзина" title="Корзина">
                                         {isMobile ? "Корзина" :
-
-                                            <ShoppingCart />
+                                            <div className="position-relative">
+                                                <ShoppingCart />
+                                                <span className={basket.basketItems?.length > 0 && 'navigationBasketCounter'}>
+                                                {basket.basketItems?.length > 0 && basket.basketItems?.length}</span>
+                                            </div>
                                         }
                                     </NavLink>
                                     <NavLink onClick={hideMobileMenu} className={cl.navbarItem} to='/login' alt="Войти" title="Войти">
                                         {isMobile ? "Войти" :
-                                            <Login style={{color: "#FFF"}} />
+                                            <div>
+                                                <Login style={{color: "#FFF"}} />
+                                            </div>
                                         }
                                     </NavLink>
 

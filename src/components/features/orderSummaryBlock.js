@@ -52,7 +52,7 @@ const OrderSummaryBlock = observer(({basket, order, currentDeliveryMethod, curre
                 <Form id="SummaryBlockForm">
                     {user.isAuth &&
                         <div className="useBonusPoints">
-                            <span>Бонусы: </span><Form.Control onChange={e => userBonusPoints(e)} type='number' value={bonusPoints} placeholder={`Использовать Баллы (доступно: ${Math.floor(user.bonus.currentQty)})`} />
+                            <span>Бонусы: </span><Form.Control onChange={e => userBonusPoints(e)} type='number' value={bonusPoints} placeholder={`Использовать баллы (доступно: ${Math.floor(user.bonus.currentQty)})`} />
                         </div>
 
                     }

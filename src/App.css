@@ -275,6 +275,7 @@ a {
     gap: 4px;
     max-width: 100%;
     align-items: center;
+    width: 100%;
 }
 #Content .ProductCard {
     height: 100%;
@@ -756,6 +757,36 @@ a {
     text-decoration: none;
 }
 
+.CategoryCard {
+    padding: 10px 0px;
+    height: 100%;
+}
+.CategoryCard .container {
+    height: 100%;
+}
+
+.CategoryCard .container .content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.CategoryCard .categoryImg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.CategoryCard .categoryImg img {
+    width: 200px;
+    height: 140px;
+    min-width: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
 .CategoryCard .container a {
     display: flex;
     flex-direction: column;
@@ -1126,12 +1157,13 @@ a {
         margin: 0 0;
         width: 100%;
         max-width: 100%;
-        padding: 0 10px 0 10px;
+        padding: 0 0px 0 0px;
         box-sizing: border-box;
     }
     #Content {
         gap: 6px;
         max-width: 100%;
+        padding: 0 6px;
     }
 
 

@@ -16,6 +16,7 @@ import AdminProductAttributes from "../features/Admin/AdminProductAttributes";
 import AdminProductModalChildren from "../features/Admin/AdminProductModalChildren";
 import Delete from "../../UI/svgs/delete";
 import Master from "../../UI/svgs/master";
+import Loader from "../../UI/Loader/Loader";
 
 const AdminProductModal = ({show, onHide, productId}) => {
 
@@ -24,6 +25,7 @@ const AdminProductModal = ({show, onHide, productId}) => {
     const [currentProduct, setCurrentProduct] = useState({});
     const [update, setUpdate] = useState(0);
     const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         fetchAllCategories().then(data => setCategories([...data].filter(c => !c.children.length>0)
@@ -33,10 +35,11 @@ const AdminProductModal = ({show, onHide, productId}) => {
 
 
     useDebounce(() => {
+        setLoading(true)
         fetchCurrentProduct(productId).then(data => {
             setCurrentProduct(data)
             setProduct(data)
-        })
+        }).finally(() => setLoading(false))
 
     }, 100, [productId, update])
 
@@ -81,20 +84,23 @@ const AdminProductModal = ({show, onHide, productId}) => {
     }
 
     const addImg = async (e) => {
-        console.log(e.target.files)
+
         if (e.target.files.length>0){
+            setLoading(true)
             for (let i =0; i< e.target.files.length; i++){
                 let formData = new FormData()
                 formData.append("productId", `${productId}`)
                 formData.append('file', e.target.files[i])
                 if (i===e.target.files.length-1){
-                    await addProductImage(formData).then(() => {
-                        setUpdate(prev => prev+1)
-                    })
+                    await addProductImage(formData)
                 } else {
                     await addProductImage(formData)
                 }
             }
+            setTimeout(() => {
+                setLoading(false)
+                setUpdate(prev => prev + 1)
+            }, 500)
         }
     }
 
@@ -117,6 +123,8 @@ const AdminProductModal = ({show, onHide, productId}) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                {loading ? <Loader /> :
+
                 <Form id="adminProductModalForm" style={{color: "#777"}}>
                     <div className="d-flex flex-wrap justify-content-between">
                         <div className='info'>
@@ -217,6 +225,7 @@ const AdminProductModal = ({show, onHide, productId}) => {
                     </Accordion>
 
                 </Form>
+                }
 
                 {product?.children?.length>0 &&
                     <AdminProductModalChildren product={product} />

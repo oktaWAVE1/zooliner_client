@@ -51,7 +51,7 @@ const MyNavbar = observer(() => {
                         <img alt='logo' src={process.env.REACT_APP_API_URL+'/images/logo_main_mini.webp'} className={cl.navbarlogo}/>
                     </Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav"  ref={togglerRef} onClick={() => setExpanded(expanded ? false : "expanded")} />
-                    <Navbar.Collapse id="responsive-navbar-nav" ref={menuRef}>
+                    <Navbar.Collapse id="responsive-navbar-nav" className=" navbar-nav-scroll" ref={menuRef}>
                         <Nav className='mobileCatalogue'>
                             <Accordion>
                                 <Accordion.Item eventKey={'catalogue'}>

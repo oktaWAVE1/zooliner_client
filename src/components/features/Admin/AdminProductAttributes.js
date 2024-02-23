@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Accordion, Form} from "react-bootstrap";
-import MyButton from "../../../UI/MyButton/MyButton";
 import {
     addProductAttribute,
     delProductAttribute,
@@ -8,7 +7,7 @@ import {
 } from "../../../http/admin/productAdminAPI";
 import Delete from "../../../UI/svgs/delete";
 
-const AdminProductAttributes = ({setUpdate, product, productId}) => {
+const AdminProductAttributes = ({product, productId, setUpdate}) => {
     const [newAttributeCategoryId, setNewAttributeCategoryId] = useState(0);
     const [newAttributeId, setNewAttributeId] = useState(0);
     const [attributeCategories, setAttributeCategories] = useState([]);

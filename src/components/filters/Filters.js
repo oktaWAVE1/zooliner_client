@@ -82,7 +82,9 @@ const Filters = observer(() => {
         <Row className="Filters">
 
                 <Accordion alwaysOpen defaultActiveKey={openFilters}>
-                    {products?.products?.attributes && Object.keys(products?.products?.attributes)?.length>1 &&
+                    {products?.products?.attributes
+                        && Object.keys(products?.products?.attributes)?.length>0
+                        &&
                         <Accordion.Item eventKey="1">
                             <Accordion.Header>Фильтры</Accordion.Header>
                             <Accordion.Body>

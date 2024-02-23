@@ -123,7 +123,7 @@ const AdminProductModal = ({show, onHide, productId}) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {loading ? <Loader /> :
+
 
                 <Form id="adminProductModalForm" style={{color: "#777"}}>
                     <div className="d-flex flex-wrap justify-content-between">
@@ -225,7 +225,7 @@ const AdminProductModal = ({show, onHide, productId}) => {
                     </Accordion>
 
                 </Form>
-                }
+
 
                 {product?.children?.length>0 &&
                     <AdminProductModalChildren product={product} />
@@ -233,38 +233,43 @@ const AdminProductModal = ({show, onHide, productId}) => {
                 <div>
                     <MyButton classes="w-100 my-2" onClick={e => handleUpdateChanges(e)}>СОХРАНИТЬ ИЗМЕНЕНИЯ</MyButton>
                 </div>
-                <div>
+                {loading ? <Loader/> :
+                    <div>
                         <h4>Изображения:</h4>
-                <Form id='AddImgForm'>
-                    <Form.Control title={"Добавить изображение"} accept={"image/*"} type="file" className="mb-2" multiple={true} onChange={(e) => addImg(e)} placeholder="Добавить изображение" />
-                </Form>
+                        <Form id='AddImgForm'>
+                            <Form.Control title={"Добавить изображение"} accept={"image/*"} type="file" className="mb-2"
+                                          multiple={true} onChange={(e) => addImg(e)}
+                                          placeholder="Добавить изображение"/>
+                        </Form>
 
-                {product?.product_images?.length>0 &&
-                    <div className='images d-flex gap-2 flex-wrap'>
-                        {product.product_images.map(pi =>
-                            <div key={pi.id}>
-                                <img alt="product_img" style={{boxShadow: "1px 1px 4px 4px rgba(0, 0, 0, 0.1)"}} className='item' loading="lazy"
-                                    src={`${process.env.REACT_APP_API_URL}/images/products/${pi.img}`}/>
-                                <span
-                                    title="Сделать основной"
-                                    onClick={() => setMasterImg(pi.id)}
-                                    className="pointer master_btn">
-                                    <Master />
+                        {product?.product_images?.length > 0 &&
+                            <div className='images d-flex gap-2 flex-wrap'>
+                                {product.product_images.map(pi =>
+                                        <div key={pi.id}>
+                                            <img alt="product_img" style={{boxShadow: "1px 1px 4px 4px rgba(0, 0, 0, 0.1)"}}
+                                                 className='item' loading="lazy"
+                                                 src={`${process.env.REACT_APP_API_URL}/images/products/${pi.img}`}/>
+                                            <span
+                                                title="Сделать основной"
+                                                onClick={() => setMasterImg(pi.id)}
+                                                className="pointer master_btn">
+                                    <Master/>
                                 </span>
-                                <span
-                                    title="Удалить"
-                                    onClick={() => delImg(pi.id)}
-                                    className="pointer del_btn">
-                                   <Delete />
+                                            <span
+                                                title="Удалить"
+                                                onClick={() => delImg(pi.id)}
+                                                className="pointer del_btn">
+                                   <Delete/>
                                 </span>
 
+                                        </div>
+                                )
+                                }
                             </div>
-                        )
+
                         }
                     </div>
-
                 }
-                </div>
             </Modal.Body>
             <Modal.Footer>
                 <MyButton onClick={onHide}>Закрыть</MyButton>

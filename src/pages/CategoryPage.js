@@ -58,6 +58,7 @@ const CategoryPage = observer(() => {
         products.setAttributes(data.attributes)
         filters.setAttributeFilters({})
         filters.setBrandFilters([])
+        console.log(data.attributes)
         products.setCurrentAttributes([])
         products.setCurrentBrands([])
         if(products?.products?.products?.length>0){

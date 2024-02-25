@@ -4,8 +4,15 @@ Disallow: /reg
 Disallow: /basket
 Disallow: /category/-1
 Allow: /server/sitemap.xml
-Disallow: /server
 sitemap: https://zooliner.ru/server/sitemap.xml
+
+User-agent: Yandex
+Clean-param: utm
+Clean-param: brand
+Clean-param: attribute
+Clean-param: query
+
+
 
 
 

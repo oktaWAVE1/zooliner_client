@@ -13,7 +13,7 @@ const ProductImageCarousel = ({product}) => {
                         </Carousel.Item>
                     ) :
                     <Carousel.Item>
-                        <img width={200} height={200} className='noImage' alt='noImage'
+                        <img itemProp="image" width={200} height={200} className='noImage' alt='noImage'
                              src={`${process.env.REACT_APP_API_URL}/images/products/no_image.webp`}
                         />
                     </Carousel.Item>

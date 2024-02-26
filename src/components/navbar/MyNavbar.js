@@ -111,7 +111,7 @@ const MyNavbar = observer(() => {
                                     {isMobile ? "Корзина" :
                                         <div className="position-relative">
                                             <ShoppingCart />
-                                            <span className={basket.basketItems?.length > 0 && 'navigationBasketCounter'}>
+                                            <span className={basket.basketItems?.length > 0 ? 'navigationBasketCounter' : ''}>
                                                 {basket.basketItems?.length > 0 && basket.basketItems?.length}</span>
                                         </div>
                                     }
@@ -140,7 +140,7 @@ const MyNavbar = observer(() => {
                                         {isMobile ? "Корзина" :
                                             <div className="position-relative">
                                                 <ShoppingCart />
-                                                <span className={basket.basketItems?.length > 0 && 'navigationBasketCounter'}>
+                                                <span className={basket.basketItems?.length > 0 ? 'navigationBasketCounter' : ""}>
                                                 {basket.basketItems?.length > 0 && basket.basketItems?.length}</span>
                                             </div>
                                         }

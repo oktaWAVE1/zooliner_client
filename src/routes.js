@@ -18,6 +18,7 @@ import Contacts from "./pages/Contacts";
 import PersonalDataProcessing from "./pages/PersonalDataProcessing";
 import Check from "./pages/Check";
 import FailedAuthPage from "./pages/FailedAuthPage";
+import StocksPage from "./pages/StocksPage";
 
 
 export const publicRoutes = [
@@ -54,7 +55,8 @@ export const authRoutes = [
     {path: '/basket', element: <BasketPage/>},
     {path: '/order_confirmation/:accessLink', element: <OrderConfirmationPage/>},
     {path: '/success', element: <SuccessPage />},
-    {path: '/personal_data', element: <PersonalDataProcessing/>}
+    {path: '/personal_data', element: <PersonalDataProcessing/>},
+
 
 
 ]
@@ -64,4 +66,5 @@ export const adminRoutes = [
     {path: '/admin/orders', element: <AdminOrders />},
     {path: '/admin/users', element: <AdminUsers />},
     {path: '/admin/products', element: <AdminProductPage />},
+    {path: '/admin/stocks', element: <StocksPage />}
 ]

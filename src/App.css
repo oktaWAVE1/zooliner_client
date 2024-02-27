@@ -1648,6 +1648,14 @@ a {
     color: #FFFFFF;
 }
 
+.stockListItem {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr 1fr;
+    border-bottom: #777777 solid 1px;
+    align-items: center;
+    font-size: 0.9rem;
+    gap: 5px;
+}
 
 
 

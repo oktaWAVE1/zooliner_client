@@ -22,7 +22,7 @@ const Auth = observer(() => {
     const [currentUser, setCurrentUser] = useState({
         name: '', email: '', telephone: '', password: '', passwordConfirm: ''
     })
-    const [alertMessage, setAlertMessage] = useState({title: '', message: '', show: false, variant: 'danger'})
+    const [alertMessage, setAlertMessage] = useState({title: '', message: 'Аккаунты пользователей были перенесены со старого сайта, пароли сброшены. Пожалуйста, воспользуйтесь функцией восстановления пароля! Если возникнут проблемы, мы будем рады помочь Вам с восстановлением.', show: true, variant: 'warning'})
 
     const location = useLocation()
     const isLogin = location.pathname === "/login"

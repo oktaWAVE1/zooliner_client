@@ -1,13 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {fetchAllProductStocks} from "../../http/admin/remoteAdminAPI";
 import ModalPagination from "./Admin/ModalPagination";
 import useDebounce from "../../hooks/useDebounce";
 import {Form} from "react-bootstrap";
-import {useProductStockSearch} from "../../hooks/useProductStockSearch";
 import fuseSearchStocks from "../../utils/admin/fuseSearchStocks";
 
 const StocksList = () => {
-
     const [page, setPage] = useState(1);
     const [products, setProducts] = useState([]);
     const [query, setQuery] = useState('');
@@ -26,12 +24,10 @@ const StocksList = () => {
 
     useDebounce(() => {
         setPage(1)
-        console.log(searchedProducts)
         setCurrentProducts([...searchedProducts].slice(limit*(0), limit))
     }, 1000, [searchedProducts]);
 
     useDebounce(() => {
-        console.log(searchedProducts)
         setCurrentProducts([...searchedProducts].slice(limit*(page-1), limit*page))
     }, 200, [page, limit]);
     return (

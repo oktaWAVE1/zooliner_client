@@ -67,7 +67,7 @@ const ModalUserBonus = observer(({show, onHide, logs, currentUser, handleUpdate}
                             <tbody>
                                 {currentLogs.map(log =>
                                     <tr key={log.id}>
-                                        <td className="text-center">{dateTime(log.updatedAt)}</td>
+                                        <td className="text-center">{new Date(log.updatedAt).toLocaleDateString()}</td>
                                         <td className="text-center">{Number(log.qtyChanges).toFixed(2)}</td>
                                         <td >{log.description}</td>
                                     </tr>

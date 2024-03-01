@@ -30,7 +30,7 @@ const AppRouter = observer(() => {
                         <Route key={r.path} path={r.path} element={r.element}/>
                     )
                 }
-                <Route path="/*" element=<Navigate to='/page404' /> />
+                <Route path="/*" status={404} element=<Navigate to='/page404' /> />
 
             </Routes>
 

@@ -2,6 +2,7 @@ User-agent: *
 Disallow: /login
 Disallow: /reg
 Disallow: /basket
+Disallow: /reset_pass
 Disallow: /category/-1
 Allow: /server/sitemap.xml
 sitemap: https://zooliner.ru/server/xml/sitemap.xml
@@ -11,6 +12,11 @@ Clean-param: utm
 Clean-param: brand
 Clean-param: attribute
 Clean-param: query
+Disallow: /login
+Disallow: /reg
+Disallow: /basket
+Disallow: /reset_pass
+Disallow: /category/-1
 
 
 

@@ -1,4 +1,4 @@
-import React, {useContext, useState, Suspense, useLayoutEffect} from 'react';
+import React, {useContext, useState, Suspense, useLayoutEffect, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
 import {useParams, useSearchParams} from "react-router-dom";
 import {fetchCategoryProducts} from "../http/catalogueAPI";
@@ -9,6 +9,7 @@ import {useLocalStorage} from "../hooks/useStorage";
 import useDebounce from "../hooks/useDebounce";
 import Loader from "../UI/Loader/Loader";
 import {fetchSearchedPublishedProducts} from "../http/searchAPI";
+import Page404 from "./404/Page404";
 
 const Pages = React.lazy(() => import('../components/features/Pages'));
 const Filters = React.lazy(() => import('../components/filters/Filters'));
@@ -19,6 +20,7 @@ const Helmet = React.lazy(() => import('react-helmet'));
 
 const CategoryPage = observer(() => {
     const {products, filters, user, basket, loading} = useContext(Context)
+    const [failed, setFailed] = useState(false);
     const [searchParams] = useSearchParams()
     const query = (searchParams.get('query'))
     const [clicker, setClicker] = useState(0);
@@ -58,7 +60,6 @@ const CategoryPage = observer(() => {
         products.setAttributes(data.attributes)
         filters.setAttributeFilters({})
         filters.setBrandFilters([])
-        console.log(data.attributes)
         products.setCurrentAttributes([])
         products.setCurrentBrands([])
         if(products?.products?.products?.length>0){
@@ -66,7 +67,7 @@ const CategoryPage = observer(() => {
         }
     }
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (id==='-1'){
             fetchSearchedPublishedProducts(query).then(data => {
                 setData(data)
@@ -75,7 +76,11 @@ const CategoryPage = observer(() => {
         }  else {
             fetchCategoryProducts(id).then(data => {
               setData(data)
-        }).finally(() => loading.setLoading(false))
+        })
+                .catch(() => {
+            setFailed(true)
+            })
+                .finally(() => loading.setLoading(false))
     }
     },
     [id, query]);
@@ -91,6 +96,8 @@ const CategoryPage = observer(() => {
         return <div>
             <Loader/>
         </div>
+    } else if(failed){
+        return <Page404 />
     } else {
 
 

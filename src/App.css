@@ -1833,3 +1833,123 @@ a {
         transform:translateX(0);
     }
 }
+
+
+/* 404 page */
+
+
+
+
+.container_404{
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.h2_404{
+
+    font-size: 32px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    display: block;
+    color: #ff005d;
+    font-weight: 300;
+    font-family: Days;
+    animation: fadeInText 500ms ease-in 0.1s forwards, flicker4 5s linear 7.5s infinite, hueRotate 6s ease-in-out 3s infinite;
+
+}
+
+.sign_404 {
+    font-family: Exo2;
+    font-size: 8rem;
+    color: #ff005d;
+}
+#id_404_1{
+    animation: flicker1 5s linear 7.5s infinite, hueRotate 6s ease-in-out 3s infinite;
+}
+#id_404_2{
+    animation: flicker2 5s linear 7.5s infinite, hueRotate 6s ease-in-out 3s infinite;
+}
+#id_404_3{
+    animation: flicker3 5s linear 7.5s infinite, hueRotate 6s ease-in-out 3s infinite;
+}
+
+
+
+@keyframes flicker1{
+    0%  {color: #ff005d; text-shadow: #ff005d;}
+    1%  {color: transparent; text-shadow: transparent;}
+    3%  {color: transparent; text-shadow: transparent;}
+    4%  {color: #ff005d; text-shadow: #ff005d;}
+    6%  {color: #ff005d; text-shadow: #ff005d;}
+    7%  {color: transparent; text-shadow: transparent;}
+    13% {color: transparent; text-shadow: transparent;}
+    14% {color: #ff005d; text-shadow: #ff005d;}
+    100%{color: #ff005d; text-shadow: #ff005d;}
+}
+
+@keyframes flicker2{
+    0%  {color: #ff005d; text-shadow: #ff005d;}
+    50% {color: #ff005d; text-shadow: #ff005d;}
+    51% {color: transparent; text-shadow: transparent;}
+    61% {color: transparent; text-shadow: transparent;}
+    62% {color: #ff005d; text-shadow: #ff005d;}
+    100%{color: #ff005d; text-shadow: #ff005d;}
+}
+
+@keyframes flicker3{
+    0%  {color: #ff005d; text-shadow: #ff005d;}
+    1%  {color: transparent; text-shadow: transparent;}
+    10% {color: transparent; text-shadow: transparent;}
+    11% {color: #ff005d; text-shadow: #ff005d;}
+    40% {color: #ff005d; text-shadow: #ff005d;}
+    41% {color: transparent; text-shadow: transparent;}
+    45% {color: transparent; text-shadow: transparent;}
+    46% {color: #ff005d; text-shadow: #ff005d;}
+    100%{color: #ff005d; text-shadow: #ff005d;}
+}
+
+@keyframes flicker4{
+    0%  {color: #ff005d;text-shadow:0px 0px 4px #ff005d;}
+    30% {color: #ff005d;text-shadow:0px 0px 4px #ff005d;}
+    31% {color: #ffffff;text-shadow:0px 0px 4px #ffffff;}
+    32% {color: #ff005d;text-shadow:0px 0px 4px #ff005d;}
+    36% {color: #ff005d;text-shadow:0px 0px 4px #ff005d;}
+    37% {color: #ffffff;text-shadow:0px 0px 4px #ffffff;}
+    41% {color: #ffffff;text-shadow:0px 0px 4px #ffffff;}
+    42% {color: #ff005d;text-shadow:0px 0px 4px #ff005d;}
+    85% {color: #ffffff;text-shadow:0px 0px 4px #ffffff;}
+    86% {color: #ffffff;text-shadow:0px 0px 4px #ffffff;}
+    95% {color: #ffffff;text-shadow:0px 0px 4px #ffffff;}
+    96% {color: #ff005d;text-shadow:0px 0px 4px #ff005d;}
+    100%{color: #ff005d;text-shadow:0px 0px 4px #ff005d;}
+}
+
+@keyframes fadeInText{
+    1%  {color: #ffffff;text-shadow:0px 0px 4px #ffffff;}
+    70% {color: #ff005d;text-shadow:0px 0px 14px #ff005d;}
+    100%{color: #ff005d;text-shadow:0px 0px 4px #ff005d;}
+}
+
+@keyframes hueRotate{
+    0%  {
+        filter: hue-rotate(0deg);
+    }
+    50%  {
+        filter: hue-rotate(-120deg);
+    }
+    100%  {
+        filter: hue-rotate(0deg);
+    }
+}
+
+
+

@@ -19,6 +19,7 @@ import PersonalDataProcessing from "./pages/PersonalDataProcessing";
 import Check from "./pages/Check";
 import FailedAuthPage from "./pages/FailedAuthPage";
 import StocksPage from "./pages/StocksPage";
+import Page404 from "./pages/404/Page404";
 
 
 export const publicRoutes = [
@@ -39,7 +40,7 @@ export const publicRoutes = [
     {path: '/personal_data', element: <PersonalDataProcessing/>},
     {path: '/check', element: <Check/>},
     {path: '/failed_auth', element: <FailedAuthPage/>},
-
+    {path: '/page404', element: <Page404/>},
 ]
 
 export const authRoutes = [
@@ -56,9 +57,7 @@ export const authRoutes = [
     {path: '/order_confirmation/:accessLink', element: <OrderConfirmationPage/>},
     {path: '/success', element: <SuccessPage />},
     {path: '/personal_data', element: <PersonalDataProcessing/>},
-
-
-
+    {path: '/page404', element: <Page404/>},
 ]
 
 export const adminRoutes = [

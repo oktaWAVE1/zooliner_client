@@ -18,6 +18,8 @@ const Page404 = () => {
             <Helmet>
                 <meta name="robots" content="noindex"/>
                 <title>Страница не найдена | Зоолайнер</title>
+                <meta name='errorpage' content='true' />
+                <meta name='errortype' content='404 - Not Found' />
             </Helmet>
 
         </div>

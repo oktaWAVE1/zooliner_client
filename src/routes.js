@@ -20,6 +20,7 @@ import Check from "./pages/Check";
 import FailedAuthPage from "./pages/FailedAuthPage";
 import StocksPage from "./pages/StocksPage";
 import Page404 from "./pages/404/Page404";
+import AdminTodayDeliveriesPage from "./pages/AdminTodayDeliveriesPage";
 
 
 export const publicRoutes = [
@@ -63,6 +64,7 @@ export const authRoutes = [
 export const adminRoutes = [
     {path: '/admin', element: <Admin/>},
     {path: '/admin/orders', element: <AdminOrders />},
+    {path: '/admin/today_deliveries', element: <AdminTodayDeliveriesPage />},
     {path: '/admin/users', element: <AdminUsers />},
     {path: '/admin/products', element: <AdminProductPage />},
     {path: '/admin/stocks', element: <StocksPage />}

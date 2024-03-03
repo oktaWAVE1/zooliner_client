@@ -24,6 +24,7 @@ const Admin = () => {
                     <MyButton onClick={() => setModals({...modals, attributes: true})}>Атрибуты</MyButton>
                     <MyButton onClick={() => setModals({...modals, promo: true})}>Промо акции</MyButton>
                     <MyButton onClick={() => navigate('/admin/orders')}>Управление заказами</MyButton>
+                    <MyButton onClick={() => navigate('/admin/today_deliveries')}>Доставки сегодня</MyButton>
                     <MyButton onClick={() => navigate('/admin/users')}>Управление пользователями</MyButton>
                     <MyButton onClick={() => navigate('/admin/products')}>Управление товарами</MyButton>
                     <MyButton onClick={() => navigate('/admin/stocks')}>Товарные остатки</MyButton>

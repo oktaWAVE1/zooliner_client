@@ -1,8 +1,8 @@
-import React, {useContext, useState, Suspense} from 'react';
+import React, {useContext, useState, Suspense, useEffect} from 'react';
 import {Form, Card, Container, Alert} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import MyButton from "../UI/MyButton/MyButton";
 import {login, registration, userResendActivationLink} from "../http/userAPI";
 import {validate} from "email-validator";
@@ -14,6 +14,7 @@ const SocialAuth = React.lazy(() => import('../components/features/SocialAuth'))
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [personalData, setPersonalData] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false)
@@ -23,7 +24,11 @@ const Auth = observer(() => {
         name: '', email: '', telephone: '', password: '', passwordConfirm: ''
     })
     const [alertMessage, setAlertMessage] = useState({title: '', message: 'Аккаунты пользователей были перенесены со старого сайта, пароли сброшены. Пожалуйста, воспользуйтесь функцией восстановления пароля! Если возникнут проблемы, мы будем рады помочь Вам с восстановлением.', show: true, variant: 'warning'})
-
+    useEffect(() => {
+        if (user.isAuth) {
+            navigate('/')
+        }
+    }, [user.isAuth]);
     const location = useLocation()
     const isLogin = location.pathname === "/login"
     const resendActivationLink = async() =>{
@@ -37,17 +42,19 @@ const Auth = observer(() => {
         event.preventDefault();
         try {
             if (isLogin){
+
                     setIsDisabled(false)
                     await login(
                         {telephone: currentUser.telephone,
                         email:currentUser.email,
                         password: currentUser.password}).then(data =>
                     {
+                        console.log(data)
                         user.setUser(data)
+                        if(data.role) {
+                            user.setIsAuth(true)
+                        }
                     })
-                if(user.user.role) {
-                    user.setIsAuth(true)
-                }
             }
             else{
                 if (!validate(currentUser.email)){
@@ -64,12 +71,15 @@ const Auth = observer(() => {
                             });
                             setIsDisabled(true)
                         }
-                    ).finally(() => setLoading(false))
+                    ).finally(() => {
+                        setLoading(false)
+                    })
                 }
             }
 
     } catch (e) {
-            if(e.response.status===423){
+            console.log(e)
+            if(e?.response?.status===423){
                 setResendLink(true)
                 setAlertMessage(
                     {
@@ -77,7 +87,7 @@ const Auth = observer(() => {
                         show: true,
                         variant: 'danger'})
             } else {
-                setAlertMessage({message: e.response.data.message, show: true, variant: 'danger'})
+                setAlertMessage({message: e.response?.data?.message, show: true, variant: 'danger'})
             }
     }
     }

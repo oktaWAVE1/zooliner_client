@@ -45,7 +45,7 @@ export const publicRoutes = [
 ]
 
 export const authRoutes = [
-
+    {path: '/login', element: <Auth/>},
     {path: '/', element: <IndexPage/>},
     {path: '/contacts', element: <Contacts/>},
     {path: '/user', element: <UserPage/>},

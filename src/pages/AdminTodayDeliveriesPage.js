@@ -21,7 +21,7 @@ const AdminTodayDeliveriesPage = () => {
                         <div>Клиент: {r?.customersRemote?.Имя}</div>
                         <div>Телефон:
                             {r?.customersRemote?.Телефон.replaceAll(",", "").replaceAll(".", "").split(" ")
-                                .map((t, index) => <div key={t} className="my-2" ><a href={`"tel:${t}"`}>{t}</a></div>)
+                                .map((t, index) => <div key={t} className="my-2" ><a href={`tel:${t}`}>{t}</a></div>)
                             }
 
                         </div>

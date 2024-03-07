@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import ChildItems from "./ChildItems";
 import MyButton from "../../UI/MyButton/MyButton";
 import parse from "html-react-parser";
@@ -15,6 +15,20 @@ const ProductContent = observer(({product, setCurrentProduct, currentProduct}) =
     const {user, basket} = useContext(Context)
     const [clicker, setClicker] = useState(0);
     const [localBasket, setLocalBasket] = useLocalStorage('basket', [])
+
+    useEffect(() => {
+        console.log(product)
+        if (product?.children?.length>0) {
+            let sortedChildren = product.children.filter(c => c.published===true && c.inStock).toSorted((a, b) => b.price-a.price)
+            if (sortedChildren.length === 0){
+                sortedChildren = product.children.filter(c => c.published===true).toSorted((a, b) => b.price-a.price)
+            }
+            setCurrentProduct(sortedChildren[0])
+        } else {
+            setCurrentProduct(product)
+        }
+    }, [product]);
+
     useDebounce(() => user.isAuth ?
             fetchBasket(user.user.id).then(data => basket.setBasketItems(data)) : fetchBasketUnauthorized(JSON.stringify(localBasket)).then(data => basket.setBasketItems(data)),
         500, [localBasket, clicker])

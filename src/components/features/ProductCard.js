@@ -9,8 +9,12 @@ const   ProductCard = ({product, addToCart, preview}) => {
     const [currentProduct, setCurrentProduct] = useState({});
     useEffect(() => {
 
-        if (product?.children.length>0) {
-            setCurrentProduct(product.children.filter(c => c.published===true).sort((a, b) => b.price-a.price)[0])
+        if (product?.children?.length>0) {
+            let sortedChildren = product.children.filter(c => c.published===true && c.inStock).toSorted((a, b) => b.price-a.price)
+            if (sortedChildren.length === 0){
+                sortedChildren = product.children.filter(c => c.published===true).toSorted((a, b) => b.price-a.price)
+            }
+            setCurrentProduct(sortedChildren[0])
         } else {
             setCurrentProduct(product)
         }

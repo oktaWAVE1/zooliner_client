@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Accordion, Container} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import {fetchRealizationsToday} from "../http/admin/remoteAdminAPI";
 
 const AdminTodayDeliveriesPage = () => {
@@ -9,14 +9,13 @@ const AdminTodayDeliveriesPage = () => {
             console.log(data)
             setRealizations(data)})
     }, []);
-    const [accordionKey, setAccordionKey] = useState("1");
     return (
         <Container>
             <h1 className='text-center'>Доставки сегодня:</h1>
 
             {realizations.length>0 &&
                 realizations.map(r =>
-                    <div key={r.Счетчик}>
+                    <div className="px-3 w-100" key={r.Счетчик}>
                         <div>Доставка: {r?.deliveryRemote?.name}</div>
                         <div>Клиент: {r?.customersRemote?.Имя}</div>
                         <div>Телефон:

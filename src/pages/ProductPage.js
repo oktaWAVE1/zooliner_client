@@ -42,6 +42,7 @@ const ProductPage = () => {
 
 
         <div itemType="https://schema.org/Product" itemScope  className="w-100">
+            <meta itemProp="name" content={product?.brand?.name}/>
             <div className="ProductPage" itemProp="offers" itemScope itemType="http://schema.org/Offer">
                 <meta itemProp="description" content={(product.description)} />
                 <meta itemProp="availability" content="https://schema.org/InStock"/>

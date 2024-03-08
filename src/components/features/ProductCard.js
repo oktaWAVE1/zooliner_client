@@ -29,14 +29,15 @@ const   ProductCard = ({product, addToCart, preview}) => {
 
     return (
         <Card itemType="https://schema.org/Product" itemScope className="ProductCard">
+            {product?.product_images?.length>0  &&
+                <meta itemProp="image" content={`${process.env.REACT_APP_API_URL}/images/products/${product.product_images[0].img}`} />
+            }
             <div style={{height: 0}} itemProp="offers" itemScope itemType="http://schema.org/Offer">
                 <meta itemProp="availability" content="https://schema.org/InStock"/>
                 <meta itemProp="priceCurrency" content="RUB"/>
                 <meta itemProp="itemCondition" content="https://schema.org/NewCondition"/>
                 <meta itemProp="price" content={currentProduct?.price}/>
-                {product?.product_images?.length>0  &&
-                    <meta itemProp="image" content={`${process.env.REACT_APP_API_URL}/images/products/${product.product_images[0].img}`} />
-                }
+
             </div>
             {product.brandId === 1 && <div className="stars" ><img alt="rating" title="рейтинг" src={`${process.env.REACT_APP_API_URL}/images/stars.png`}/><p>5.0</p></div>
             }

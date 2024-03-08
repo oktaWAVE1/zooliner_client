@@ -69,7 +69,7 @@ const ProductContent = observer(({product, setCurrentProduct, currentProduct}) =
     }
     return (
         <>
-        <div itemType="https://schema.org/Product" itemScope className='product'>
+        <div className='product'>
             <meta itemProp="name" content={`${product?.title?.toUpperCase()} ${product?.shortDescription}`} />
             <div itemProp="offers" itemScope className="content">
                 {product?.brandId === 1 && <div className="stars"><img alt={product?.title} title="рейтинг" src={`${process.env.REACT_APP_API_URL}/images/stars.png`}/><p>5.0</p></div>

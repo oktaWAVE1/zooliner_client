@@ -41,7 +41,7 @@ const ProductPage = () => {
     return (
 
 
-        <div className="ProductPage">
+        <div className="ProductPage"  itemType="https://schema.org/Product" itemScope className="ProductCard">
             <Suspense fallback={<Loader />}>
                 <ProductImageCarousel product={product} />
             </Suspense>
@@ -56,6 +56,7 @@ const ProductPage = () => {
                 <meta property="og:title" content={`${product?.title} | Зоолайнер`} />
                 {product?.product_images?.length>0  &&
                     <meta property="og:image" content={`${process.env.REACT_APP_API_URL}/images/products/${product.product_images[0].img}`} />
+                    <meta itemProp="image" content={`${process.env.REACT_APP_API_URL}/images/products/${product.product_images[0].img}`} />
                 }
                 <meta property="og:description" content={`${product?.shortDescription} | ЗооЛАЙНЕР`} />
                 <meta property="og:url" content={`${process.env.REACT_APP_URL}/product/${id}`} />

@@ -28,7 +28,7 @@ const   ProductCard = ({product, addToCart, preview}) => {
 
 
     return (
-        <Card itemType="https://schema.org/Product" itemScope className="ProductCard">
+        <Card>
             {product.brandId === 1 && <div className="stars" ><img alt="rating" title="рейтинг" src={`${process.env.REACT_APP_API_URL}/images/stars.png`}/><p>5.0</p></div>
             }
             <meta itemProp="name" content={`${product.title.toUpperCase()} ${product.shortDescription}`} />

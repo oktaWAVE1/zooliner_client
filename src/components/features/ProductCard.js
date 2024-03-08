@@ -41,7 +41,7 @@ const   ProductCard = ({product, addToCart, preview}) => {
                 </Link>
                 <p>{product.shortDescription}</p>
             </div>
-                <div>
+                <div itemProp="offers" itemscope itemtype="http://schema.org/Offer">
 
                     <meta itemProp="name" content={`${product.title.toUpperCase()} ${product.shortDescription}`} />
                     <meta itemProp="availability" content="https://schema.org/InStock"/>

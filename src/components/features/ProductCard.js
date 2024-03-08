@@ -45,7 +45,7 @@ const   ProductCard = ({product, addToCart, preview}) => {
                     </div>
                     <div>
 
-                        <meta itemProp="name" content={`${product.title.toUpperCase()} ${product.shortDescription}`} />
+                        <meta itemProp="name" content={`${product.title.toUpperCase()} ${product.shortDescription}`} />
                         <meta itemProp="availability" content="https://schema.org/InStock"/>
                         <meta itemProp="priceCurrency" content="RUB"/>
                         <meta itemProp="itemCondition" content="https://schema.org/NewCondition"/>

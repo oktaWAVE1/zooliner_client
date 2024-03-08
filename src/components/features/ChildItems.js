@@ -17,7 +17,7 @@ const ChildItems = ({chooseChild, chosenProduct, parentProduct, preview, ...prop
                     )
                 }
             </div>
-            {chosenProduct?.discountedPrice>0 ? <h4 className="price"><span className="oldPrice">{chosenProduct?.price}</span><span className="newPrice">{chosenProduct?.discountedPrice} ₽</span></h4> : <h4 className="price">{chosenProduct?.price} ₽</h4>}
+            {chosenProduct?.discountedPrice>0 ? <h4 className="price"><span className="oldPrice">{chosenProduct?.price}</span><span itemProp="price" className="newPrice">{chosenProduct?.discountedPrice} ₽</span></h4> : <h4 itemProp="price" className="price">{chosenProduct?.price} ₽</h4>}
             {(chosenProduct?.price * process.env.REACT_APP_BONUS_RATE) > 1 &&
                 <div title='бонусные баллы'
                     className='bonusPoints d-flex align-items-center'>

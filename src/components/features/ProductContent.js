@@ -69,7 +69,7 @@ const ProductContent = observer(({product, setCurrentProduct, currentProduct}) =
     }
     return (
         <>
-        <div itemType="https://schema.org/Product" itemScope className='product'>
+        <div className='product'>
             <meta itemProp="name" content={`${product?.title?.toUpperCase()} ${product?.shortDescription}`} />
             <div className="content">
                 {product?.brandId === 1 && <div className="stars"><img alt={product?.title} title="рейтинг" src={`${process.env.REACT_APP_API_URL}/images/stars.png`}/><p>5.0</p></div>
@@ -77,11 +77,6 @@ const ProductContent = observer(({product, setCurrentProduct, currentProduct}) =
                 <div itemProp="brand" itemType="https://schema.org/Brand" itemScope>
                     <meta itemProp="name" content={product?.brand?.name}/>
                 </div>
-                <meta itemProp="description" content={(product.description)} />
-                <meta itemProp="availability" content="https://schema.org/InStock"/>
-                <meta itemProp="priceCurrency" content="RUR"/>
-                <meta itemProp="itemCondition" content="https://schema.org/NewCondition"/>
-                <meta itemProp="price" content={currentProduct?.price}/>
                 <h3>{product?.title}</h3>
                 <h6>{product?.shortDescription}</h6>
                 <div className="qtyBar">

@@ -29,15 +29,16 @@ const   ProductCard = ({product, addToCart, preview}) => {
 
     return (
         <Card itemType="https://schema.org/Product" itemScope className="ProductCard">
-            {product.brandId === 1 && <div className="stars" ><img alt="rating" title="рейтинг" src={`${process.env.REACT_APP_API_URL}/images/stars.png`}/><p>5.0</p></div>
-            }
-            <meta itemProp="name" content={`${product.title.toUpperCase()} ${product.shortDescription}`} />
-            <div itemProp="offers" itemscope itemtype="http://schema.org/Offer">
+            <div style={{height: 0}} itemProp="offers" itemScope itemType="http://schema.org/Offer">
                 <meta itemProp="availability" content="https://schema.org/InStock"/>
                 <meta itemProp="priceCurrency" content="RUB"/>
                 <meta itemProp="itemCondition" content="https://schema.org/NewCondition"/>
                 <meta itemProp="price" content={currentProduct?.price}/>
             </div>
+            {product.brandId === 1 && <div className="stars" ><img alt="rating" title="рейтинг" src={`${process.env.REACT_APP_API_URL}/images/stars.png`}/><p>5.0</p></div>
+            }
+            <meta itemProp="name" content={`${product.title.toUpperCase()} ${product.shortDescription}`} />
+
             <Link itemProp="url" to={`/product/${product.id}`}>
                 <img itemProp="image" alt="product_img" loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${product?.product_images[0]?.img ? product.product_images[0]?.img : "no_image.webp"}`}/>
             </Link>
@@ -50,9 +51,6 @@ const   ProductCard = ({product, addToCart, preview}) => {
                     <p>{product.shortDescription}</p>
                 </div>
                 <div>
-
-
-
 
                    <ChildItems preview={preview} chooseChild={chooseChild} chosenProduct={currentProduct} parentProduct={product} />
                    <MyButton disabled={preview} onClick={() => addToCart(currentProduct.id)} classes="AddToCartButton">

@@ -79,7 +79,7 @@ const ProductContent = observer(({product, setCurrentProduct, currentProduct}) =
                 </div>
                 <meta itemProp="description" content={(product.description)} />
                 <meta itemProp="availability" content="https://schema.org/InStock"/>
-                <meta itemProp="priceCurrency" content="RUR"/>
+                <meta itemProp="priceCurrency" content=""/>
                 <meta itemProp="itemCondition" content="https://schema.org/NewCondition"/>
                 <meta itemProp="price" content={currentProduct?.price}/>
                 <h3>{product?.title}</h3>

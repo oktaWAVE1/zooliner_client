@@ -42,14 +42,14 @@ const   ProductCard = ({product, addToCart, preview}) => {
                 <p>{product.shortDescription}</p>
             </div>
                 <div>
-                    <meta itemProp="offers">
-                        <meta itemProp="name" content={`${product.title.toUpperCase()} ${product.shortDescription}`} />
-                        <meta itemProp="availability" content="https://schema.org/InStock"/>
-                        <meta itemProp="priceCurrency" content="RUR"/>
-                        <meta itemProp="itemCondition" content="https://schema.org/NewCondition"/>
-                        <meta itemProp="price" content={currentProduct?.price}/>
-                        <meta itemProp="priceSpecification.price" content={currentProduct?.price}/>
-                    </meta>
+
+                    <meta itemProp="name" content={`${product.title.toUpperCase()} ${product.shortDescription}`} />
+                    <meta itemProp="availability" content="https://schema.org/InStock"/>
+                    <meta itemProp="priceCurrency" content="RUR"/>
+                    <meta itemProp="itemCondition" content="https://schema.org/NewCondition"/>
+                    <meta itemProp="price" content={currentProduct?.price}/>
+                    <meta itemProp="priceSpecification.price" content={currentProduct?.price}/>
+
                    <ChildItems preview={preview} chooseChild={chooseChild} chosenProduct={currentProduct} parentProduct={product} />
                    <MyButton disabled={preview} onClick={() => addToCart(currentProduct.id)} classes="AddToCartButton">
                        <span>

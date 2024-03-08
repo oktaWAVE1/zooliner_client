@@ -35,17 +35,19 @@ const   ProductCard = ({product, addToCart, preview}) => {
                 <img itemProp="image" alt="product_img" loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${product?.product_images[0]?.img ? product.product_images[0]?.img : "no_image.webp"}`}/>
             </Link>
             <div><div>
-                <meta itemProp="name" content={`${product.title.toUpperCase()} ${product.shortDescription}`} />
+
                 <Link to={`/product/${product.id}`}>
                     <h4>{product.title.toUpperCase()}</h4>
                 </Link>
                 <p>{product.shortDescription}</p>
             </div>
                 <div itemProp="offers">
+                    <meta itemProp="name" content={`${product.title.toUpperCase()} ${product.shortDescription}`} />
                    <meta itemProp="availability" content="https://schema.org/InStock"/>
                    <meta itemProp="priceCurrency" content="RUR"/>
                    <meta itemProp="itemCondition" content="https://schema.org/NewCondition"/>
                    <meta itemProp="price" content={currentProduct?.price}/>
+                   <meta itemProp="priceSpecification.price" content={currentProduct?.price}/>
 
                    <ChildItems preview={preview} chooseChild={chooseChild} chosenProduct={currentProduct} parentProduct={product} />
                    <MyButton disabled={preview} onClick={() => addToCart(currentProduct.id)} classes="AddToCartButton">

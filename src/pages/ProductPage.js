@@ -47,7 +47,7 @@ const ProductPage = () => {
                 <meta itemProp="availability" content="https://schema.org/InStock"/>
                 <meta itemProp="priceCurrency" content="RUR"/>
                 <meta itemProp="itemCondition" content="https://schema.org/NewCondition"/>
-                <meta itemProp="price" content={currentProduct?.price}/>
+                <meta itemProp="price" content={currentProduct?.discountedPrice ? currentProduct?.discountedPrice : currentProduct?.price}/>
                 {product?.product_images?.length>0  &&
                     <meta itemProp="image" content={`${process.env.REACT_APP_API_URL}/images/products/${product.product_images[0].img}`} />
                 }

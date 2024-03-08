@@ -34,13 +34,16 @@ const   ProductCard = ({product, addToCart, preview}) => {
                 <meta itemProp="priceCurrency" content="RUB"/>
                 <meta itemProp="itemCondition" content="https://schema.org/NewCondition"/>
                 <meta itemProp="price" content={currentProduct?.price}/>
+                {product?.product_images?.length>0  &&
+                    <meta itemProp="image" content={`${process.env.REACT_APP_API_URL}/images/products/${product.product_images[0].img}`} />
+                }
             </div>
             {product.brandId === 1 && <div className="stars" ><img alt="rating" title="рейтинг" src={`${process.env.REACT_APP_API_URL}/images/stars.png`}/><p>5.0</p></div>
             }
             <meta itemProp="name" content={`${product.title.toUpperCase()} ${product.shortDescription}`} />
 
             <Link itemProp="url" to={`/product/${product.id}`}>
-                <img itemProp="image" alt="product_img" loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${product?.product_images[0]?.img ? product.product_images[0]?.img : "no_image.webp"}`}/>
+                <img alt="product_img" loading="lazy" src={`${process.env.REACT_APP_API_URL}/images/products/mini/${product?.product_images[0]?.img ? product.product_images[0]?.img : "no_image.webp"}`}/>
             </Link>
             <div>
                 <div>

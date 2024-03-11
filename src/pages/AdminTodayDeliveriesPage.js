@@ -19,7 +19,7 @@ const AdminTodayDeliveriesPage = () => {
                         <div>Доставка: {r?.deliveryRemote?.name}</div>
                         <div>Клиент: {r?.customersRemote?.Имя}</div>
                         <div>Телефон:
-                            {r?.customersRemote?.Телефон.replaceAll(",", "").replaceAll(".", "").split(" ")
+                            {r?.customersRemote?.Телефон.replaceAll(",", "").replaceAll(";", "").replaceAll(".", "").split(" ")
                                 .map((t, index) => <div key={t} className="my-2" ><a href={`tel:${t}`}>{t}</a></div>)
                             }
 

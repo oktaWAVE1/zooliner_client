@@ -55,7 +55,7 @@ const UserListAdmin = () => {
             </div>
             <hr className="mt-2 mb-2 pt-0" />
             <Form id="OrderSearchForm" className="mb-3">
-                <Form.Control type={'text'} placeholder="Поиск заказа..." value={query} onChange={(e) => setQuery(e.target.value)} />
+                <Form.Control type={'text'} placeholder="Поиск клиента..." value={query} onChange={(e) => setQuery(e.target.value)} />
             </Form>
             {currentUsers?.length>0 &&
                <div className='adminUsersList'>

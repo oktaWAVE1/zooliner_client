@@ -8,10 +8,10 @@ Allow: /server/sitemap.xml
 sitemap: https://zooliner.ru/server/xml/sitemap.xml
 
 User-agent: Yandex
-Clean-param: utm
-Clean-param: brand
-Clean-param: attribute
-Clean-param: query
+Clean-param: utm /
+Clean-param: brand /category/
+Clean-param: attribute /category/
+Clean-param: query /category/
 Disallow: /login
 Disallow: /reg
 Disallow: /basket

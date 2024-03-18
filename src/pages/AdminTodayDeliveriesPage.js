@@ -24,7 +24,12 @@ const AdminTodayDeliveriesPage = () => {
                             }
 
                         </div>
-                        <div>Адрес: {r?.customersRemote?.Адрес}</div>
+                        <div>
+                            <a target="_blank" href={`https://2gis.ru/novorossiysk/search/${r?.customersRemote?.Адрес.replaceAll(" ", "%20")}?m=37.472666%2C44.997017%2F11.93`}>
+                                Адрес: {r?.customersRemote?.Адрес}
+                            </a>
+                        </div>
+
                         <hr />
                     </div>
                 )

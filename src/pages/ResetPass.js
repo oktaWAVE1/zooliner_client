@@ -88,7 +88,7 @@ const ResetPass = () => {
                         />
                             <MyButton
                                 title={pass.pass.length<8 ? 'Длина пароля должна быть больше 8 символов' : !pass.pass===pass.confPass ? "Пароли не совпадают" : ''}
-                                disabled={!pass.pass===pass.confPass || pass.pass.length<8}
+                                disabled={pass.pass!==pass.confPass || pass.pass.length<8}
                                 style={{width: "100%"}} onClick={(e) => resetPass(e)}>СОХРАНИТЬ НОВЫЙ ПАРОЛЬ</MyButton>
                         </div>
                     }

@@ -49,7 +49,6 @@ const Auth = observer(() => {
                         email:currentUser.email,
                         password: currentUser.password}).then(data =>
                     {
-                        console.log(data)
                         user.setUser(data)
                         if(data.role) {
                             user.setIsAuth(true)

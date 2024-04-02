@@ -128,7 +128,7 @@ const UserEditForm = () => {
                         <div className='mt-2'>
                             <MyButton style={{width: "100%"}}
                                       title={!pass.password ? "Введите пароль" : pass.newPassword!==pass.confirmNewPassword ? "Пароли не совпадают" : ''}
-                                      disabled={!(currentUser.vkId || pass.password) || pass.newPassword!==pass.confirmNewPassword}
+                                      disabled={currentUser.vkId ? false : !pass.password || pass.newPassword!==pass.confirmNewPassword}
                                       onClick={(e) => updateUser(e)}
                             >Сохранить изменения</MyButton>
                         </div>

@@ -28,7 +28,7 @@ const BasketItem = ({item, user, basket, delBasketItem, localBasket, setLocalBas
 
     const increaseQty = () => {
         setQuantity(prev => prev+1)
-        console.log(item.product)
+
     }
     const decreaseQty = () => {
         setQuantity(prev => prev-1)

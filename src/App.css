@@ -47,6 +47,12 @@
     color: white;
 }
 
+
+.productListDeliveriesAccordion .accordion-button {
+    background-color: rgba(0,0,0,0.3);
+    padding: 3px 10px;
+}
+
 .customerOrdersAccordion .accordion-button, .customerOrdersAccordion .accordion-button:after {
     background-color: var(--main-theme-color);
     color: white;
@@ -1820,6 +1826,8 @@ a {
     justify-content: center;
     color: #ffffff;
 }
+
+/* animation */
 
 #BasketBlock.shake {
     animation: shakeCart .5s ease-in-out forwards;

@@ -10,8 +10,8 @@ import SideMenu from "./components/sidemenu/SideMenu";
 
 const BasketBlock = React.lazy(() => import('./components/features/BasketBlock'));
 const Footer = React.lazy(() => import('./components/footer/Footer'));
-const AppRouter = React.lazy(() => import('./components/appRouter'));
 const MyNavbar = React.lazy(() => import('./components/navbar/MyNavbar'));
+const AppRouter = React.lazy(() => import('./components/appRouter'));
 
 
 const App = observer(() => {

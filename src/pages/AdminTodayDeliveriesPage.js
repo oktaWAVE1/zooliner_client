@@ -18,7 +18,7 @@ const AdminTodayDeliveriesPage = () => {
     const countSum = (realization) => {
         let sum = 0
         for (let item of realization.sellsRemotes) {
-           sum += item.Сумма
+           sum += item.Цена * item.Количество
         }
         let deliveryCost = (sum < realization?.deliveryRemote?.freeSum ? realization.deliveryRemote.cost : 0)
         return sum - realization.discount + deliveryCost
@@ -54,7 +54,7 @@ const AdminTodayDeliveriesPage = () => {
                                 <Accordion.Body>
                                     {r.sellsRemotes?.length>0 &&
                                         r.sellsRemotes.map(sellItem =>
-                                            <div className="d-flex justify-content-between" key={sellItem['№ реализации']}>{sellItem.Наименование} - {sellItem.Количество} шт.  <strong>{sellItem.Сумма}</strong></div>
+                                            <div className="d-flex justify-content-between" key={sellItem['№ реализации']}>{sellItem.Наименование} - {sellItem.Количество} шт.  <strong>{sellItem.Цена * sellItem.Количество}</strong></div>
                                         )
                                     }
 
